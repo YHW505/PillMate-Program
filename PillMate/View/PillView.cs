@@ -7,17 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
-namespace PillMate
+namespace PillMate.View
 {
-    public partial class PillMate : Form
+    public partial class PillView : Form
     {
-        public PillMate()
+        public PillView()
         {
             InitializeComponent();
         }
-
-        
     }
 }
