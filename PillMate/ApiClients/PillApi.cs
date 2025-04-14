@@ -8,25 +8,15 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PillMate.DTO;
+using PillMate.Services;
 
 namespace PillMate.Client.ApiClients
 {
-    internal class PillAPI
+    public class PillAPI : ApiService
     {
-        private readonly HttpClient _httpClient = new HttpClient();
-        private readonly string _baseUrl = "https://localhost:14188/api/Pills"; // 서버 주소 맞출것
 
-        public PillAPI()
-        {
-            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        public PillAPI() : base("Pills") { }
 
-            var handler = new HttpClientHandler // 이렇게 하면 모든 인증서 오류를 무시하게 되므로, 절대 프로덕션(실서버)에서는 사용하면 안 됨. 실서버 사용시 수정해야 함
-            {
-                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
-            };
-
-            _httpClient = new HttpClient(handler);
-        }
 
         // 알약 목록 불러오기
         public async Task<List<PillDto>> GetPillsAsync()
