@@ -132,7 +132,7 @@ namespace PillMate.View
             this.Controls.Add(this.Pill_Register_Button);
             this.Controls.Add(this.Pill_DataGreed);
             this.Name = "PillView";
-            this.Size = new System.Drawing.Size(798, 420);
+            //this.Size = new System.Drawing.Size(798, 420);
             ((System.ComponentModel.ISupportInitialize)(this.Pill_DataGreed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
