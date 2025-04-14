@@ -123,6 +123,7 @@
     <Compile Include="DTOs\PatientDto.cs" />
     <Compile Include="DTOs\PillDto.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="Services\ApiService.cs" />
     <Compile Include="View\BukyoungView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -184,8 +185,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
