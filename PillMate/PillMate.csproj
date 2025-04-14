@@ -124,19 +124,19 @@
     <Compile Include="DTOs\PillDto.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="View\BukyoungView.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\BukyoungView.Designer.cs">
       <DependentUpon>BukyoungView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\PillView.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\PillView.Designer.cs">
       <DependentUpon>PillView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\PatientView.Designer.cs">
       <DependentUpon>PatientView.cs</DependentUpon>
@@ -149,6 +149,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\BukyoungView.resx">
+      <DependentUpon>BukyoungView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
@@ -161,6 +164,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\PatientView.resx">
+      <DependentUpon>PatientView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\PillView.resx">
       <DependentUpon>PillView.cs</DependentUpon>
     </EmbeddedResource>
