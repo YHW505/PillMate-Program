@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PillMate.Models
 {
-    internal class Patient
+    internal class Patient // test용
     {
     }
 }
