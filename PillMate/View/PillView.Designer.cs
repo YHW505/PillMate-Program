@@ -1,4 +1,6 @@
-﻿namespace PillMate.View
+﻿using System.Windows.Forms;
+
+namespace PillMate.View
 {
     partial class PillView
     {
@@ -31,14 +33,12 @@
             this.Pill_DataGreed = new System.Windows.Forms.DataGridView();
             this.Pill_Register_Button = new System.Windows.Forms.Button();
             this.Pill_Delete_Button = new System.Windows.Forms.Button();
-            this.Pill_Modify_Button = new System.Windows.Forms.Button();
             this.YName_Label = new System.Windows.Forms.Label();
             this.YCNT_TextBox = new System.Windows.Forms.TextBox();
             this.YName_TextBox = new System.Windows.Forms.TextBox();
             this.YCnt_Label = new System.Windows.Forms.Label();
             this.YNUM_Label = new System.Windows.Forms.Label();
             this.YNum_TextBox = new System.Windows.Forms.TextBox();
-            this.Pill_Reload = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Pill_DataGreed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,16 +70,6 @@
             this.Pill_Delete_Button.Text = "삭제";
             this.Pill_Delete_Button.UseVisualStyleBackColor = true;
             this.Pill_Delete_Button.Click += new System.EventHandler(this.Pill_Delete_Button_Click);
-            // 
-            // Pill_Modify_Button
-            // 
-            this.Pill_Modify_Button.Location = new System.Drawing.Point(713, 33);
-            this.Pill_Modify_Button.Name = "Pill_Modify_Button";
-            this.Pill_Modify_Button.Size = new System.Drawing.Size(75, 23);
-            this.Pill_Modify_Button.TabIndex = 10;
-            this.Pill_Modify_Button.Text = "수정";
-            this.Pill_Modify_Button.UseVisualStyleBackColor = true;
-            this.Pill_Modify_Button.Click += new System.EventHandler(this.Pill_Modify_Button_Click);
             // 
             // YName_Label
             // 
@@ -129,23 +119,9 @@
             this.YNum_TextBox.Size = new System.Drawing.Size(100, 21);
             this.YNum_TextBox.TabIndex = 9;
             // 
-            // Pill_Reload
-            // 
-            this.Pill_Reload.Location = new System.Drawing.Point(713, 63);
-            this.Pill_Reload.Name = "button1";
-            this.Pill_Reload.Size = new System.Drawing.Size(75, 23);
-            this.Pill_Reload.TabIndex = 11;
-            this.Pill_Reload.Text = "새로고침";
-            this.Pill_Reload.UseVisualStyleBackColor = true;
-            this.Pill_Reload.Click += new System.EventHandler(this.PillForm_Load);
-            // 
             // PillView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.Pill_Reload);
-            this.Controls.Add(this.Pill_Modify_Button);
+            this.AutoSize = true;
             this.Controls.Add(this.YNum_TextBox);
             this.Controls.Add(this.YNUM_Label);
             this.Controls.Add(this.YCnt_Label);
@@ -156,7 +132,7 @@
             this.Controls.Add(this.Pill_Register_Button);
             this.Controls.Add(this.Pill_DataGreed);
             this.Name = "PillView";
-            this.Text = "PillList";
+            this.Size = new System.Drawing.Size(798, 420);
             ((System.ComponentModel.ISupportInitialize)(this.Pill_DataGreed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -174,7 +150,5 @@
         private System.Windows.Forms.DataGridView Pill_DataGreed;
         private System.Windows.Forms.Button Pill_Register_Button;
         private System.Windows.Forms.Button Pill_Delete_Button;
-        private System.Windows.Forms.Button Pill_Modify_Button;
-        private System.Windows.Forms.Button Pill_Reload;
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace PillMate.View
 {
-    public partial class BukyoungView : Form
+    public partial class BukyoungView : UserControl
     {
         public BukyoungView()
         {

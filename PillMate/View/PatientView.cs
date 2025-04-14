@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace PillMate.View
 {
-    public partial class PatientView : Form
+    public partial class PatientView : UserControl
     {
         public PatientView()
         {
