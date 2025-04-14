@@ -66,7 +66,6 @@ namespace PillMate.View
             ClearInput();
             if (Pill_DataGreed.SelectedRows.Count > 0)
             {
-                // 선택된 행의 첫 번째 셀 (Id) 값 가져오기
                 var selectedRow = Pill_DataGreed.SelectedRows[0];
                 if (selectedRow.Cells["Id"].Value is int id)
                 {
