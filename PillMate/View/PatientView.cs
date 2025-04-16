@@ -3,6 +3,12 @@ using System.Windows.Forms;
 using PillMate.ApiClients;
 using PillMate.DTO;
 using System.Threading.Tasks;
+using PillMate.Models;
+using System.IO;
+using System.Net.Http;
+using System.Net;
+using System.Drawing;
+using System.Drawing.Printing;
 
 namespace PillMate.View
 {
@@ -20,6 +26,7 @@ namespace PillMate.View
         {
             await LoadPatientsAsync();
         }
+
 
         private async Task LoadPatientsAsync()
         {
@@ -104,5 +111,94 @@ namespace PillMate.View
                 MessageBox.Show("삭제할 환자를 선택해주세요.");
             }
         }
+
+        private async void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dataGridView1.SelectedRows.Count > 0)
+            {
+                var selectedPatient = dataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
+
+                if (selectedPatient != null && selectedPatient.Id != null)
+                {
+                    await LoadQRCodeAsync(selectedPatient.Id.Value); // QR 불러오기
+                }
+            }
+        }
+
+
+        private async Task LoadQRCodeAsync(int patientId)
+        {
+            string url = $"https://localhost:14188/api/QRCode/{patientId}";
+
+            try
+            {
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                HttpClientHandler handler = new HttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
+
+                using (HttpClient client = new HttpClient(handler))
+                {
+                    var imageBytes = await client.GetByteArrayAsync(url);
+                    using (var ms = new MemoryStream(imageBytes))
+                    {
+                        QR_Image_Box.SizeMode = PictureBoxSizeMode.Zoom;
+                        QR_Image_Box.Image = Image.FromStream(ms);
+
+                        // ✅ QR 이미지가 생기면 버튼 보이게!
+                        Print_QR.Visible = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                QR_Image_Box.Image = null;
+                Print_QR.Visible = false; // ❌ 에러나면 숨기기
+                MessageBox.Show("QR 코드 로드 실패: " + ex.Message);
+            }
+        }
+
+        private Image qrImageToPrint;
+
+        private void PrintQRCode()
+        {
+            if (QR_Image_Box.Image == null)
+            {
+                MessageBox.Show("인쇄할 QR 이미지가 없습니다.");
+                return;
+            }
+
+            qrImageToPrint = QR_Image_Box.Image;
+
+            PrintDocument pd = new PrintDocument();
+            pd.PrintPage += Pd_PrintPage;
+
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = pd;
+
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                pd.Print();
+            }
+        }
+
+        private void Pd_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            if (qrImageToPrint != null)
+            {
+                // 인쇄 위치 및 사이즈 조정 (페이지 중앙에 200x200 사이즈로 출력)
+                int x = (e.PageBounds.Width - 200) / 2;
+                int y = (e.PageBounds.Height - 200) / 2;
+
+                e.Graphics.DrawImage(qrImageToPrint, x, y, 200, 200);
+            }
+        }
+
+        private void Print_QR_Click(object sender, EventArgs e)
+        {
+            PrintQRCode();
+        }
+
+        
     }
 }
