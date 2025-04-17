@@ -108,7 +108,7 @@
             this.Controls.Add(this.YName_TextBox);
             this.Controls.Add(this.YName_Label);
             this.Name = "PillRegisterView";
-            this.Text = "Form1";
+            this.Text = "약품 등록";
             this.ResumeLayout(false);
             this.PerformLayout();
 
