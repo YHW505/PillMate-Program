@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{43FDA430-ABA4-4402-AC44-6CF7C4A74F43}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>PillMate</RootNamespace>
     <AssemblyName>PillMate</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -31,6 +31,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
@@ -123,11 +126,24 @@
     <Compile Include="DTOs\PatientDto.cs" />
     <Compile Include="DTOs\PillDto.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="Services\ApiService.cs" />
     <Compile Include="View\BukyoungView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\BukyoungView.Designer.cs">
       <DependentUpon>BukyoungView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientEditView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PatientEditView.Designer.cs">
+      <DependentUpon>PatientEditView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientRegisterView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PatientRegisterView.Designer.cs">
+      <DependentUpon>PatientRegisterView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\PillView.cs">
       <SubType>UserControl</SubType>
@@ -164,6 +180,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\PatientEditView.resx">
+      <DependentUpon>PatientEditView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PatientRegisterView.resx">
+      <DependentUpon>PatientRegisterView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\PatientView.resx">
       <DependentUpon>PatientView.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,8 +206,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PillMate.DTO
+﻿namespace PillMate.DTO
 {
     public class PatientDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }  // 수정할 때만 필요 (nullable로 설정)
         public string Hwanja_Name { get; set; }
         public string Hwanja_Gender { get; set; }
         public string Hwanja_No { get; set; }
@@ -29,14 +23,14 @@ namespace PillMate.DTO
         public string Bohoja_PhoneNumber { get; set; }
     }
 
-    public class UpdatePatientDto : CreatePatientDto
+    public class UpdatePatientDto : PatientDto
     {
-        public int Id { get; set; }
+        // 이곳에서 Id를 사용
     }
 
+    // 환자 삭제용 DTO
     public class DeletePatientDto
     {
-        public int Id { get; set; }
+        public int Id { get; set; }  // 환자의 Id
     }
 }
-
