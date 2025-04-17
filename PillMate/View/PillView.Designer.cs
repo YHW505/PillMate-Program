@@ -33,12 +33,7 @@ namespace PillMate.View
             this.Pill_DataGreed = new System.Windows.Forms.DataGridView();
             this.Pill_Register_Button = new System.Windows.Forms.Button();
             this.Pill_Delete_Button = new System.Windows.Forms.Button();
-            this.YName_Label = new System.Windows.Forms.Label();
-            this.YCNT_TextBox = new System.Windows.Forms.TextBox();
-            this.YName_TextBox = new System.Windows.Forms.TextBox();
-            this.YCnt_Label = new System.Windows.Forms.Label();
-            this.YNUM_Label = new System.Windows.Forms.Label();
-            this.YNum_TextBox = new System.Windows.Forms.TextBox();
+            this.labelStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Pill_DataGreed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,9 +48,9 @@ namespace PillMate.View
             // 
             // Pill_Register_Button
             // 
-            this.Pill_Register_Button.Location = new System.Drawing.Point(599, 361);
+            this.Pill_Register_Button.Location = new System.Drawing.Point(614, 12);
             this.Pill_Register_Button.Name = "Pill_Register_Button";
-            this.Pill_Register_Button.Size = new System.Drawing.Size(91, 56);
+            this.Pill_Register_Button.Size = new System.Drawing.Size(164, 80);
             this.Pill_Register_Button.TabIndex = 2;
             this.Pill_Register_Button.Text = "등록";
             this.Pill_Register_Button.UseVisualStyleBackColor = true;
@@ -63,76 +58,32 @@ namespace PillMate.View
             // 
             // Pill_Delete_Button
             // 
-            this.Pill_Delete_Button.Location = new System.Drawing.Point(696, 361);
+            this.Pill_Delete_Button.Location = new System.Drawing.Point(614, 107);
             this.Pill_Delete_Button.Name = "Pill_Delete_Button";
-            this.Pill_Delete_Button.Size = new System.Drawing.Size(99, 54);
+            this.Pill_Delete_Button.Size = new System.Drawing.Size(164, 85);
             this.Pill_Delete_Button.TabIndex = 3;
             this.Pill_Delete_Button.Text = "삭제";
             this.Pill_Delete_Button.UseVisualStyleBackColor = true;
             this.Pill_Delete_Button.Click += new System.EventHandler(this.Pill_Delete_Button_Click);
             // 
-            // YName_Label
+            // labelStatus
             // 
-            this.YName_Label.AutoSize = true;
-            this.YName_Label.Location = new System.Drawing.Point(612, 156);
-            this.YName_Label.Name = "YName_Label";
-            this.YName_Label.Size = new System.Drawing.Size(41, 12);
-            this.YName_Label.TabIndex = 5;
-            this.YName_Label.Text = "약품명";
-            // 
-            // YCNT_TextBox
-            // 
-            this.YCNT_TextBox.Location = new System.Drawing.Point(614, 219);
-            this.YCNT_TextBox.Name = "YCNT_TextBox";
-            this.YCNT_TextBox.Size = new System.Drawing.Size(100, 21);
-            this.YCNT_TextBox.TabIndex = 6;
-            // 
-            // YName_TextBox
-            // 
-            this.YName_TextBox.Location = new System.Drawing.Point(614, 171);
-            this.YName_TextBox.Name = "YName_TextBox";
-            this.YName_TextBox.Size = new System.Drawing.Size(100, 21);
-            this.YName_TextBox.TabIndex = 4;
-            // 
-            // YCnt_Label
-            // 
-            this.YCnt_Label.AutoSize = true;
-            this.YCnt_Label.Location = new System.Drawing.Point(615, 204);
-            this.YCnt_Label.Name = "YCnt_Label";
-            this.YCnt_Label.Size = new System.Drawing.Size(57, 12);
-            this.YCnt_Label.TabIndex = 7;
-            this.YCnt_Label.Text = "약품 개수";
-            // 
-            // YNUM_Label
-            // 
-            this.YNUM_Label.AutoSize = true;
-            this.YNUM_Label.Location = new System.Drawing.Point(615, 254);
-            this.YNUM_Label.Name = "YNUM_Label";
-            this.YNUM_Label.Size = new System.Drawing.Size(85, 12);
-            this.YNUM_Label.TabIndex = 8;
-            this.YNUM_Label.Text = "알약 고유 번호";
-            // 
-            // YNum_TextBox
-            // 
-            this.YNum_TextBox.Location = new System.Drawing.Point(614, 269);
-            this.YNum_TextBox.Name = "YNum_TextBox";
-            this.YNum_TextBox.Size = new System.Drawing.Size(100, 21);
-            this.YNum_TextBox.TabIndex = 9;
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(3, 327);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(161, 12);
+            this.labelStatus.TabIndex = 10;
+            this.labelStatus.Text = "알약 데이터를 불러오는 중...";
             // 
             // PillView
             // 
             this.AutoSize = true;
-            this.Controls.Add(this.YNum_TextBox);
-            this.Controls.Add(this.YNUM_Label);
-            this.Controls.Add(this.YCnt_Label);
-            this.Controls.Add(this.YCNT_TextBox);
-            this.Controls.Add(this.YName_Label);
-            this.Controls.Add(this.YName_TextBox);
+            this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.Pill_Delete_Button);
             this.Controls.Add(this.Pill_Register_Button);
             this.Controls.Add(this.Pill_DataGreed);
             this.Name = "PillView";
-            //this.Size = new System.Drawing.Size(798, 420);
+            this.Size = new System.Drawing.Size(798, 420);
             ((System.ComponentModel.ISupportInitialize)(this.Pill_DataGreed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -140,15 +91,10 @@ namespace PillMate.View
         }
 
         #endregion
-        private System.Windows.Forms.Label YName_Label;
-        private System.Windows.Forms.TextBox YCNT_TextBox;
-        private System.Windows.Forms.TextBox YName_TextBox;
-        private System.Windows.Forms.Label YCnt_Label;
-        private System.Windows.Forms.Label YNUM_Label;
-        private System.Windows.Forms.TextBox YNum_TextBox;
 
         private System.Windows.Forms.DataGridView Pill_DataGreed;
         private System.Windows.Forms.Button Pill_Register_Button;
         private System.Windows.Forms.Button Pill_Delete_Button;
+        private Label labelStatus;
     }
 }
