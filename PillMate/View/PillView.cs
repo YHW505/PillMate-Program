@@ -7,15 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Google.Protobuf.WellKnownTypes;
 using PillMate.Client.ApiClients;
 using PillMate.DTO;
+using PillMate.ApiClients;
+using PillMate.Models;
+using System.IO;
+using System.Net.Http;
+using System.Net;
+using System.Drawing.Printing;
 
 namespace PillMate.View
 {
     public partial class PillView : UserControl
     {
 
-        private PillAPI apiClient = new PillAPI();
+        private readonly PillAPI _api;
 
         public PillView()
         {
@@ -23,21 +30,52 @@ namespace PillMate.View
 
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-
+            _api = new PillAPI();
             this.Load += PillForm_Load;
         }
-
+        /*
         private void ClearInput()
         {
             YName_TextBox.Text = "";
             YCNT_TextBox.Text = "";
             YNum_TextBox.Text = "";
+        }  
+        */
+
+        private async Task LoadPillsAsync()
+        {
+            try
+            {
+                var Pills = await _api.GetAllAsync();
+
+                Pill_DataGreed.DataSource = Pills;
+
+
+                if (Pills != null && Pills.Count > 0)
+                {
+                    labelStatus.Text = $"총 {Pills.Count}명 환자 데이터";
+                }
+                else
+                {
+                    labelStatus.Text = "환자 데이터가 없습니다.";
+                }
+            }
+            catch (Exception ex)
+            {
+                labelStatus.Text = "데이터를 불러오는 데 실패했습니다.";
+                MessageBox.Show($"오류 발생: {ex.Message}");
+            }
         }
 
-        private async void Pill_Register_Button_Click(object sender, EventArgs e)
+        private void Pill_Register_Button_Click(object sender, EventArgs e)
         {
-            
-            
+            /// 실험중 
+            PillRegisterView PillRegisterView = new PillRegisterView(LoadPillsAsync); // LoadPatientsAsync 메소드를 전달
+            PillRegisterView.StartPosition = FormStartPosition.CenterScreen;
+            PillRegisterView.ShowDialog();
+            ///
+            ///
+            /*
             var pill = new PillDto
             {
                 Yank_Name = YName_TextBox.Text,
@@ -45,7 +83,7 @@ namespace PillMate.View
                 Yank_Num = YNum_TextBox.Text
             };
 
-            bool success = await apiClient.CreatePillAsync(pill);
+            bool success = await _api.CreatePillAsync(pill);
 
             if (success && pill != null)
             {
@@ -57,13 +95,13 @@ namespace PillMate.View
             {
                 MessageBox.Show("등록 실패", "등록");
             }
-            
+            */
         }
+
 
         private async void Pill_Delete_Button_Click(object sender, EventArgs e)
         {
             //ToggleInputControls(false);
-            ClearInput();
             if (Pill_DataGreed.SelectedRows.Count > 0)
             {
                 var selectedRow = Pill_DataGreed.SelectedRows[0];
@@ -74,7 +112,7 @@ namespace PillMate.View
                     if (confirm == DialogResult.Yes)
                     {
 
-                        await apiClient.DeletePillAsync(id);
+                        await _api.DeletePillAsync(id);
                         await LoadPillsToGrid();
                     }
                     MessageBox.Show($"ID {id}번 알약이 삭제되었습니다.", "삭제");
@@ -95,7 +133,7 @@ namespace PillMate.View
 
         private async Task LoadPillsToGrid()
         {
-            var pillList = await apiClient.GetPillsAsync();
+            var pillList = await _api.GetPillsAsync();
             Pill_DataGreed.DataSource = pillList;
         }
     }
