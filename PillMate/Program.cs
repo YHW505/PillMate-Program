@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PillMate.Services;
 using PillMate.View;
 
 namespace PillMate
@@ -15,6 +16,14 @@ namespace PillMate
         [STAThread]
         static void Main()
         {
+            var serverService = new PillMate.Services.ServerService();
+
+            serverService.StartServer();
+
+            Application.ApplicationExit += (s, e) =>
+            {
+                serverService.StopServer();
+            };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainView());

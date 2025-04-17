@@ -34,9 +34,11 @@ namespace PillMate.View
             {
                 var patients = await _api.GetAllAsync();
 
+                dataGridView1.DataSource = patients;
+
+
                 if (patients != null && patients.Count > 0)
                 {
-                    dataGridView1.DataSource = patients;
                     labelStatus.Text = $"총 {patients.Count}명 환자 데이터";
                 }
                 else
