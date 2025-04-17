@@ -33,10 +33,10 @@ namespace PillMate.View
             try
             {
                 var patients = await _api.GetAllAsync();
-                dataGridView1.DataSource = patients;
 
                 if (patients != null && patients.Count > 0)
                 {
+                    dataGridView1.DataSource = patients;
                     labelStatus.Text = $"총 {patients.Count}명 환자 데이터";
                 }
                 else
@@ -128,7 +128,7 @@ namespace PillMate.View
 
         private async Task LoadQRCodeAsync(int patientId)
         {
-            string url = $"https://localhost:51879/api/QRCode/{patientId}";
+            string url = $"https://localhost:14188/api/QRCode/{patientId}";
 
             try
             {
@@ -186,15 +186,11 @@ namespace PillMate.View
         {
             if (qrImageToPrint != null)
             {
-                //// 인쇄 위치 및 사이즈 조정 (페이지 중앙에 200x200 사이즈로 출력)
-                //int x = (e.PageBounds.Width - 200) / 2;
-                //int y = (e.PageBounds.Height - 200) / 2;
-                int x = 50;
-                int y = 50;
+                // 인쇄 위치 및 사이즈 조정 (페이지 중앙에 200x200 사이즈로 출력)
+                int x = (e.PageBounds.Width - 200) / 2;
+                int y = (e.PageBounds.Height - 200) / 2;
 
-
-
-                e.Graphics.DrawImage(qrImageToPrint, x, y, 100, 100);
+                e.Graphics.DrawImage(qrImageToPrint, x, y, 200, 200);
             }
         }
 
