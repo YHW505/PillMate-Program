@@ -134,6 +134,12 @@
     <Compile Include="View\BukyoungView.Designer.cs">
       <DependentUpon>BukyoungView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PillRegisterView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PillRegisterView.Designer.cs">
+      <DependentUpon>PillRegisterView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientEditView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PatientView.resx">
       <DependentUpon>PatientView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PillRegisterView.resx">
+      <DependentUpon>PillRegisterView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\PillView.resx">
       <DependentUpon>PillView.cs</DependentUpon>
