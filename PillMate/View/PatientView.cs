@@ -126,6 +126,9 @@ namespace PillMate.View
                 {
                     await LoadQRCodeAsync(selectedPatient.Id.Value); // QR 불러오기
                     bokyoung_imform.Visible = true;
+                    bohoja_name_label.Text = $"병실: {selectedPatient.Bohoja_Name}";
+                    bohoja_pn_label.Text = $"보호자 번호: {selectedPatient.Bohoja_PhoneNumber}";
+                    hwanja_room_label.Text = $"병실: {selectedPatient.Hwanja_Room}";
                 }
             }
         }
