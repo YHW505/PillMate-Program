@@ -33,11 +33,6 @@ namespace PillMate
             LoadView(new PillView());
         }
 
-        private void Get_Pill_Button_Click(object sender, EventArgs e)
-        {
-            LoadView(new BukyoungView());
-        }
-
         private void LoadView(UserControl view)
         {
             Main_Pannel.Controls.Clear();        // 패널에 있는 기존 컨트롤 제거

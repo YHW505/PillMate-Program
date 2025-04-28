@@ -13,6 +13,7 @@
             this.btnDeletePatient = new System.Windows.Forms.Button();
             this.QR_Image_Box = new System.Windows.Forms.PictureBox();
             this.Print_QR = new System.Windows.Forms.Button();
+            this.bokyoung_imform = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QR_Image_Box)).BeginInit();
             this.SuspendLayout();
@@ -93,11 +94,22 @@
             this.Print_QR.Visible = false;
             this.Print_QR.Click += new System.EventHandler(this.Print_QR_Click);
             // 
+            // bokyoung_imform
+            // 
+            this.bokyoung_imform.Location = new System.Drawing.Point(498, 344);
+            this.bokyoung_imform.Name = "bokyoung_imform";
+            this.bokyoung_imform.Size = new System.Drawing.Size(93, 23);
+            this.bokyoung_imform.TabIndex = 8;
+            this.bokyoung_imform.Text = "복약 정보 확인";
+            this.bokyoung_imform.UseVisualStyleBackColor = true;
+            this.bokyoung_imform.Visible = false;
+            // 
             // PatientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.bokyoung_imform);
             this.Controls.Add(this.Print_QR);
             this.Controls.Add(this.QR_Image_Box);
             this.Controls.Add(this.btnDeletePatient);
@@ -123,5 +135,6 @@
         private System.Windows.Forms.Button btnDeletePatient;  // 삭제 버튼 추가
         private System.Windows.Forms.PictureBox QR_Image_Box;
         private System.Windows.Forms.Button Print_QR;
+        private System.Windows.Forms.Button bokyoung_imform;
     }
 }
