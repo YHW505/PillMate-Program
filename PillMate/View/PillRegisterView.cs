@@ -43,7 +43,7 @@ namespace PillMate.View
 
             if (success)
             {
-                MessageBox.Show("✅ 환자 등록이 완료되었습니다.");
+                MessageBox.Show("✅ 약 등록이 완료되었습니다.");
                 this.Close();  // 등록 후 창 닫기
                 await refreshList(); // 환자 목록 새로고침
             }

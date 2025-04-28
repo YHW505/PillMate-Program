@@ -100,6 +100,8 @@ namespace PillMate.View
                         {
                             MessageBox.Show("환자가 삭제되었습니다.");
                             await LoadPatientsAsync(); // 환자 리스트 새로고침
+                            QR_Image_Box.Visible = false;
+                            Print_QR.Visible = false;
                         }
                         else
                         {
@@ -131,7 +133,8 @@ namespace PillMate.View
 
         private async Task LoadQRCodeAsync(int patientId)
         {
-            string url = $"https://localhost:14188/api/QRCode/{patientId}";
+            //이 부분 자신에 맞게 수정
+            string url = $"https://localhost:51879/api/QRCode/{patientId}";
 
             try
             {
