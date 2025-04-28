@@ -125,6 +125,7 @@ namespace PillMate.View
                 if (selectedPatient != null && selectedPatient.Id != null)
                 {
                     await LoadQRCodeAsync(selectedPatient.Id.Value); // QR 불러오기
+                    bokyoung_imform.Visible = true;
                 }
             }
         }
@@ -204,6 +205,6 @@ namespace PillMate.View
             PrintQRCode();
         }
 
-        
+
     }
 }

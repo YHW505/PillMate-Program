@@ -33,7 +33,7 @@ namespace PillMate.View
             this.Pill_DataGreed = new System.Windows.Forms.DataGridView();
             this.Pill_Register_Button = new System.Windows.Forms.Button();
             this.Pill_Delete_Button = new System.Windows.Forms.Button();
-            this.labelStatus = new System.Windows.Forms.Label();
+            this.pillLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Pill_DataGreed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,6 +48,7 @@ namespace PillMate.View
             // 
             // Pill_Register_Button
             // 
+            this.Pill_Register_Button.Font = new System.Drawing.Font("Gulim", 12F);
             this.Pill_Register_Button.Location = new System.Drawing.Point(614, 12);
             this.Pill_Register_Button.Name = "Pill_Register_Button";
             this.Pill_Register_Button.Size = new System.Drawing.Size(164, 80);
@@ -58,6 +59,7 @@ namespace PillMate.View
             // 
             // Pill_Delete_Button
             // 
+            this.Pill_Delete_Button.Font = new System.Drawing.Font("Gulim", 12F);
             this.Pill_Delete_Button.Location = new System.Drawing.Point(614, 107);
             this.Pill_Delete_Button.Name = "Pill_Delete_Button";
             this.Pill_Delete_Button.Size = new System.Drawing.Size(164, 85);
@@ -66,19 +68,19 @@ namespace PillMate.View
             this.Pill_Delete_Button.UseVisualStyleBackColor = true;
             this.Pill_Delete_Button.Click += new System.EventHandler(this.Pill_Delete_Button_Click);
             // 
-            // labelStatus
+            // pillLabel
             // 
-            this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(3, 327);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(161, 12);
-            this.labelStatus.TabIndex = 10;
-            this.labelStatus.Text = "알약 데이터를 불러오는 중...";
+            this.pillLabel.AutoSize = true;
+            this.pillLabel.Location = new System.Drawing.Point(3, 327);
+            this.pillLabel.Name = "pillLabel";
+            this.pillLabel.Size = new System.Drawing.Size(161, 12);
+            this.pillLabel.TabIndex = 10;
+            this.pillLabel.Text = "알약 데이터를 불러오는 중...";
             // 
             // PillView
             // 
             this.AutoSize = true;
-            this.Controls.Add(this.labelStatus);
+            this.Controls.Add(this.pillLabel);
             this.Controls.Add(this.Pill_Delete_Button);
             this.Controls.Add(this.Pill_Register_Button);
             this.Controls.Add(this.Pill_DataGreed);
@@ -95,6 +97,6 @@ namespace PillMate.View
         private System.Windows.Forms.DataGridView Pill_DataGreed;
         private System.Windows.Forms.Button Pill_Register_Button;
         private System.Windows.Forms.Button Pill_Delete_Button;
-        private Label labelStatus;
+        private Label pillLabel;
     }
 }
