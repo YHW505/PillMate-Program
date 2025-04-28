@@ -14,6 +14,10 @@
             this.QR_Image_Box = new System.Windows.Forms.PictureBox();
             this.Print_QR = new System.Windows.Forms.Button();
             this.bokyoung_imform = new System.Windows.Forms.Button();
+            this.bohoja_name_label = new System.Windows.Forms.Label();
+            this.bohoja_pn_label = new System.Windows.Forms.Label();
+            this.hwanja_room_label = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QR_Image_Box)).BeginInit();
             this.SuspendLayout();
@@ -40,11 +44,11 @@
             // 
             // btnAddPatient
             // 
-            this.btnAddPatient.Font = new System.Drawing.Font("Gulim", 12F);
+            this.btnAddPatient.Font = new System.Drawing.Font("Gulim", 9F);
             this.btnAddPatient.Location = new System.Drawing.Point(597, 3);
             this.btnAddPatient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAddPatient.Name = "btnAddPatient";
-            this.btnAddPatient.Size = new System.Drawing.Size(168, 75);
+            this.btnAddPatient.Size = new System.Drawing.Size(92, 39);
             this.btnAddPatient.TabIndex = 2;
             this.btnAddPatient.Text = "환자 등록";
             this.btnAddPatient.UseVisualStyleBackColor = true;
@@ -52,11 +56,11 @@
             // 
             // btnEditPatient
             // 
-            this.btnEditPatient.Font = new System.Drawing.Font("Gulim", 12F);
-            this.btnEditPatient.Location = new System.Drawing.Point(597, 82);
+            this.btnEditPatient.Font = new System.Drawing.Font("Gulim", 9F);
+            this.btnEditPatient.Location = new System.Drawing.Point(597, 46);
             this.btnEditPatient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEditPatient.Name = "btnEditPatient";
-            this.btnEditPatient.Size = new System.Drawing.Size(168, 75);
+            this.btnEditPatient.Size = new System.Drawing.Size(92, 39);
             this.btnEditPatient.TabIndex = 3;
             this.btnEditPatient.Text = "환자 수정";
             this.btnEditPatient.UseVisualStyleBackColor = true;
@@ -64,11 +68,11 @@
             // 
             // btnDeletePatient
             // 
-            this.btnDeletePatient.Font = new System.Drawing.Font("Gulim", 12F);
-            this.btnDeletePatient.Location = new System.Drawing.Point(597, 161);
+            this.btnDeletePatient.Font = new System.Drawing.Font("Gulim", 9F);
+            this.btnDeletePatient.Location = new System.Drawing.Point(597, 89);
             this.btnDeletePatient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDeletePatient.Name = "btnDeletePatient";
-            this.btnDeletePatient.Size = new System.Drawing.Size(168, 75);
+            this.btnDeletePatient.Size = new System.Drawing.Size(92, 39);
             this.btnDeletePatient.TabIndex = 4;
             this.btnDeletePatient.Text = "환자 삭제";
             this.btnDeletePatient.UseVisualStyleBackColor = true;
@@ -76,9 +80,9 @@
             // 
             // QR_Image_Box
             // 
-            this.QR_Image_Box.Location = new System.Drawing.Point(598, 242);
+            this.QR_Image_Box.Location = new System.Drawing.Point(598, 259);
             this.QR_Image_Box.Name = "QR_Image_Box";
-            this.QR_Image_Box.Size = new System.Drawing.Size(167, 154);
+            this.QR_Image_Box.Size = new System.Drawing.Size(169, 137);
             this.QR_Image_Box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.QR_Image_Box.TabIndex = 5;
             this.QR_Image_Box.TabStop = false;
@@ -104,11 +108,51 @@
             this.bokyoung_imform.UseVisualStyleBackColor = true;
             this.bokyoung_imform.Visible = false;
             // 
+            // bohoja_name_label
+            // 
+            this.bohoja_name_label.AutoSize = true;
+            this.bohoja_name_label.Location = new System.Drawing.Point(598, 206);
+            this.bohoja_name_label.Name = "bohoja_name_label";
+            this.bohoja_name_label.Size = new System.Drawing.Size(73, 12);
+            this.bohoja_name_label.TabIndex = 11;
+            this.bohoja_name_label.Text = "보호자 이름:";
+            // 
+            // bohoja_pn_label
+            // 
+            this.bohoja_pn_label.AutoSize = true;
+            this.bohoja_pn_label.Location = new System.Drawing.Point(598, 189);
+            this.bohoja_pn_label.Name = "bohoja_pn_label";
+            this.bohoja_pn_label.Size = new System.Drawing.Size(97, 12);
+            this.bohoja_pn_label.TabIndex = 12;
+            this.bohoja_pn_label.Text = "보호자 전화번호:";
+            // 
+            // hwanja_room_label
+            // 
+            this.hwanja_room_label.AutoSize = true;
+            this.hwanja_room_label.Location = new System.Drawing.Point(598, 174);
+            this.hwanja_room_label.Name = "hwanja_room_label";
+            this.hwanja_room_label.Size = new System.Drawing.Size(33, 12);
+            this.hwanja_room_label.TabIndex = 14;
+            this.hwanja_room_label.Text = "병실:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(597, 157);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "상세정보";
+            // 
             // PatientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.hwanja_room_label);
+            this.Controls.Add(this.bohoja_pn_label);
+            this.Controls.Add(this.bohoja_name_label);
             this.Controls.Add(this.bokyoung_imform);
             this.Controls.Add(this.Print_QR);
             this.Controls.Add(this.QR_Image_Box);
@@ -136,5 +180,9 @@
         private System.Windows.Forms.PictureBox QR_Image_Box;
         private System.Windows.Forms.Button Print_QR;
         private System.Windows.Forms.Button bokyoung_imform;
+        private System.Windows.Forms.Label bohoja_name_label;
+        private System.Windows.Forms.Label bohoja_pn_label;
+        private System.Windows.Forms.Label hwanja_room_label;
+        private System.Windows.Forms.Label label1;
     }
 }
