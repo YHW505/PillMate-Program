@@ -137,7 +137,7 @@ namespace PillMate.View
         private async Task LoadQRCodeAsync(int patientId)
         {
             //이 부분 자신에 맞게 수정
-            string url = $"https://localhost:51879/api/QRCode/{patientId}";
+            string url = $"https://localhost:7293/api/QRCode/{patientId}";
 
             try
             {
@@ -148,7 +148,7 @@ namespace PillMate.View
 
                 using (HttpClient client = new HttpClient(handler))
                 {
-                    var imageBytes = await client.GetByteArrayAsync(url);
+                    var imageBytes = await client.GetByteArrayAsync(url);  
                     using (var ms = new MemoryStream(imageBytes))
                     {
                         QR_Image_Box.SizeMode = PictureBoxSizeMode.Zoom;
