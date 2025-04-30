@@ -212,6 +212,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\MenuUi.resx">
+      <DependentUpon>MenuUi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\PatientEditView.resx">
       <DependentUpon>PatientEditView.cs</DependentUpon>
     </EmbeddedResource>
