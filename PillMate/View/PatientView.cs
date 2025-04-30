@@ -125,6 +125,10 @@ namespace PillMate.View
                 if (selectedPatient != null && selectedPatient.Id != null)
                 {
                     await LoadQRCodeAsync(selectedPatient.Id.Value); // QR 불러오기
+                    bokyoung_imform.Visible = true;
+                    bohoja_name_label.Text = $"병실: {selectedPatient.Bohoja_Name}";
+                    bohoja_pn_label.Text = $"보호자 번호: {selectedPatient.Bohoja_PhoneNumber}";
+                    hwanja_room_label.Text = $"병실: {selectedPatient.Hwanja_Room}";
                 }
             }
         }
@@ -133,7 +137,7 @@ namespace PillMate.View
         private async Task LoadQRCodeAsync(int patientId)
         {
             //이 부분 자신에 맞게 수정
-            string url = $"https://localhost:51879/api/QRCode/{patientId}";
+            string url = $"https://localhost:7293/api/QRCode/{patientId}";
 
             try
             {
@@ -144,7 +148,7 @@ namespace PillMate.View
 
                 using (HttpClient client = new HttpClient(handler))
                 {
-                    var imageBytes = await client.GetByteArrayAsync(url);
+                    var imageBytes = await client.GetByteArrayAsync(url);  
                     using (var ms = new MemoryStream(imageBytes))
                     {
                         QR_Image_Box.SizeMode = PictureBoxSizeMode.Zoom;
@@ -204,6 +208,6 @@ namespace PillMate.View
             PrintQRCode();
         }
 
-        
+
     }
 }

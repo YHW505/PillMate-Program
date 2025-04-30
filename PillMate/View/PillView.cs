@@ -46,23 +46,23 @@ namespace PillMate.View
         {
             try
             {
-                var Pills = await _api.GetAllAsync();
+                var Pills = await _api.GetPillsAsync();
 
                 Pill_DataGreed.DataSource = Pills;
 
 
                 if (Pills != null && Pills.Count > 0)
                 {
-                    labelStatus.Text = $"총 {Pills.Count}명 환자 데이터";
+                    pillLabel.Text = $"총 {Pills.Count}개의 알약 데이터";
                 }
                 else
                 {
-                    labelStatus.Text = "환자 데이터가 없습니다.";
+                    pillLabel.Text = "알약 데이터가 없습니다.";
                 }
             }
             catch (Exception ex)
             {
-                labelStatus.Text = "데이터를 불러오는 데 실패했습니다.";
+                pillLabel.Text = "데이터를 불러오는 데 실패했습니다.";
                 MessageBox.Show($"오류 발생: {ex.Message}");
             }
         }
@@ -128,6 +128,7 @@ namespace PillMate.View
 
         private async void PillForm_Load(object sender, EventArgs e)
         {
+            await LoadPillsAsync();
             await LoadPillsToGrid();
         }
 
