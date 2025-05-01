@@ -10,6 +10,7 @@
         public string Hwanja_PhoneNumber { get; set; }
         public string Bohoja_Name { get; set; }
         public string Bohoja_PhoneNumber { get; set; }
+        public int Hwanja_Age { get; set; }
     }
 
     public class CreatePatientDto
@@ -21,6 +22,8 @@
         public string Hwanja_PhoneNumber { get; set; }
         public string Bohoja_Name { get; set; }
         public string Bohoja_PhoneNumber { get; set; }
+        public int Hwanja_Age { get; set; }
+
     }
 
     public class UpdatePatientDto : PatientDto

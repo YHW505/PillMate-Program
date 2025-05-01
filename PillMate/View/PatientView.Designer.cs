@@ -1,4 +1,6 @@
-﻿namespace PillMate.View
+﻿using System.Windows.Forms;
+
+namespace PillMate.View
 {
     partial class PatientView
     {
@@ -25,6 +27,7 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
@@ -32,6 +35,8 @@
             this.dataGridView1.Size = new System.Drawing.Size(591, 324);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += dataGridView1_CellClick;
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ScrollBars = ScrollBars.Vertical;
             // 
             // labelStatus
             // 

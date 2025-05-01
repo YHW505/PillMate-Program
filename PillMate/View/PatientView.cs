@@ -33,8 +33,30 @@ namespace PillMate.View
             try
             {
                 var patients = await _api.GetAllAsync();
+                dataGridView1.Columns.Clear(); // 이전 열 제거
 
+                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "hwanja_name",
+                    HeaderText = "환자 이름"
+                });
+                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "hwanja_gender",
+                    HeaderText = "성별"
+                });
+                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "hwanja_no",
+                    HeaderText = "환자 번호"
+                });
+                dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "hwanja_age",
+                    HeaderText = "나이"
+                });
                 dataGridView1.DataSource = patients;
+
 
 
                 if (patients != null && patients.Count > 0)
@@ -126,7 +148,7 @@ namespace PillMate.View
                 {
                     await LoadQRCodeAsync(selectedPatient.Id.Value); // QR 불러오기
                     bokyoung_imform.Visible = true;
-                    bohoja_name_label.Text = $"병실: {selectedPatient.Bohoja_Name}";
+                    bohoja_name_label.Text = $"보호자 이름: {selectedPatient.Bohoja_Name}";
                     bohoja_pn_label.Text = $"보호자 번호: {selectedPatient.Bohoja_PhoneNumber}";
                     hwanja_room_label.Text = $"병실: {selectedPatient.Hwanja_Room}";
                 }
@@ -148,7 +170,7 @@ namespace PillMate.View
 
                 using (HttpClient client = new HttpClient(handler))
                 {
-                    var imageBytes = await client.GetByteArrayAsync(url);
+                    var imageBytes = await client.GetByteArrayAsync(url);  
                     using (var ms = new MemoryStream(imageBytes))
                     {
                         QR_Image_Box.SizeMode = PictureBoxSizeMode.Zoom;
