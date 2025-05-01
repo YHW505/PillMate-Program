@@ -27,10 +27,16 @@ namespace PillMate.View
             txtPhone.Text = _selectedPatient.Hwanja_PhoneNumber;
             txtGuardianName.Text = _selectedPatient.Bohoja_Name;
             txtGuardianPhone.Text = _selectedPatient.Bohoja_PhoneNumber;
+            txtHwanjaAge.Text = _selectedPatient.Hwanja_Age.ToString() ?? "";;
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
+            if (!int.TryParse(txtHwanjaAge.Text.Trim(), out int age))
+            {
+                MessageBox.Show("나이는 숫자로 입력해주세요.");
+                return;
+            }
             var dto = new UpdatePatientDto
             {
                 Id = _selectedPatient.Id ?? 0,
@@ -40,7 +46,8 @@ namespace PillMate.View
                 Hwanja_Room = txtRoom.Text.Trim(),
                 Hwanja_PhoneNumber = txtPhone.Text.Trim(),
                 Bohoja_Name = txtGuardianName.Text.Trim(),
-                Bohoja_PhoneNumber = txtGuardianPhone.Text.Trim()
+                Bohoja_PhoneNumber = txtGuardianPhone.Text.Trim(),
+                Hwanja_Age = age
             };
 
             if (string.IsNullOrEmpty(dto.Hwanja_Name) || string.IsNullOrEmpty(dto.Hwanja_No))
