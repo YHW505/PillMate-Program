@@ -47,6 +47,24 @@ namespace PillMate.View
             try
             {
                 var Pills = await _api.GetPillsAsync();
+                Pill_DataGreed.Columns.Clear(); // 이전 열 제거
+
+                Pill_DataGreed.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "yank_name",
+                    HeaderText = "약명"
+                });
+                Pill_DataGreed.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "yank_cnt",
+                    HeaderText = "개수"
+                });
+                Pill_DataGreed.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "yank_num",
+                    HeaderText = "약품 번호"
+                });
+
 
                 Pill_DataGreed.DataSource = Pills;
 
@@ -104,9 +122,11 @@ namespace PillMate.View
             //ToggleInputControls(false);
             if (Pill_DataGreed.SelectedRows.Count > 0)
             {
-                var selectedRow = Pill_DataGreed.SelectedRows[0];
-                if (selectedRow.Cells["Id"].Value is int id)
+                var selectedRow = Pill_DataGreed.SelectedRows[0].DataBoundItem as PillDto;
+
+                if (selectedRow != null)
                 {
+                    var id = selectedRow.Id;
                     // 삭제 확인 메시지
                     var confirm = MessageBox.Show($"정말로 ID {id}번 알약을 삭제하시겠습니까?", "삭제", MessageBoxButtons.YesNo);
                     if (confirm == DialogResult.Yes)

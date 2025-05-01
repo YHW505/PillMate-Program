@@ -18,6 +18,12 @@ namespace PillMate.View
 
         private async void btnRegister_Click(object sender, EventArgs e)
         {
+
+            if (!int.TryParse(txtHwanjaAge.Text.Trim(), out int age))
+            {
+                MessageBox.Show("나이는 숫자로 입력해주세요.");
+                return;
+            }
             var dto = new CreatePatientDto
             {
                 Hwanja_Name = txtName.Text.Trim(),
@@ -26,7 +32,8 @@ namespace PillMate.View
                 Hwanja_Room = txtRoom.Text.Trim(),
                 Hwanja_PhoneNumber = txtPhone.Text.Trim(),
                 Bohoja_Name = txtGuardianName.Text.Trim(),
-                Bohoja_PhoneNumber = txtGuardianPhone.Text.Trim()
+                Bohoja_PhoneNumber = txtGuardianPhone.Text.Trim(),
+                Hwanja_Age = age
             };
 
             if (string.IsNullOrEmpty(dto.Hwanja_Name) || string.IsNullOrEmpty(dto.Hwanja_No))
