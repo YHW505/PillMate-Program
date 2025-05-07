@@ -39,11 +39,13 @@ namespace PillMate.View
             // 
             // Pill_DataGreed
             // 
+            this.Pill_DataGreed.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Pill_DataGreed.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Pill_DataGreed.Location = new System.Drawing.Point(0, 0);
             this.Pill_DataGreed.Name = "Pill_DataGreed";
             this.Pill_DataGreed.RowHeadersWidth = 62;
             this.Pill_DataGreed.RowTemplate.Height = 23;
+            this.Pill_DataGreed.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.Pill_DataGreed.Size = new System.Drawing.Size(591, 324);
             this.Pill_DataGreed.TabIndex = 0;
             this.Pill_DataGreed.AutoGenerateColumns = false;
@@ -53,10 +55,10 @@ namespace PillMate.View
             // 
             // Pill_Register_Button
             // 
-            this.Pill_Register_Button.Font = new System.Drawing.Font("굴림", 9F);
+            this.Pill_Register_Button.Font = new System.Drawing.Font("Gulim", 9F);
             this.Pill_Register_Button.Location = new System.Drawing.Point(597, 12);
             this.Pill_Register_Button.Name = "Pill_Register_Button";
-            this.Pill_Register_Button.Size = new System.Drawing.Size(131, 58);
+            this.Pill_Register_Button.Size = new System.Drawing.Size(92, 39);
             this.Pill_Register_Button.TabIndex = 2;
             this.Pill_Register_Button.Text = "등록";
             this.Pill_Register_Button.UseVisualStyleBackColor = true;
@@ -65,10 +67,10 @@ namespace PillMate.View
             // Pill_Delete_Button
             // 
             this.Pill_Delete_Button.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.Pill_Delete_Button.Font = new System.Drawing.Font("굴림", 9F);
-            this.Pill_Delete_Button.Location = new System.Drawing.Point(597, 76);
+            this.Pill_Delete_Button.Font = new System.Drawing.Font("Gulim", 9F);
+            this.Pill_Delete_Button.Location = new System.Drawing.Point(597, 57);
             this.Pill_Delete_Button.Name = "Pill_Delete_Button";
-            this.Pill_Delete_Button.Size = new System.Drawing.Size(131, 58);
+            this.Pill_Delete_Button.Size = new System.Drawing.Size(92, 39);
             this.Pill_Delete_Button.TabIndex = 3;
             this.Pill_Delete_Button.Text = "삭제";
             this.Pill_Delete_Button.UseVisualStyleBackColor = true;
@@ -79,7 +81,7 @@ namespace PillMate.View
             this.pillLabel.AutoSize = true;
             this.pillLabel.Location = new System.Drawing.Point(3, 327);
             this.pillLabel.Name = "pillLabel";
-            this.pillLabel.Size = new System.Drawing.Size(242, 18);
+            this.pillLabel.Size = new System.Drawing.Size(161, 12);
             this.pillLabel.TabIndex = 10;
             this.pillLabel.Text = "알약 데이터를 불러오는 중...";
             // 

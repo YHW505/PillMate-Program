@@ -20,6 +20,7 @@ namespace PillMate.View
             timer2.Start();
             PanelWidth = panelLeft.Width;
             isCollapsed = false;
+            LoadView(new BukyoungView());
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -63,6 +64,7 @@ namespace PillMate.View
         private void btnHome_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnHome);
+            LoadView(new BukyoungView());
         }
 
         private void btnPatient_Click(object sender, EventArgs e)

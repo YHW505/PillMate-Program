@@ -15,23 +15,27 @@ namespace PillMate.View
             this.btnDeletePatient = new System.Windows.Forms.Button();
             this.QR_Image_Box = new System.Windows.Forms.PictureBox();
             this.Print_QR = new System.Windows.Forms.Button();
-            this.bokyoung_imform = new System.Windows.Forms.Button();
             this.bohoja_name_label = new System.Windows.Forms.Label();
             this.bohoja_pn_label = new System.Windows.Forms.Label();
             this.hwanja_room_label = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.Bukyoung_list = new System.Windows.Forms.ListView();
+            this.TakenMedicine_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TakenmMedicine_dosage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QR_Image_Box)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.Size = new System.Drawing.Size(591, 324);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += dataGridView1_CellClick;
@@ -85,7 +89,7 @@ namespace PillMate.View
             // 
             // QR_Image_Box
             // 
-            this.QR_Image_Box.Location = new System.Drawing.Point(598, 259);
+            this.QR_Image_Box.Location = new System.Drawing.Point(597, 157);
             this.QR_Image_Box.Name = "QR_Image_Box";
             this.QR_Image_Box.Size = new System.Drawing.Size(169, 137);
             this.QR_Image_Box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -94,7 +98,7 @@ namespace PillMate.View
             // 
             // Print_QR
             // 
-            this.Print_QR.Location = new System.Drawing.Point(517, 373);
+            this.Print_QR.Location = new System.Drawing.Point(691, 301);
             this.Print_QR.Name = "Print_QR";
             this.Print_QR.Size = new System.Drawing.Size(75, 23);
             this.Print_QR.TabIndex = 7;
@@ -103,20 +107,10 @@ namespace PillMate.View
             this.Print_QR.Visible = false;
             this.Print_QR.Click += new System.EventHandler(this.Print_QR_Click);
             // 
-            // bokyoung_imform
-            // 
-            this.bokyoung_imform.Location = new System.Drawing.Point(498, 344);
-            this.bokyoung_imform.Name = "bokyoung_imform";
-            this.bokyoung_imform.Size = new System.Drawing.Size(93, 23);
-            this.bokyoung_imform.TabIndex = 8;
-            this.bokyoung_imform.Text = "복약 정보 확인";
-            this.bokyoung_imform.UseVisualStyleBackColor = true;
-            this.bokyoung_imform.Visible = false;
-            // 
             // bohoja_name_label
             // 
             this.bohoja_name_label.AutoSize = true;
-            this.bohoja_name_label.Location = new System.Drawing.Point(598, 206);
+            this.bohoja_name_label.Location = new System.Drawing.Point(597, 396);
             this.bohoja_name_label.Name = "bohoja_name_label";
             this.bohoja_name_label.Size = new System.Drawing.Size(73, 12);
             this.bohoja_name_label.TabIndex = 11;
@@ -125,7 +119,7 @@ namespace PillMate.View
             // bohoja_pn_label
             // 
             this.bohoja_pn_label.AutoSize = true;
-            this.bohoja_pn_label.Location = new System.Drawing.Point(598, 189);
+            this.bohoja_pn_label.Location = new System.Drawing.Point(597, 379);
             this.bohoja_pn_label.Name = "bohoja_pn_label";
             this.bohoja_pn_label.Size = new System.Drawing.Size(97, 12);
             this.bohoja_pn_label.TabIndex = 12;
@@ -134,7 +128,7 @@ namespace PillMate.View
             // hwanja_room_label
             // 
             this.hwanja_room_label.AutoSize = true;
-            this.hwanja_room_label.Location = new System.Drawing.Point(598, 174);
+            this.hwanja_room_label.Location = new System.Drawing.Point(597, 364);
             this.hwanja_room_label.Name = "hwanja_room_label";
             this.hwanja_room_label.Size = new System.Drawing.Size(33, 12);
             this.hwanja_room_label.TabIndex = 14;
@@ -143,22 +137,34 @@ namespace PillMate.View
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(597, 157);
+            this.label1.Location = new System.Drawing.Point(596, 347);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 16;
             this.label1.Text = "상세정보";
+            // 
+            // Bukyoung_list
+            // 
+            this.Bukyoung_list.GridLines = true;
+            this.Bukyoung_list.HideSelection = false;
+            this.Bukyoung_list.Location = new System.Drawing.Point(307, 347);
+            this.Bukyoung_list.Name = "Bukyoung_list";
+            this.Bukyoung_list.Size = new System.Drawing.Size(284, 159);
+            this.Bukyoung_list.TabIndex = 17;
+            this.Bukyoung_list.UseCompatibleStateImageBehavior = false;
+            this.Bukyoung_list.View = System.Windows.Forms.View.Details;
+            this.Bukyoung_list.Visible = false;
             // 
             // PatientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.Bukyoung_list);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.hwanja_room_label);
             this.Controls.Add(this.bohoja_pn_label);
             this.Controls.Add(this.bohoja_name_label);
-            this.Controls.Add(this.bokyoung_imform);
             this.Controls.Add(this.Print_QR);
             this.Controls.Add(this.QR_Image_Box);
             this.Controls.Add(this.btnDeletePatient);
@@ -168,7 +174,7 @@ namespace PillMate.View
             this.Controls.Add(this.dataGridView1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "PatientView";
-            this.Size = new System.Drawing.Size(798, 420);
+            this.Size = new System.Drawing.Size(798, 526);
             this.Load += new System.EventHandler(this.PatientView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.QR_Image_Box)).EndInit();
@@ -184,10 +190,12 @@ namespace PillMate.View
         private System.Windows.Forms.Button btnDeletePatient;  // 삭제 버튼 추가
         private System.Windows.Forms.PictureBox QR_Image_Box;
         private System.Windows.Forms.Button Print_QR;
-        private System.Windows.Forms.Button bokyoung_imform;
         private System.Windows.Forms.Label bohoja_name_label;
         private System.Windows.Forms.Label bohoja_pn_label;
         private System.Windows.Forms.Label hwanja_room_label;
         private System.Windows.Forms.Label label1;
+        private ColumnHeader TakenMedicine_name;
+        private ColumnHeader TakenmMedicine_dosage;
+        private ListView Bukyoung_list;
     }
 }
