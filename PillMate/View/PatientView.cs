@@ -9,17 +9,21 @@ using System.Net.Http;
 using System.Net;
 using System.Drawing;
 using System.Drawing.Printing;
+using PillMate.Client.ApiClients;
+using Google.Protobuf.WellKnownTypes;
 
 namespace PillMate.View
 {
     public partial class PatientView : UserControl
     {
         private readonly PatientApi _api;
+        private readonly TakenMedicineAPI _Tapi;
 
         public PatientView()
         {
             InitializeComponent();
             _api = new PatientApi();
+            _Tapi = new TakenMedicineAPI();
         }
 
         private async void PatientView_Load(object sender, EventArgs e)
@@ -72,6 +76,33 @@ namespace PillMate.View
             {
                 labelStatus.Text = "데이터를 불러오는 데 실패했습니다.";
                 MessageBox.Show($"오류 발생: {ex.Message}");
+            }
+        }
+
+        private async Task LoadTakenMedicine(int patientId)
+        {
+            Bukyoung_list.Items.Clear();
+
+            // View 및 컬럼 설정 확인
+            Bukyoung_list.View = System.Windows.Forms.View.Details;
+            if (Bukyoung_list.Columns.Count == 0)
+            {
+                Bukyoung_list.Columns.Add("약품명", 150);
+                Bukyoung_list.Columns.Add("복용량", 100);
+                Bukyoung_list.Columns[0].Width = 142;
+                Bukyoung_list.Columns[1].Width = 142;
+            }
+
+            var takenList = await _Tapi.GetAllAsync(patientId);
+
+            foreach (var tm in takenList)
+            {
+                if (tm.Pill != null)
+                {
+                    var item = new ListViewItem(tm.Pill.Yank_Name);
+                    item.SubItems.Add($"{tm.Dosage}정");
+                    Bukyoung_list.Items.Add(item);
+                }
             }
         }
 
@@ -147,7 +178,8 @@ namespace PillMate.View
                 if (selectedPatient != null && selectedPatient.Id != null)
                 {
                     await LoadQRCodeAsync(selectedPatient.Id.Value); // QR 불러오기
-                    bokyoung_imform.Visible = true;
+                    await LoadTakenMedicine(selectedPatient.Id.Value);
+                    Bukyoung_list.Visible = true;
                     bohoja_name_label.Text = $"보호자 이름: {selectedPatient.Bohoja_Name}";
                     bohoja_pn_label.Text = $"보호자 번호: {selectedPatient.Bohoja_PhoneNumber}";
                     hwanja_room_label.Text = $"병실: {selectedPatient.Hwanja_Room}";
@@ -159,7 +191,7 @@ namespace PillMate.View
         private async Task LoadQRCodeAsync(int patientId)
         {
             //이 부분 자신에 맞게 수정
-            string url = $"https://localhost:51879/api/QRCode/{patientId}";
+            string url = $"https://localhost:14188/api/QRCode/{patientId}";
 
             try
             {
@@ -229,6 +261,9 @@ namespace PillMate.View
         {
             PrintQRCode();
         }
+
+        
+
 
 
     }

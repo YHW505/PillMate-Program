@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PillMate.DTO
 {
@@ -13,6 +9,7 @@ namespace PillMate.DTO
         public string Hwanja_Name { get; set; }
         public bool Bukyoung_Chk { get; set; }
         public int PatientId { get; set; }
+        public DateTime Bukyoung_At { get; set; }
     }
 
     public class CreateBukyoungStatusDto
@@ -21,6 +18,7 @@ namespace PillMate.DTO
         public string Hwanja_Name { get; set; }
         public bool Bukyoung_Chk { get; set; }
         public int PatientId { get; set; }
+        public DateTime Bukyoung_At { get; set; }
     }
 
     public class UpdateBukyoungStatusDto : CreateBukyoungStatusDto
