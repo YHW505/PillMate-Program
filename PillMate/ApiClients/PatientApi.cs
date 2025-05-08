@@ -12,19 +12,39 @@ namespace PillMate.ApiClients
         public PatientApi() : base("Patients") { }
 
         // 환자 등록 (Create)
-        public async Task<bool> AddAsync(CreatePatientDto dto)
+        //public async Task<bool> AddAsync(CreatePatientDto dto)
+        //{
+        //    try
+        //    {
+        //        var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}", dto);
+        //        return response.IsSuccessStatusCode;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"[AddAsync] 오류: {ex.Message}");
+        //        return false;
+        //    }
+        //}
+
+        public async Task<int?> AddAsync(CreatePatientDto dto)
         {
             try
             {
                 var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}", dto);
-                return response.IsSuccessStatusCode;
+                if (response.IsSuccessStatusCode)
+                {
+                    var createdPatient = await response.Content.ReadFromJsonAsync<PatientDto>();
+                    return createdPatient?.Id;
+                }
+                return null;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[AddAsync] 오류: {ex.Message}");
-                return false;
+                return null;
             }
         }
+
 
         // 환자 수정 (Update)
         public async Task<bool> UpdateAsync(UpdatePatientDto dto)
