@@ -14,6 +14,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -195,6 +196,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\TakenMedicienResisterView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TakenMedicienResisterView.Designer.cs">
+      <DependentUpon>TakenMedicienResisterView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\BukyoungView.resx">
       <DependentUpon>BukyoungView.cs</DependentUpon>
     </EmbeddedResource>
@@ -229,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PillView.resx">
       <DependentUpon>PillView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TakenMedicienResisterView.resx">
+      <DependentUpon>TakenMedicienResisterView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
