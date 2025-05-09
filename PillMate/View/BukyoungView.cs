@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PillMate.ApiClients;
+using PillMate.Models;
 
 namespace PillMate.View
 {
@@ -65,6 +66,15 @@ namespace PillMate.View
                     DataPropertyName = "DisplayTime", // <- 주의: 아래에서 만드는 가공된 속성
                     HeaderText = "복용 시간"
                 });
+
+                if (BokyoungStatus != null && BokyoungStatus.Count > 0)
+                {
+                    Loading_Status.Text = "";
+                }
+                else
+                {
+                    Loading_Status.Text = "데이터가 없습니다.";
+                }
 
                 // 복용 시간 표시를 위해 DisplayTime 속성 추가
                 var displayData = BokyoungStatus.Select(s => new
