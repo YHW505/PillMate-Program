@@ -174,17 +174,6 @@
             this.txtGuardianPhone.Size = new System.Drawing.Size(124, 28);
             this.txtGuardianPhone.TabIndex = 13;
             // 
-            // btnRegister
-            // 
-            this.btnRegister.Location = new System.Drawing.Point(154, 518);
-            this.btnRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(94, 28);
-            this.btnRegister.TabIndex = 14;
-            this.btnRegister.Text = "등록";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -197,9 +186,22 @@
             // txtHwanjaAge
             // 
             this.txtHwanjaAge.Location = new System.Drawing.Point(230, 452);
+            this.txtHwanjaAge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtHwanjaAge.Name = "txtHwanjaAge";
             this.txtHwanjaAge.Size = new System.Drawing.Size(124, 28);
-            this.txtHwanjaAge.TabIndex = 16;
+            this.txtHwanjaAge.TabIndex = 14;
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(154, 518);
+            this.btnRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(94, 28);
+            this.btnRegister.TabIndex = 16;
+            this.btnRegister.Text = "등록";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            
             // 
             // PatientRegisterView
             // 

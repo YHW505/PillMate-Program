@@ -57,7 +57,7 @@ namespace PillMate.View
                 Pill_DataGreed.Columns.Add(new DataGridViewTextBoxColumn
                 {
                     DataPropertyName = "yank_cnt",
-                    HeaderText = "개수"
+                    HeaderText = "잔여 개수"
                 });
                 Pill_DataGreed.Columns.Add(new DataGridViewTextBoxColumn
                 {
