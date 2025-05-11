@@ -29,15 +29,13 @@ namespace PillMate.View
 
         private readonly int _patientId;
 
+        private TableLayoutPanel tableLayout;
+
         public TakenMedicineResisterView(int patientId)
         {
             InitializeComponent();
             _patientId = patientId;
         }
-
-        
-
-        private TableLayoutPanel tableLayout;
 
         private async void ChkPill_Load(object sender, EventArgs e)
         {
@@ -83,24 +81,6 @@ namespace PillMate.View
             }
         }
 
-        
-
-
-        //private async Task LoadPillListAsync()
-        //{
-        //    var api = new PillAPI();
-        //    _pills = await api.GetAllAsync();
-
-        //    foreach (var pill in _pills)
-        //    {
-        //        var checkbox = new CheckBox
-        //        {
-        //            Text = pill.Yank_Name,
-        //            Tag = pill
-        //        };
-        //        flowLayoutPanel1.Controls.Add(checkbox); // 약 체크박스 추가
-        //    }
-        //}
 
         public List<PillDto> GetSelectedPills()
         {
@@ -116,12 +96,16 @@ namespace PillMate.View
             return selected;
         }
 
+
         private async void btnRegister_Click(object sender, EventArgs e)
         {
             var list = new List<TakenMedicineDto>();
             var _takenApi = new TakenMedicineAPI();
-            var view = new PatientView();
-            
+
+            // 기존 복약 목록
+            var existingMedicines = await _takenApi.GetTakenMedicinesAsync(_patientId);
+
+            bool anyRegistered = false;
 
             for (int i = 0; i < tableLayout.Controls.Count; i += 2)
             {
@@ -130,13 +114,30 @@ namespace PillMate.View
 
                 if (chk?.Checked == true && chk.Tag is PillDto pill && int.TryParse(txt?.Text, out int dosage))
                 {
+                    bool isDuplicate = existingMedicines.Any(m => m.PillId == pill.Id);
+                    if (isDuplicate)
+                    {
+                        MessageBox.Show($"❗ '{pill.Yank_Name}' 약은 이미 등록되어 있습니다.", "중복 알림", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        continue;
+                    }
+
                     var dto = new TakenMedicineDto
                     {
                         PatientId = _patientId,
                         PillId = pill.Id,
                         Dosage = dosage.ToString()
                     };
-                    await _takenApi.CreateTakenMedicineAsync(dto); // ✅ DB 저장
+
+                    bool isSuccess = await _takenApi.CreateTakenMedicineAsync(dto);
+                    if (isSuccess)
+                    {
+                        list.Add(dto);
+                        MessageBox.Show("✅ 복약 등록이 완료되었습니다.", "완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"❌ '{pill.Yank_Name}' 등록 실패", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
 
@@ -147,38 +148,7 @@ namespace PillMate.View
 
             this.Close();
         }
-    }
-
-        //private async void btnConfirm_Click(object sender, EventArgs e)
-        //{
-            //var selected = new List<TakenMedicineDto>();
-
-        //    for (int i = 0; i < tableLayout.Controls.Count; i += 2)
-        //    {
-        //        var checkBox = tableLayout.Controls[i] as CheckBox;
-        //        var textBox = tableLayout.Controls[i + 1] as TextBox;
-
-        //        if (checkBox != null && checkBox.Checked && checkBox.Tag is PillDto pill)
-        //        {
-        //            if (int.TryParse(textBox.Text, out int dosage))
-        //            {
-        //                selected.Add(new TakenMedicineDto
-        //                {
-        //                    PillId = pill.Id,
-        //                    Dosage = dosage.ToString()
-        //                    // PatientId는 부모에서 넘겨받도록 설정
-        //                });
-        //            }
-        //        }
-        //    }
-
-        //            if (OnPillsSelectedAsync != null)
-        //            {
-        //                await OnPillsSelectedAsync(selected);
-        //}
-
-        //    this.Close();
-        //}
 
 
     }
+}

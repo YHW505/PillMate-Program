@@ -107,14 +107,7 @@ namespace PillMate.View
             }
         }
 
-        private void btnAddTakenMedicine_click(object sender, EventArgs e)
-        {
-            var selectedPatient = dataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
-            if (selectedPatient.Id == null) return;
-            TakenMedicineResisterView takenmedicineResisterView = new TakenMedicineResisterView(selectedPatient.Id.Value); 
-            takenmedicineResisterView.StartPosition = FormStartPosition.CenterScreen;
-            takenmedicineResisterView.ShowDialog();
-        }
+        
 
         private void btnAddPatient_Click(object sender, EventArgs e)
         {
@@ -203,7 +196,7 @@ namespace PillMate.View
         private async Task LoadQRCodeAsync(int patientId)
         {
             //이 부분 자신에 맞게 수정
-            string url = $"https://localhost:51879/api/QRCode/{patientId}";
+            string url = $"https://localhost:14188/api/QRCode/{patientId}";
 
             try
             {
@@ -278,84 +271,15 @@ namespace PillMate.View
         private void btnAddMedicine_Click(object sender, EventArgs e)
         {
             var selectedPatient = dataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
-            if (selectedPatient.Id == null) return;
+            if (selectedPatient?.Id == null) return;
 
-            var form = new TakenMedicineResisterView(selectedPatient.Id.Value); // 환자 ID 전달
+            var form = new TakenMedicineResisterView(selectedPatient.Id.Value);
             form.OnPillsSelectedAsync += async (selectedList) =>
             {
-                // 필요한 경우 selectedList 사용 가능 (예: ListView 직접 갱신)
-                await LoadTakenMedicine(selectedPatient.Id.Value); // 등록 후 새로고침
+                await LoadTakenMedicine(selectedPatient.Id.Value); // 새로고침
             };
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.ShowDialog(); // 이거 꼭 필요!
         }
-
-
-
-            //private void btnAddMedicine_Click(object sender, EventArgs e)
-            //{
-            //    var selectedPatient = dataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
-            //    if (selectedPatient == null || selectedPatient.Id == null)
-            //    {
-            //        MessageBox.Show("유효한 환자 정보가 없습니다.");
-            //        return;
-            //    }
-
-            //    var form = new TakenMedicineResisterView();
-            //    form.OnPillsSelectedAsync = async selectedList =>
-            //    {
-            //        foreach (var taken in selectedList)
-            //        {
-            //            // 환자 ID 지정
-            //            taken.PatientId = selectedPatient.Id.Value;
-
-            //            // DB에 저장
-            //            await _Tapi.CreateTakenMedicineAsync(taken);
-
-            //            // ListView에 추가
-            //            var _pillApi = new PillAPI();
-            //            var pill = await _pillApi.GetAllAsync(taken.PillId);
-            //            var item = new ListViewItem(pill.Yank_Name);
-            //            item.SubItems.Add($"{taken.Dosage}정");
-            //            Bukyoung_list.Items.Add(item);
-            //        }
-            //    };
-
-            //    form.ShowDialog();
-            //}
-
-            //private void btnAddMedicine_Click(object sender, EventArgs e)
-            //{
-            //    var selectedPatient = dataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
-
-            //if (selectedPatient == null || selectedPatient.Id == null)
-            //{
-            //    MessageBox.Show("유효한 환자 정보가 없습니다.");
-            //    return;
-            //}
-
-            //    // ✅ 환자 ID를 팝업으로 전달
-            //    //var form = new TakenMedicineResisterView(selectedPatient.Id.Value);
-            //    var form = new TakenMedicineResisterView();
-
-            //    // 콜백을 통해 체크된 약 리스트를 전달받음
-            //    form.OnPillsSelected += selectedPills =>
-            //    {
-            //        foreach (var pill in selectedPills)
-            //        {
-            //            var item = new ListViewItem(pill.Yank_Name); // 약 이름
-            //            item.SubItems.Add(pill.Yank_Cnt.ToString()); // 예: 수량 표시
-            //            Bukyoung_list.Items.Add(item);
-            //        }
-            //    };
-
-            //    form.ShowDialog(); // 팝업 열기
-            //}
-
-
-
-
-
-
-
-
         }
     }
