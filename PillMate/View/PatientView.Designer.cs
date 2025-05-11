@@ -175,7 +175,7 @@ namespace PillMate.View
             this.Add_TakenMedicine.Text = "복약 등록";
             this.Add_TakenMedicine.UseVisualStyleBackColor = true;
             this.Add_TakenMedicine.Visible = false;
-            this.Add_TakenMedicine.Click += new System.EventHandler(this.btnAddTakenMedicine_click);
+            this.Add_TakenMedicine.Click += new System.EventHandler(this.btnAddMedicine_Click);
 
             // 
             // PatientView
