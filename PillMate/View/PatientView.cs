@@ -285,6 +285,7 @@ namespace PillMate.View
             form.OnPillsSelectedAsync += async (selectedList) =>
             {
                 await LoadTakenMedicine(selectedPatient.Id.Value); // 새로고침
+                await LoadQRCodeAsync(selectedPatient.Id.Value);
             };
             form.StartPosition = FormStartPosition.CenterScreen;
             form.ShowDialog(); // 이거 꼭 필요!
@@ -311,7 +312,10 @@ namespace PillMate.View
 
                     if (isSuccess)
                     {
+                        var selectedPatient = dataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
+
                         Bukyoung_list.Items.Remove(selectedItem); // ✅ 3번 코드: ListView에서 삭제
+                        await LoadQRCodeAsync(selectedPatient.Id.Value);
                         MessageBox.Show("✅ 삭제 완료");
                     }
                     else
