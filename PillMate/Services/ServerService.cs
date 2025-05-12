@@ -15,7 +15,7 @@ namespace PillMate.Services
 
         public void StartServer()
         {
-            string serverPath = @"D:\PillMate.Server";
+            string serverPath = @"C:\Users\유형우\source\repos\PillMate.Server";
 
             var psi = new ProcessStartInfo
             {
