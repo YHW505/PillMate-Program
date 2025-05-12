@@ -25,6 +25,13 @@ namespace PillMate.View
             InitializeComponent();
             _api = new PatientApi();
             _Tapi = new TakenMedicineAPI();
+            // 우클릭 메뉴 설정 코드
+            var contextMenu = new ContextMenuStrip();
+            var deleteMenu = new ToolStripMenuItem("삭제");
+            deleteMenu.Click += DeleteMenu_Click;
+            contextMenu.Items.Add(deleteMenu);
+
+            Bukyoung_list.ContextMenuStrip = contextMenu;
         }
 
         private async void PatientView_Load(object sender, EventArgs e)
@@ -102,6 +109,7 @@ namespace PillMate.View
                 {
                     var item = new ListViewItem(tm.Pill.Yank_Name);
                     item.SubItems.Add($"{tm.Dosage}정");
+                    item.Tag = tm; // ← 여기에서 Tag에 dto 넣기
                     Bukyoung_list.Items.Add(item);
                 }
             }
@@ -281,5 +289,40 @@ namespace PillMate.View
             form.StartPosition = FormStartPosition.CenterScreen;
             form.ShowDialog(); // 이거 꼭 필요!
         }
+
+        private async void DeleteMenu_Click(object? sender, EventArgs e)
+        {
+            if (Bukyoung_list.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("삭제할 항목을 선택하세요.");
+                return;
+            }
+
+
+            var selectedItem = Bukyoung_list.SelectedItems[0];
+
+            if (selectedItem.Tag is TakenMedicineDto takenMedicine)
+            {
+                var result = MessageBox.Show($"'{selectedItem.Text}' 약을 삭제하시겠습니까?", "삭제 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    var api = new TakenMedicineAPI();
+                    bool isSuccess = await api.DeleteTakenMedicineAsync(takenMedicine.Id);
+
+                    if (isSuccess)
+                    {
+                        Bukyoung_list.Items.Remove(selectedItem); // ✅ 3번 코드: ListView에서 삭제
+                        MessageBox.Show("✅ 삭제 완료");
+                    }
+                    else
+                    {
+                        MessageBox.Show("❌ 삭제 실패");
+                    }
+                }
+            }
         }
+
+
+
     }
+}
