@@ -14,6 +14,18 @@ namespace PillMate.View
     {
         int PanelWidth;
         bool isCollapsed;
+        private readonly string _username;
+        private readonly string _email;
+
+
+        public MainUi(string username,string email) : this() 
+        {
+            _username = username;
+            _email = email;
+            namelabel.Text = _username;
+            emaillabel.Text = _email;
+        }
+
         public MainUi()
         {
             InitializeComponent();
