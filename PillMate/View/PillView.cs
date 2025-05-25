@@ -19,7 +19,7 @@ using System.Drawing.Printing;
 
 namespace PillMate.View
 {
-    public partial class PillView : UserControl
+    public partial class PillView : Form
     {
 
         private readonly PillAPI _api;

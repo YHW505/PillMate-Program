@@ -24,7 +24,7 @@ namespace PillMate.Services
             };
 
             _httpClient = new HttpClient(handler);
-            _httpClient.BaseAddress = new Uri("https://localhost:14188"); // 자신에 맞게 변경
+            _httpClient.BaseAddress = new Uri("https://localhost:5787"); // 자신에 맞게 변경
 
             _baseUrl = $"/api/{endpoint}";
         }
