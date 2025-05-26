@@ -1,89 +1,127 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
+using System.Net.Http;
+using Guna.UI2.WinForms;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using PillMate.ApiClients;
+using PillMate.Client.ApiClients;
+using PillMate.DTO;
 
 namespace PillMate.View
 {
     public partial class Patient : Form
     {
+        private readonly PatientApi _api;
+        private readonly TakenMedicineAPI _Tapi;
+
         public Patient()
         {
             InitializeComponent();
+            _api = new PatientApi();
+            _Tapi = new TakenMedicineAPI();
+            SetupListView();
         }
 
-        private void Patient_Load(object sender, EventArgs e)
+        private async void Patient_Load(object sender, EventArgs e)
         {
-            guna2DataGridView1.Rows.Add(9);
-            //guna2DataGridView1.Rows[0].Cells[1].Value = Image.FromFile("photos\\1.png");
-            guna2DataGridView1.Rows[0].Cells[2].Value = "Dian Cooper";
-            guna2DataGridView1.Rows[0].Cells[3].Value = "(239)555-2020";
-            guna2DataGridView1.Rows[0].Cells[4].Value = "Cilacap";
-            guna2DataGridView1.Rows[0].Cells[5].Value = "Jan 21,2020 -13:30";
-            guna2DataGridView1.Rows[0].Cells[6].Value = "Jan 21,2020";
-            guna2DataGridView1.Rows[0].Cells[7].Value = "Jan 21,2020";
+            await LoadPatientsAsync();
+        }
 
-            //guna2DataGridView1.Rows[1].Cells[1].Value = Image.FromFile("photos\\5.png");
-            guna2DataGridView1.Rows[1].Cells[2].Value = "Dian Cooper";
-            guna2DataGridView1.Rows[1].Cells[3].Value = "(239)555-2020";
-            guna2DataGridView1.Rows[1].Cells[4].Value = "Cilacap";
-            guna2DataGridView1.Rows[1].Cells[5].Value = "Jan 21,2020 -13:30";
-            guna2DataGridView1.Rows[1].Cells[6].Value = "Jan 21,2020";
-            guna2DataGridView1.Rows[1].Cells[7].Value = "Jan 21,2020";
+        private async Task LoadPatientsAsync()
+        {
+            var patients = await _api.GetAllAsync();
 
-            //guna2DataGridView1.Rows[2].Cells[1].Value = Image.FromFile("photos\\3.png");
-            guna2DataGridView1.Rows[2].Cells[2].Value = "Dian Cooper";
-            guna2DataGridView1.Rows[2].Cells[3].Value = "(239)555-2020";
-            guna2DataGridView1.Rows[2].Cells[4].Value = "Cilacap";
-            guna2DataGridView1.Rows[2].Cells[5].Value = "Jan 21,2020 -13:30";
-            guna2DataGridView1.Rows[2].Cells[6].Value = "Jan 21,2020";
-            guna2DataGridView1.Rows[2].Cells[7].Value = "Jan 21,2020";
+            // 컬럼 데이터 연결 (디자이너에서 이미 컬럼 이름이 설정되어 있다고 가정)
+            guna2DataGridView1.Columns["ColumnId"].DataPropertyName = "Id";
+            guna2DataGridView1.Columns["ColumnName"].DataPropertyName = "Hwanja_Name";
+            guna2DataGridView1.Columns["ColumnPhone"].DataPropertyName = "Hwanja_PhoneNumber";
+            guna2DataGridView1.Columns["ColumnRoom"].DataPropertyName = "Hwanja_Room";
 
-            //guna2DataGridView1.Rows[3].Cells[1].Value = Image.FromFile("photos\\4.png");
-            guna2DataGridView1.Rows[3].Cells[2].Value = "Dian Cooper";
-            guna2DataGridView1.Rows[3].Cells[3].Value = "(239)555-2020";
-            guna2DataGridView1.Rows[3].Cells[4].Value = "Cilacap";
-            guna2DataGridView1.Rows[3].Cells[5].Value = "Jan 21,2020 -13:30";
-            guna2DataGridView1.Rows[3].Cells[6].Value = "Jan 21,2020";
-            guna2DataGridView1.Rows[3].Cells[7].Value = "Jan 21,2020";
+            guna2DataGridView1.DataSource = patients;
 
-            //guna2DataGridView1.Rows[4].Cells[1].Value = Image.FromFile("photos\\5.png");
-            guna2DataGridView1.Rows[4].Cells[2].Value = "Dian Cooper";
-            guna2DataGridView1.Rows[4].Cells[3].Value = "(239)555-2020";
-            guna2DataGridView1.Rows[4].Cells[4].Value = "Cilacap";
-            guna2DataGridView1.Rows[4].Cells[5].Value = "Jan 21,2020 -13:30";
-            guna2DataGridView1.Rows[4].Cells[6].Value = "Jan 21,2020";
-            guna2DataGridView1.Rows[4].Cells[7].Value = "Jan 21,2020";
+            patientcnt.Text = patients.Count.ToString("D2");
+            patientcnt.Text = $"{patients.Count}";
+        }
 
-            //guna2DataGridView1.Rows[5].Cells[1].Value = Image.FromFile("photos\\6.png");
-            guna2DataGridView1.Rows[5].Cells[2].Value = "Dian Cooper";
-            guna2DataGridView1.Rows[5].Cells[3].Value = "(239)555-2020";
-            guna2DataGridView1.Rows[5].Cells[4].Value = "Cilacap";
-            guna2DataGridView1.Rows[5].Cells[5].Value = "Jan 21,2020 -13:30";
-            guna2DataGridView1.Rows[5].Cells[6].Value = "Jan 21,2020";
-            guna2DataGridView1.Rows[5].Cells[7].Value = "Jan 21,2020";
+        private async void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
 
-            //guna2DataGridView1.Rows[6].Cells[1].Value = Image.FromFile("photos\\5.png");
-            guna2DataGridView1.Rows[6].Cells[2].Value = "Dian Cooper";
-            guna2DataGridView1.Rows[6].Cells[3].Value = "(239)555-2020";
-            guna2DataGridView1.Rows[6].Cells[4].Value = "Cilacap";
-            guna2DataGridView1.Rows[6].Cells[5].Value = "Jan 21,2020 -13:30";
-            guna2DataGridView1.Rows[6].Cells[6].Value = "Jan 21,2020";
-            guna2DataGridView1.Rows[6].Cells[7].Value = "Jan 21,2020";
+            // 선택된 행에서 데이터 추출
+            if (guna2DataGridView1.Rows[e.RowIndex].DataBoundItem is PatientDto patient && patient.Id != null)
+            {
+                await LoadQRCodeAsync(patient.Id.Value);
+                await LoadTakenMedicine(patient.Id.Value);
+            }
+        }
 
-            //guna2DataGridView1.Rows[7].Cells[1].Value = Image.FromFile("photos\\1.png");
-            guna2DataGridView1.Rows[7].Cells[2].Value = "Dian Cooper";
-            guna2DataGridView1.Rows[7].Cells[3].Value = "(239)555-2020";
-            guna2DataGridView1.Rows[7].Cells[4].Value = "Cilacap";
-            guna2DataGridView1.Rows[7].Cells[5].Value = "Jan 21,2020 -13:30";
-            guna2DataGridView1.Rows[7].Cells[6].Value = "Jan 21,2020";
-            guna2DataGridView1.Rows[7].Cells[7].Value = "Jan 21,2020";
+        private async Task LoadQRCodeAsync(int patientId)
+        {
+            string url = $"https://localhost:8938/api/QRCode/{patientId}";
 
-            //guna2DataGridView1.Rows[8].Cells[1].Value = Image.FromFile("photos\\1.png");
-            guna2DataGridView1.Rows[8].Cells[2].Value = "Dian Cooper";
-            guna2DataGridView1.Rows[8].Cells[3].Value = "(239)555-2020";
-            guna2DataGridView1.Rows[8].Cells[4].Value = "Cilacap";
-            guna2DataGridView1.Rows[8].Cells[5].Value = "Jan 21,2020 -13:30";
-            guna2DataGridView1.Rows[8].Cells[6].Value = "Jan 21,2020";
-            guna2DataGridView1.Rows[8].Cells[7].Value = "Jan 21,2020";
+            try
+            {
+                using var handler = new HttpClientHandler { ServerCertificateCustomValidationCallback = (a, b, c, d) => true };
+                using var client = new HttpClient(handler);
+
+                var imageBytes = await client.GetByteArrayAsync(url);
+                using var ms = new MemoryStream(imageBytes);
+                QR_Image_Box.Image = Image.FromStream(ms);
+            }
+            catch (Exception ex)
+            {
+                QR_Image_Box.Image = null;
+                MessageBox.Show("QR 코드 로드 실패: " + ex.Message);
+            }
+        }
+
+        private async Task LoadTakenMedicine(int patientId)
+        {
+            listView1.Items.Clear();
+            var takenList = await _Tapi.GetAllAsync(patientId);
+
+            foreach (var item in takenList)
+            {
+                var lvi = new ListViewItem(item.Pill.Yank_Name);
+                lvi.SubItems.Add($"{item.Dosage}정");
+                listView1.Items.Add(lvi);
+            }
+        }
+
+        private void SetupListView()
+        {
+            listView1.View = System.Windows.Forms.View.Details;
+            listView1.Columns.Add("약품명", 100);
+            listView1.Columns.Add("복용량", 80);
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            PrintQRCode();
+        }
+
+        private void PrintQRCode()
+        {
+            if (QR_Image_Box.Image == null)
+            {
+                MessageBox.Show("인쇄할 QR 이미지가 없습니다.");
+                return;
+            }
+
+            var pd = new PrintDocument();
+            pd.PrintPage += (s, e) =>
+            {
+                var img = QR_Image_Box.Image;
+                e.Graphics.DrawImage(img, new Rectangle(100, 100, 200, 200));
+            };
+
+            var dlg = new PrintDialog { Document = pd };
+            if (dlg.ShowDialog() == DialogResult.OK)
+                pd.Print();
         }
     }
 }
