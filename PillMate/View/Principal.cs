@@ -5,6 +5,15 @@ namespace PillMate.View
 {
     public partial class Principal : Form
     {
+        private readonly string _username;
+        private readonly string _email;
+        public Principal(string username, string email) : this()
+        {
+            _username = username;
+            _email = email;
+            namelabel.Text = _username;
+            emaillabel.Text = _email;
+        }
         public Principal()
         {
             InitializeComponent();
@@ -60,13 +69,19 @@ namespace PillMate.View
         private void guna2Button4_Click(object sender, EventArgs e) //pill
         {
             label_val.Text = "Pill List";
-            container(new PillView());
+            container(new Pill());
         }
 
         private void btnset_Click(object sender, EventArgs e)
         {
             label_val.Text = "Setting";
             container(new PatientView());
+        }
+
+        private void Helpbtn_Click(object sender, EventArgs e)
+        {
+            label_val.Text = "Help";
+            //container(new HelpView());
         }
     }
 }
