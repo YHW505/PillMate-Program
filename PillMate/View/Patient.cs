@@ -33,18 +33,50 @@ namespace PillMate.View
 
         private async Task LoadPatientsAsync()
         {
-            var patients = await _api.GetAllAsync();
+            try
+            {
+                var patients = await _api.GetAllAsync();
+                guna2DataGridView1.Columns.Clear(); // 이전 열 제거
 
-            // 컬럼 데이터 연결 (디자이너에서 이미 컬럼 이름이 설정되어 있다고 가정)
-            guna2DataGridView1.Columns["ColumnId"].DataPropertyName = "Id";
-            guna2DataGridView1.Columns["ColumnName"].DataPropertyName = "Hwanja_Name";
-            guna2DataGridView1.Columns["ColumnPhone"].DataPropertyName = "Hwanja_PhoneNumber";
-            guna2DataGridView1.Columns["ColumnRoom"].DataPropertyName = "Hwanja_Room";
+                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "ColumnId",
+                    HeaderText = "No.",
+                    DataPropertyName = "Id",
+                    Width = 50
+                });
+                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "ColumnName",
+                    HeaderText = "이름",
+                    DataPropertyName = "Hwanja_Name",
+                    Width = 100
+                });
+                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "ColumnPhone",
+                    HeaderText = "전화번호",
+                    DataPropertyName = "Hwanja_PhoneNumber",
+                    Width = 100
+                });
+                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "ColumnRoom",
+                    HeaderText = "병실",
+                    DataPropertyName = "Hwanja_Room",
+                    Width = 80
+                });
+                         // 엑셀에 헤더가 전부 보이면 디자이너 코드에 this.guna2DataGridView1.AutoGenerateColumns = false; 추가
 
-            guna2DataGridView1.DataSource = patients;
+                guna2DataGridView1.DataSource = patients;
 
-            patientcnt.Text = patients.Count.ToString("D2");
-            patientcnt.Text = $"{patients.Count}";
+                patientcnt.Text = patients.Count.ToString("D2");
+                patientcnt.Text = $"{patients.Count}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"환자 목록 로드 실패: {ex.Message}");
+            }
         }
 
         private async void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

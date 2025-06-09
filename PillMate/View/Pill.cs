@@ -84,6 +84,7 @@ namespace PillMate.View
 
                         await _api.DeletePillAsync(id);
                         await LoadPillsToGrid();
+                        await LoadPillsAsync();
                     }
                     //MessageBox.Show($"ID {id}번 알약이 삭제되었습니다.", "삭제");
                 }
