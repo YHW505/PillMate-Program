@@ -93,5 +93,13 @@ namespace PillMate.View
                 MessageBox.Show("삭제할 알약을 선택해주세요.");
             }
         }
+
+        private void Editbtn_Click(object sender, EventArgs e)
+        {
+            /// 실험중 
+            PillRegisterView PillRegisterView = new PillRegisterView(LoadPillsAsync); // LoadPatientsAsync 메소드를 전달
+            PillRegisterView.StartPosition = FormStartPosition.CenterScreen;
+            PillRegisterView.ShowDialog();
+        }
     }
 }
