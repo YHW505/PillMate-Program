@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using PillMate.ApiClients;
 using PillMate.Client.ApiClients;
 using PillMate.DTO;
+using System.Net;
 
 namespace PillMate.View
 {
@@ -29,6 +30,16 @@ namespace PillMate.View
         private async void Patient_Load(object sender, EventArgs e)
         {
             await LoadPatientsAsync();
+            if (guna2DataGridView1.Rows[0].DataBoundItem is PatientDto patient && patient.Id != null)
+            {
+                QR_Image_Box.Visible = true;
+                guna2Button1.Visible = true;
+                Label_Bohoja_Name.Text = $"보호자 이름: {patient.Bohoja_Name}";
+                Label_Bohoja_pNum.Text = $"보호자 번호: {patient.Bohoja_PhoneNumber}";
+                Label_Hwanja_Room.Text = $"병실: {patient.Hwanja_Room}";
+                await LoadQRCodeAsync(patient.Id.Value);
+                await LoadTakenMedicine(patient.Id.Value);
+            }
         }
 
         private async Task LoadPatientsAsync()
@@ -45,6 +56,7 @@ namespace PillMate.View
 
             patientcnt.Text = patients.Count.ToString("D2");
             patientcnt.Text = $"{patients.Count}";
+
         }
 
         private async void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -56,15 +68,18 @@ namespace PillMate.View
             {
                 await LoadQRCodeAsync(patient.Id.Value);
                 await LoadTakenMedicine(patient.Id.Value);
+                Label_Bohoja_Name.Text = $"보호자 이름: {patient.Bohoja_Name}";
+                Label_Bohoja_pNum.Text = $"보호자 번호: {patient.Bohoja_PhoneNumber}";
+                Label_Hwanja_Room.Text = $"병실: {patient.Hwanja_Room}";
             }
         }
 
         private async Task LoadQRCodeAsync(int patientId)
         {
-            string url = $"https://localhost:8938/api/QRCode/{patientId}";
-
+            string url = $"https://localhost:14188/api/QRCode/{patientId}";
             try
             {
+
                 using var handler = new HttpClientHandler { ServerCertificateCustomValidationCallback = (a, b, c, d) => true };
                 using var client = new HttpClient(handler);
 
@@ -131,6 +146,7 @@ namespace PillMate.View
             patientRegisterView.ShowDialog();
         }
 
+
         private void guna2Button4_Click(object sender, EventArgs e)
         {
             if (guna2DataGridView1.SelectedRows.Count > 0)
@@ -182,6 +198,22 @@ namespace PillMate.View
             {
                 MessageBox.Show("삭제할 환자를 선택해주세요.");
             }
+        }
+
+        private void AddPillbtn_Click(object sender, EventArgs e)
+        {
+            var selectedPatient = guna2DataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
+            if (selectedPatient?.Id == null) return;
+
+            var form = new TakenMedicineResisterView(selectedPatient.Id.Value);
+            form.OnPillsSelectedAsync += async (selectedList) =>
+            {
+                await LoadTakenMedicine(selectedPatient.Id.Value); // 새로고침
+                await LoadQRCodeAsync(selectedPatient.Id.Value);
+            };
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.ShowDialog(); // 이거 꼭 필요!
+
         }
     }
 }
