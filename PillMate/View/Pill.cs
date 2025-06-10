@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Guna.UI2.WinForms;
 using PillMate.Client.ApiClients;
 using PillMate.DTO;
 
@@ -68,6 +69,25 @@ namespace PillMate.View
             PillRegisterView.ShowDialog();
         }
 
+        private void Edit_Pill_Btn(object sender, EventArgs e)
+        {
+            if (Pill_DataGreed.SelectedRows.Count > 0)
+            {
+                var selectedPill = Pill_DataGreed.SelectedRows[0].DataBoundItem as PillDto;
+
+                if (selectedPill != null)
+                {
+                    PillEditView pillEditView = new PillEditView(selectedPill, LoadPillsAsync);
+                    pillEditView.StartPosition = FormStartPosition.CenterScreen;
+                    pillEditView.ShowDialog();
+                }
+            }
+            else
+            {
+                MessageBox.Show("수정할 약품을 선택해주세요.");
+            }
+        }
+
         private async void Deletebtn_Click_1(object sender, EventArgs e)
         {
             if (Pill_DataGreed.SelectedRows.Count > 0)
@@ -94,5 +114,6 @@ namespace PillMate.View
                 MessageBox.Show("삭제할 알약을 선택해주세요.");
             }
         }
+
     }
 }

@@ -24,6 +24,14 @@ namespace PillMate.View
             _api = new PatientApi();
             _Tapi = new TakenMedicineAPI();
             SetupListView();
+
+            // 우클릭 메뉴 설정 코드
+            var contextMenu = new ContextMenuStrip();
+            var deleteMenu = new ToolStripMenuItem("삭제");
+            deleteMenu.Click += DeleteMenu_Click;
+            contextMenu.Items.Add(deleteMenu);
+
+            listView1.ContextMenuStrip = contextMenu;
         }
 
         private async void Patient_Load(object sender, EventArgs e)
@@ -70,6 +78,15 @@ namespace PillMate.View
 
                 guna2DataGridView1.DataSource = patients;
 
+                if (guna2DataGridView1.Rows[0].DataBoundItem is PatientDto patient && patient.Id != null)
+                {
+                    Label_Bohoja_Name.Text = $"보호자 이름: {patient.Bohoja_Name}";
+                    Label_Bohoja_pNum.Text = $"보호자 전화번호: {patient.Bohoja_PhoneNumber}";
+                    Label_Hwanja_Room.Text = $"병실: {patient.Hwanja_Room}";
+                    await LoadQRCodeAsync(patient.Id.Value);
+                    await LoadTakenMedicine(patient.Id.Value);
+                }
+
                 patientcnt.Text = patients.Count.ToString("D2");
                 patientcnt.Text = $"{patients.Count}";
             }
@@ -86,6 +103,9 @@ namespace PillMate.View
             // 선택된 행에서 데이터 추출
             if (guna2DataGridView1.Rows[e.RowIndex].DataBoundItem is PatientDto patient && patient.Id != null)
             {
+                Label_Bohoja_Name.Text = $"보호자 이름: {patient.Bohoja_Name}";
+                Label_Bohoja_pNum.Text = $"보호자 전화번호: {patient.Bohoja_PhoneNumber}";
+                Label_Hwanja_Room.Text = $"병실: {patient.Hwanja_Room}";
                 await LoadQRCodeAsync(patient.Id.Value);
                 await LoadTakenMedicine(patient.Id.Value);
             }
@@ -93,7 +113,7 @@ namespace PillMate.View
 
         private async Task LoadQRCodeAsync(int patientId)
         {
-            string url = $"https://localhost:8938/api/QRCode/{patientId}";
+            string url = $"https://localhost:14188/api/QRCode/{patientId}";
 
             try
             {
@@ -120,6 +140,7 @@ namespace PillMate.View
             {
                 var lvi = new ListViewItem(item.Pill.Yank_Name);
                 lvi.SubItems.Add($"{item.Dosage}정");
+                lvi.Tag = item; // ← 여기에서 Tag에 dto 넣기
                 listView1.Items.Add(lvi);
             }
         }
@@ -213,6 +234,56 @@ namespace PillMate.View
             else
             {
                 MessageBox.Show("삭제할 환자를 선택해주세요.");
+            }
+        }
+
+        private void AddPillbtn_Click(object sender, EventArgs e)
+        {
+            var selectedPatient = guna2DataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
+            if (selectedPatient?.Id == null) return;
+
+            var form = new TakenMedicineResisterView(selectedPatient.Id.Value);
+            form.OnPillsSelectedAsync += async (selectedList) =>
+            {
+                await LoadTakenMedicine(selectedPatient.Id.Value); // 새로고침
+                await LoadQRCodeAsync(selectedPatient.Id.Value);
+            };
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.ShowDialog(); // 이거 꼭 필요!
+        }
+
+        private async void DeleteMenu_Click(object? sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("삭제할 항목을 선택하세요.");
+                return;
+            }
+
+
+            var selectedItem = listView1.SelectedItems[0];
+
+            if (selectedItem.Tag is TakenMedicineDto takenMedicine)
+            {
+                var result = MessageBox.Show($"'{selectedItem.Text}' 약을 삭제하시겠습니까?", "삭제 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    var api = new TakenMedicineAPI();
+                    bool isSuccess = await api.DeleteTakenMedicineAsync(takenMedicine.Id);
+
+                    if (isSuccess)
+                    {
+                        var selectedPatient = guna2DataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
+
+                        listView1.Items.Remove(selectedItem); // ✅ 3번 코드: ListView에서 삭제
+                        await LoadQRCodeAsync(selectedPatient.Id.Value);
+                        MessageBox.Show("✅ 삭제 완료");
+                    }
+                    else
+                    {
+                        MessageBox.Show("❌ 삭제 실패");
+                    }
+                }
             }
         }
     }

@@ -42,10 +42,15 @@
             this.patientcnt = new System.Windows.Forms.Label();
             this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.DetailTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.Label_Bohoja_Name = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.Label_Bohoja_pNum = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.Label_Hwanja_Room = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.listView1 = new System.Windows.Forms.ListView();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.QR_Image_Box = new System.Windows.Forms.PictureBox();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
+            this.AddPillbtn = new Guna.UI2.WinForms.Guna2Button();
             this.Createbtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
             this.guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
@@ -130,6 +135,10 @@
             // 
             // guna2Panel2
             // 
+            this.guna2Panel2.Controls.Add(this.DetailTitle);
+            this.guna2Panel2.Controls.Add(this.Label_Bohoja_Name);
+            this.guna2Panel2.Controls.Add(this.Label_Bohoja_pNum);
+            this.guna2Panel2.Controls.Add(this.Label_Hwanja_Room);
             this.guna2Panel2.Controls.Add(this.listView1);
             this.guna2Panel2.Controls.Add(this.guna2Button1);
             this.guna2Panel2.Controls.Add(this.QR_Image_Box);
@@ -138,6 +147,42 @@
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(192, 591);
             this.guna2Panel2.TabIndex = 7;
+            // 
+            // DetailTitle
+            // 
+            this.DetailTitle.BackColor = System.Drawing.Color.Transparent;
+            this.DetailTitle.Location = new System.Drawing.Point(17, 89);
+            this.DetailTitle.Name = "DetailTitle";
+            this.DetailTitle.Size = new System.Drawing.Size(55, 14);
+            this.DetailTitle.TabIndex = 26;
+            this.DetailTitle.Text = "상세 정보";
+            // 
+            // Label_Bohoja_Name
+            // 
+            this.Label_Bohoja_Name.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Bohoja_Name.Location = new System.Drawing.Point(17, 124);
+            this.Label_Bohoja_Name.Name = "Label_Bohoja_Name";
+            this.Label_Bohoja_Name.Size = new System.Drawing.Size(71, 14);
+            this.Label_Bohoja_Name.TabIndex = 25;
+            this.Label_Bohoja_Name.Text = "보호자 이름: ";
+            // 
+            // Label_Bohoja_pNum
+            // 
+            this.Label_Bohoja_pNum.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Bohoja_pNum.Location = new System.Drawing.Point(17, 144);
+            this.Label_Bohoja_pNum.Name = "Label_Bohoja_pNum";
+            this.Label_Bohoja_pNum.Size = new System.Drawing.Size(95, 14);
+            this.Label_Bohoja_pNum.TabIndex = 24;
+            this.Label_Bohoja_pNum.Text = "보호자 전화번호: ";
+            // 
+            // Label_Hwanja_Room
+            // 
+            this.Label_Hwanja_Room.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Hwanja_Room.Location = new System.Drawing.Point(17, 164);
+            this.Label_Hwanja_Room.Name = "Label_Hwanja_Room";
+            this.Label_Hwanja_Room.Size = new System.Drawing.Size(31, 14);
+            this.Label_Hwanja_Room.TabIndex = 23;
+            this.Label_Hwanja_Room.Text = "병실: ";
             // 
             // listView1
             // 
@@ -179,6 +224,7 @@
             // 
             // guna2Panel3
             // 
+            this.guna2Panel3.Controls.Add(this.AddPillbtn);
             this.guna2Panel3.Controls.Add(this.Createbtn);
             this.guna2Panel3.Controls.Add(this.guna2DataGridView1);
             this.guna2Panel3.Controls.Add(this.guna2Button5);
@@ -190,6 +236,24 @@
             this.guna2Panel3.Size = new System.Drawing.Size(978, 591);
             this.guna2Panel3.TabIndex = 8;
             // 
+            // AddPillbtn
+            // 
+            this.AddPillbtn.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.AddPillbtn.BorderRadius = 5;
+            this.AddPillbtn.BorderThickness = 1;
+            this.AddPillbtn.FillColor = System.Drawing.Color.Transparent;
+            this.AddPillbtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.AddPillbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.AddPillbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.AddPillbtn.HoverState.ForeColor = System.Drawing.Color.White;
+            this.AddPillbtn.Location = new System.Drawing.Point(854, 547);
+            this.AddPillbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.AddPillbtn.Name = "AddPillbtn";
+            this.AddPillbtn.Size = new System.Drawing.Size(98, 28);
+            this.AddPillbtn.TabIndex = 9;
+            this.AddPillbtn.Text = "Add Pill";
+            this.AddPillbtn.Click += new System.EventHandler(this.AddPillbtn_Click);
+            // 
             // Createbtn
             // 
             this.Createbtn.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
@@ -200,7 +264,7 @@
             this.Createbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Createbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Createbtn.HoverState.ForeColor = System.Drawing.Color.White;
-            this.Createbtn.Location = new System.Drawing.Point(600, 547);
+            this.Createbtn.Location = new System.Drawing.Point(536, 547);
             this.Createbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Createbtn.Name = "Createbtn";
             this.Createbtn.Size = new System.Drawing.Size(98, 28);
@@ -210,6 +274,8 @@
             // 
             // guna2DataGridView1
             // 
+            this.guna2DataGridView1.AutoGenerateColumns = false;
+            this.guna2DataGridView1.CellClick += guna2DataGridView1_CellClick;
             this.guna2DataGridView1.AllowUserToAddRows = false;
             this.guna2DataGridView1.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
@@ -273,7 +339,6 @@
             this.guna2DataGridView1.ThemeStyle.RowsStyle.Height = 50;
             this.guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.guna2DataGridView1.AutoGenerateColumns = false;
             // 
             // guna2Button5
             // 
@@ -285,7 +350,7 @@
             this.guna2Button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.guna2Button5.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.guna2Button5.HoverState.ForeColor = System.Drawing.Color.White;
-            this.guna2Button5.Location = new System.Drawing.Point(707, 547);
+            this.guna2Button5.Location = new System.Drawing.Point(643, 547);
             this.guna2Button5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2Button5.Name = "guna2Button5";
             this.guna2Button5.Size = new System.Drawing.Size(98, 28);
@@ -303,7 +368,7 @@
             this.guna2Button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.guna2Button4.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.guna2Button4.HoverState.ForeColor = System.Drawing.Color.White;
-            this.guna2Button4.Location = new System.Drawing.Point(812, 547);
+            this.guna2Button4.Location = new System.Drawing.Point(748, 547);
             this.guna2Button4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2Button4.Name = "guna2Button4";
             this.guna2Button4.Size = new System.Drawing.Size(98, 28);
@@ -328,6 +393,7 @@
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.QR_Image_Box)).EndInit();
             this.guna2Panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).EndInit();
@@ -352,5 +418,10 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button5;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
         private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel DetailTitle;
+        private Guna.UI2.WinForms.Guna2HtmlLabel Label_Bohoja_Name;
+        private Guna.UI2.WinForms.Guna2HtmlLabel Label_Bohoja_pNum;
+        private Guna.UI2.WinForms.Guna2HtmlLabel Label_Hwanja_Room;
+        private Guna.UI2.WinForms.Guna2Button AddPillbtn;
     }
 }

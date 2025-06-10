@@ -21,9 +21,9 @@ namespace PillMate.DTO
         public string Yank_Num { get; set; }
     }
 
-    public class UpdatePillDto : CreatePillDto
+    public class UpdatePillDto : PillDto
     {
-        public int Id { get; set; }
+
     }
 
     public class DeletePillDto
