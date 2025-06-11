@@ -80,9 +80,9 @@ namespace PillMate.View
 
                 if (guna2DataGridView1.Rows[0].DataBoundItem is PatientDto patient && patient.Id != null)
                 {
-                    Label_Bohoja_Name.Text = $"보호자 이름: {patient.Bohoja_Name}";
-                    Label_Bohoja_pNum.Text = $"보호자 전화번호: {patient.Bohoja_PhoneNumber}";
-                    Label_Hwanja_Room.Text = $"병실: {patient.Hwanja_Room}";
+                    Label_Bohoja_Name.Text = $"{patient.Bohoja_Name}";
+                    Label_Bohoja_pNum.Text = $"{patient.Bohoja_PhoneNumber}";
+                    Label_Hwanja_Room.Text = $"{patient.Hwanja_Room}";
                     await LoadQRCodeAsync(patient.Id.Value);
                     await LoadTakenMedicine(patient.Id.Value);
                 }
@@ -103,9 +103,9 @@ namespace PillMate.View
             // 선택된 행에서 데이터 추출
             if (guna2DataGridView1.Rows[e.RowIndex].DataBoundItem is PatientDto patient && patient.Id != null)
             {
-                Label_Bohoja_Name.Text = $"보호자 이름: {patient.Bohoja_Name}";
-                Label_Bohoja_pNum.Text = $"보호자 전화번호: {patient.Bohoja_PhoneNumber}";
-                Label_Hwanja_Room.Text = $"병실: {patient.Hwanja_Room}";
+                Label_Bohoja_Name.Text = $"{patient.Bohoja_Name}";
+                Label_Bohoja_pNum.Text = $"{patient.Bohoja_PhoneNumber}";
+                Label_Hwanja_Room.Text = $"{patient.Hwanja_Room}";
                 await LoadQRCodeAsync(patient.Id.Value);
                 await LoadTakenMedicine(patient.Id.Value);
             }
@@ -113,7 +113,7 @@ namespace PillMate.View
 
         private async Task LoadQRCodeAsync(int patientId)
         {
-            string url = $"https://localhost:14188/api/QRCode/{patientId}";
+            string url = $"https://localhost:8938/api/QRCode/{patientId}";
 
             try
             {
