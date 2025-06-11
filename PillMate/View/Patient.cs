@@ -74,7 +74,8 @@ namespace PillMate.View
                     DataPropertyName = "Hwanja_Room",
                     Width = 80
                 });
-                         // 엑셀에 헤더가 전부 보이면 디자이너 코드에 this.guna2DataGridView1.AutoGenerateColumns = false; 추가
+                // this.guna2DataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.guna2DataGridView1_CellClick); // 셀 클릭 이벤트 핸들러 등록
+                // this.guna2DataGridView1.AutoGenerateColumns = false; // 자동 생성 비활성화
 
                 guna2DataGridView1.DataSource = patients;
 

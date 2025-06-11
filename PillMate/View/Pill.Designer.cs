@@ -143,7 +143,7 @@ namespace PillMate.View
             this.Createbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Createbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Createbtn.HoverState.ForeColor = System.Drawing.Color.White;
-            this.Createbtn.Location = new System.Drawing.Point(790, 538);
+            this.Createbtn.Location = new System.Drawing.Point(847, 538);
             this.Createbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Createbtn.Name = "Createbtn";
             this.Createbtn.Size = new System.Drawing.Size(98, 28);
@@ -193,7 +193,7 @@ namespace PillMate.View
             this.Pill_DataGreed.RowHeadersWidth = 51;
             this.Pill_DataGreed.RowTemplate.DividerHeight = 5;
             this.Pill_DataGreed.RowTemplate.Height = 50;
-            this.Pill_DataGreed.Size = new System.Drawing.Size(1145, 498);
+            this.Pill_DataGreed.Size = new System.Drawing.Size(1147, 498);
             this.Pill_DataGreed.TabIndex = 12;
             this.Pill_DataGreed.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.Pill_DataGreed.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -227,7 +227,7 @@ namespace PillMate.View
             this.Deletebtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Deletebtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Deletebtn.HoverState.ForeColor = System.Drawing.Color.White;
-            this.Deletebtn.Location = new System.Drawing.Point(897, 538);
+            this.Deletebtn.Location = new System.Drawing.Point(953, 538);
             this.Deletebtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Deletebtn.Name = "Deletebtn";
             this.Deletebtn.Size = new System.Drawing.Size(98, 28);
@@ -245,7 +245,7 @@ namespace PillMate.View
             this.Editbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Editbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Editbtn.HoverState.ForeColor = System.Drawing.Color.White;
-            this.Editbtn.Location = new System.Drawing.Point(1004, 538);
+            this.Editbtn.Location = new System.Drawing.Point(1059, 538);
             this.Editbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Editbtn.Name = "Editbtn";
             this.Editbtn.Size = new System.Drawing.Size(98, 28);
