@@ -75,13 +75,13 @@ namespace PillMate.View
         private void btnset_Click(object sender, EventArgs e)
         {
             label_val.Text = "Setting";
-            container(new PatientView());
+            container(new SettingView());
         }
 
         private void Helpbtn_Click(object sender, EventArgs e)
         {
             label_val.Text = "Help";
-            //container(new HelpView());
+            container(new HelpView());
         }
     }
 }

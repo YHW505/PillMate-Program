@@ -7,16 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LiveCharts.Wpf;
-using LiveCharts;
-using System.Windows.Media;
-
 
 namespace PillMate.View
 {
-    public partial class HomeView : Form
+    public partial class SettingView : Form
     {
-        public HomeView()
+        public SettingView()
         {
             InitializeComponent();
         }
