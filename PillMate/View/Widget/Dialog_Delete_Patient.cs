@@ -47,6 +47,7 @@ namespace PillMate.View.Widget
                 dialog.ShowDialog();
                 //MessageBox.Show("환자 삭제에 실패했습니다.");
             }
+            this.Close();
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)

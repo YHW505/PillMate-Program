@@ -244,14 +244,13 @@
       <DependentUpon>Dialog_Delete_TakenPill.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Widget\Dialog_Widget.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="View\SettingView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\SettingView.Designer.cs">
       <DependentUpon>SettingView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\TakenMedicienResisterView.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\Widget\Dialog_Widget.Designer.cs">
       <DependentUpon>Dialog_Widget.cs</DependentUpon>
@@ -317,11 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Widget\Dialog_Widget.resx">
       <DependentUpon>Dialog_Widget.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\SettingView.resx">
       <DependentUpon>SettingView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\TakenMedicienResisterView.resx">
-      <DependentUpon>TakenMedicienResisterView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Widget\Dialog_Delete_Patient.resx">
       <DependentUpon>Dialog_Delete_Patient.cs</DependentUpon>

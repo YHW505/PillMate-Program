@@ -111,7 +111,7 @@
             this.btn_Cancel.Size = new System.Drawing.Size(98, 28);
             this.btn_Cancel.TabIndex = 10;
             this.btn_Cancel.Text = "취소";
-            this.btn_OK.Click += new System.EventHandler(this.btn_Cancel_Click);
+            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
             // Msg_Dialog
             // 
