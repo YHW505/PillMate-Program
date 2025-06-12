@@ -166,41 +166,35 @@
     <Compile Include="View\Patient.Designer.cs">
       <DependentUpon>Patient.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PatientEdit.Designer.cs">
+      <DependentUpon>PatientEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PatientRegister.Designer.cs">
+      <DependentUpon>PatientRegister.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Pill.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\Pill.Designer.cs">
       <DependentUpon>Pill.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PillRegisterView.cs">
+    <Compile Include="View\PillEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PillRegisterView.Designer.cs">
-      <DependentUpon>PillRegisterView.cs</DependentUpon>
+    <Compile Include="View\PillEdit.Designer.cs">
+      <DependentUpon>PillEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientEditView.cs">
+    <Compile Include="View\PillResister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PatientEditView.Designer.cs">
-      <DependentUpon>PatientEditView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\PatientRegisterView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\PatientRegisterView.Designer.cs">
-      <DependentUpon>PatientRegisterView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\PillView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\PillView.Designer.cs">
-      <DependentUpon>PillView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\PatientView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\PatientView.Designer.cs">
-      <DependentUpon>PatientView.cs</DependentUpon>
+    <Compile Include="View\PillResister.Designer.cs">
+      <DependentUpon>PillResister.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -216,17 +210,35 @@
     <Compile Include="View\RegisterView.Designer.cs">
       <DependentUpon>RegisterView.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\TakenMedicienResisterView.cs">
+    <Compile Include="View\TakenMedicineRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\TakenMedicienResisterView.Designer.cs">
-      <DependentUpon>TakenMedicienResisterView.cs</DependentUpon>
+    <Compile Include="View\TakenMedicineRegister.Designer.cs">
+      <DependentUpon>TakenMedicineRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PillEditView.cs">
+    <Compile Include="View\Widget\Dialog_Delete_Pill.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PillEditView.Designer.cs">
-      <DependentUpon>PillEditView.cs</DependentUpon>
+    <Compile Include="View\Widget\Dialog_Delete_Pill.Designer.cs">
+      <DependentUpon>Dialog_Delete_Pill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Widget\Dialog_Delete_TakenPill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Widget\Dialog_Delete_TakenPill.Designer.cs">
+      <DependentUpon>Dialog_Delete_TakenPill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Widget\Dialog_Widget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Widget\Dialog_Widget.Designer.cs">
+      <DependentUpon>Dialog_Widget.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Widget\Dialog_Delete_Patient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Widget\Dialog_Delete_Patient.Designer.cs">
+      <DependentUpon>Dialog_Delete_Patient.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="View\BukyoungView.resx">
       <DependentUpon>BukyoungView.cs</DependentUpon>
@@ -248,24 +260,17 @@
       <DependentUpon>Patient.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PatientEditView.resx">
-      <DependentUpon>PatientEditView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\PatientRegisterView.resx">
-      <DependentUpon>PatientRegisterView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\PatientView.resx">
-      <DependentUpon>PatientView.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="View\PatientRegister.resx">
+      <DependentUpon>PatientRegister.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Pill.resx">
       <DependentUpon>Pill.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PillRegisterView.resx">
-      <DependentUpon>PillRegisterView.cs</DependentUpon>
+    <EmbeddedResource Include="View\PillEdit.resx">
+      <DependentUpon>PillEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PillView.resx">
-      <DependentUpon>PillView.cs</DependentUpon>
+    <EmbeddedResource Include="View\PillResister.resx">
+      <DependentUpon>PillResister.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
@@ -273,11 +278,20 @@
     <EmbeddedResource Include="View\RegisterView.resx">
       <DependentUpon>RegisterView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\TakenMedicienResisterView.resx">
-      <DependentUpon>TakenMedicienResisterView.cs</DependentUpon>
+    <EmbeddedResource Include="View\TakenMedicineRegister.resx">
+      <DependentUpon>TakenMedicineRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PillEditView.resx">
-      <DependentUpon>PillEditView.cs</DependentUpon>
+    <EmbeddedResource Include="View\Widget\Dialog_Delete_Pill.resx">
+      <DependentUpon>Dialog_Delete_Pill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Widget\Dialog_Delete_TakenPill.resx">
+      <DependentUpon>Dialog_Delete_TakenPill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Widget\Dialog_Widget.resx">
+      <DependentUpon>Dialog_Widget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Widget\Dialog_Delete_Patient.resx">
+      <DependentUpon>Dialog_Delete_Patient.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

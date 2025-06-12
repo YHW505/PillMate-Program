@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using PillMate.View.Widget;
 
 namespace PillMate.View
 {
@@ -55,7 +56,10 @@ namespace PillMate.View
             }
             else
             {
-                MessageBox.Show("알 수 없는 컨트롤 타입입니다.");
+                Dialog_Widget dialog = new Dialog_Widget("오류", "알 수 없는 컨트롤 타입입니다."); // LoadPatientsAsync 메소드를 전달
+                dialog.StartPosition = FormStartPosition.CenterScreen;
+                dialog.ShowDialog();
+                //MessageBox.Show("알 수 없는 컨트롤 타입입니다.");
             }
         }
 
@@ -75,7 +79,7 @@ namespace PillMate.View
         private void btnset_Click(object sender, EventArgs e)
         {
             label_val.Text = "Setting";
-            container(new PatientView());
+            //container(new PatientView());
         }
 
         private void Helpbtn_Click(object sender, EventArgs e)

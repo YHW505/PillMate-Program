@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using PillMate.Client.ApiClients;
 using PillMate.DTO;
+using PillMate.View.Widget;
 
 namespace PillMate.View
 {
@@ -49,7 +50,10 @@ namespace PillMate.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"오류 발생: {ex.Message}");
+                Dialog_Widget dialog = new Dialog_Widget("오류", $"오류 발생: {ex.Message}"); // LoadPatientsAsync 메소드를 전달
+                dialog.StartPosition = FormStartPosition.CenterScreen;
+                dialog.ShowDialog();
+                //MessageBox.Show($"오류 발생: {ex.Message}");
             }
         }
         private async Task LoadPillsToGrid()
@@ -64,9 +68,9 @@ namespace PillMate.View
         }
         private void Createbtn_Click_1(object sender, EventArgs e)
         {
-            PillRegisterView PillRegisterView = new PillRegisterView(LoadPillsAsync); // LoadPatientsAsync 메소드를 전달
-            PillRegisterView.StartPosition = FormStartPosition.CenterScreen;
-            PillRegisterView.ShowDialog();
+            PillResister PillRegister = new PillResister(LoadPillsAsync); // LoadPatientsAsync 메소드를 전달
+            PillRegister.StartPosition = FormStartPosition.CenterScreen;
+            PillRegister.ShowDialog();
         }
 
         private void Edit_Pill_Btn(object sender, EventArgs e)
@@ -77,14 +81,17 @@ namespace PillMate.View
 
                 if (selectedPill != null)
                 {
-                    PillEditView pillEditView = new PillEditView(selectedPill, LoadPillsAsync);
-                    pillEditView.StartPosition = FormStartPosition.CenterScreen;
-                    pillEditView.ShowDialog();
+                    PillEdit pillEdit = new PillEdit(selectedPill, LoadPillsAsync);
+                    pillEdit.StartPosition = FormStartPosition.CenterScreen;
+                    pillEdit.ShowDialog();
                 }
             }
             else
             {
-                MessageBox.Show("수정할 약품을 선택해주세요.");
+                //MessageBox.Show("수정할 약품을 선택해주세요.");
+                Dialog_Widget dialog = new Dialog_Widget("약품 수정", "수정할 약품을 선택해주세요."); // LoadPatientsAsync 메소드를 전달
+                dialog.StartPosition = FormStartPosition.CenterScreen;
+                dialog.ShowDialog();
             }
         }
 
@@ -96,22 +103,17 @@ namespace PillMate.View
 
                 if (selectedRow != null)
                 {
-                    var id = selectedRow.Id;
-                    // 삭제 확인 메시지
-                    var confirm = MessageBox.Show($"정말로 ID {id}번 알약을 삭제하시겠습니까?", "삭제", MessageBoxButtons.YesNo);
-                    if (confirm == DialogResult.Yes)
-                    {
-
-                        await _api.DeletePillAsync(id);
-                        await LoadPillsToGrid();
-                        await LoadPillsAsync();
-                    }
-                    //MessageBox.Show($"ID {id}번 알약이 삭제되었습니다.", "삭제");
+                    Dialog_Delete_Pill dialog = new Dialog_Delete_Pill(selectedRow, LoadPillsAsync, LoadPillsToGrid); // LoadPatientsAsync 메소드를 전달
+                    dialog.StartPosition = FormStartPosition.CenterScreen;
+                    dialog.ShowDialog();
                 }
             }
             else
             {
-                MessageBox.Show("삭제할 알약을 선택해주세요.");
+                Dialog_Widget dialog = new Dialog_Widget("약품 삭제", "삭제할 알약을 선택해주세요.."); // LoadPatientsAsync 메소드를 전달
+                dialog.StartPosition = FormStartPosition.CenterScreen;
+                dialog.ShowDialog();
+                //MessageBox.Show("삭제할 알약을 선택해주세요.");
             }
         }
 

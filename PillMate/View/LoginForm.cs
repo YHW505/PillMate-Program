@@ -1,5 +1,6 @@
 ﻿using PillMate.ApiClients;
 using PillMate.DTOs;
+using PillMate.View.Widget;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,14 +36,20 @@ namespace PillMate.View
 
             if (result != null)
             {
-                MessageBox.Show("로그인 성공!");
+                //MessageBox.Show("로그인 성공!");
+                Dialog_Widget dialog = new Dialog_Widget("로그인", "로그인 성공!"); // LoadPatientsAsync 메소드를 전달
+                dialog.StartPosition = FormStartPosition.CenterScreen;
+                dialog.ShowDialog();
                 var mainView = new Principal(result.Username, result.Email); //result.Username, result.Email
                 mainView.Show();
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("로그인 실패: 사용자 이름, 이메일 또는 비밀번호 확인");
+                //MessageBox.Show("로그인 실패: 사용자 이름, 이메일 또는 비밀번호 확인");
+                Dialog_Widget dialog = new Dialog_Widget("로그인", "로그인 실패: 사용자 이름, 이메일 또는 비밀번호 확인"); // LoadPatientsAsync 메소드를 전달
+                dialog.StartPosition = FormStartPosition.CenterScreen;
+                dialog.ShowDialog();
             }
         }
 

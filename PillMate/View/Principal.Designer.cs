@@ -73,9 +73,9 @@
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.guna2Panel1.FillColor = System.Drawing.Color.White;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
-            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(273, 870);
+            this.guna2Panel1.Size = new System.Drawing.Size(239, 696);
             this.guna2Panel1.TabIndex = 0;
             // 
             // emaillabel
@@ -83,10 +83,10 @@
             this.emaillabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.emaillabel.AutoSize = true;
             this.emaillabel.ForeColor = System.Drawing.Color.Gray;
-            this.emaillabel.Location = new System.Drawing.Point(73, 841);
-            this.emaillabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.emaillabel.Location = new System.Drawing.Point(64, 673);
+            this.emaillabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.emaillabel.Name = "emaillabel";
-            this.emaillabel.Size = new System.Drawing.Size(122, 15);
+            this.emaillabel.Size = new System.Drawing.Size(108, 12);
             this.emaillabel.TabIndex = 11;
             this.emaillabel.Text = "email@naver.com";
             // 
@@ -95,10 +95,10 @@
             this.namelabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.namelabel.AutoSize = true;
             this.namelabel.Font = new System.Drawing.Font("Bahnschrift", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namelabel.Location = new System.Drawing.Point(70, 815);
-            this.namelabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.namelabel.Location = new System.Drawing.Point(61, 652);
+            this.namelabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.namelabel.Name = "namelabel";
-            this.namelabel.Size = new System.Drawing.Size(61, 23);
+            this.namelabel.Size = new System.Drawing.Size(47, 18);
             this.namelabel.TabIndex = 10;
             this.namelabel.Text = "이재현";
             // 
@@ -107,11 +107,11 @@
             this.guna2CirclePictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.guna2CirclePictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox1.Image")));
             this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(19, 814);
-            this.guna2CirclePictureBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(17, 651);
+            this.guna2CirclePictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(47, 40);
+            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(41, 32);
             this.guna2CirclePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.guna2CirclePictureBox1.TabIndex = 9;
             this.guna2CirclePictureBox1.TabStop = false;
@@ -120,10 +120,10 @@
             // 
             this.guna2PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox2.Image")));
             this.guna2PictureBox2.ImageRotate = 0F;
-            this.guna2PictureBox2.Location = new System.Drawing.Point(223, 19);
-            this.guna2PictureBox2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.guna2PictureBox2.Location = new System.Drawing.Point(195, 15);
+            this.guna2PictureBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2PictureBox2.Name = "guna2PictureBox2";
-            this.guna2PictureBox2.Size = new System.Drawing.Size(24, 28);
+            this.guna2PictureBox2.Size = new System.Drawing.Size(21, 22);
             this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.guna2PictureBox2.TabIndex = 8;
             this.guna2PictureBox2.TabStop = false;
@@ -142,10 +142,10 @@
             this.Helpbtn.Image = ((System.Drawing.Image)(resources.GetObject("Helpbtn.Image")));
             this.Helpbtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.Helpbtn.ImageOffset = new System.Drawing.Point(8, 0);
-            this.Helpbtn.Location = new System.Drawing.Point(0, 746);
-            this.Helpbtn.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Helpbtn.Location = new System.Drawing.Point(0, 597);
+            this.Helpbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Helpbtn.Name = "Helpbtn";
-            this.Helpbtn.Size = new System.Drawing.Size(273, 46);
+            this.Helpbtn.Size = new System.Drawing.Size(239, 37);
             this.Helpbtn.TabIndex = 7;
             this.Helpbtn.Text = "help ?";
             this.Helpbtn.Click += new System.EventHandler(this.Helpbtn_Click);
@@ -163,10 +163,10 @@
             this.btnset.Image = ((System.Drawing.Image)(resources.GetObject("btnset.Image")));
             this.btnset.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnset.ImageOffset = new System.Drawing.Point(8, 0);
-            this.btnset.Location = new System.Drawing.Point(0, 308);
-            this.btnset.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnset.Location = new System.Drawing.Point(0, 246);
+            this.btnset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnset.Name = "btnset";
-            this.btnset.Size = new System.Drawing.Size(273, 62);
+            this.btnset.Size = new System.Drawing.Size(239, 50);
             this.btnset.TabIndex = 6;
             this.btnset.Text = "Settings";
             this.btnset.TextOffset = new System.Drawing.Point(8, 0);
@@ -185,10 +185,10 @@
             this.btnpill.Image = ((System.Drawing.Image)(resources.GetObject("btnpill.Image")));
             this.btnpill.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnpill.ImageOffset = new System.Drawing.Point(8, 0);
-            this.btnpill.Location = new System.Drawing.Point(0, 238);
-            this.btnpill.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnpill.Location = new System.Drawing.Point(0, 190);
+            this.btnpill.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnpill.Name = "btnpill";
-            this.btnpill.Size = new System.Drawing.Size(273, 62);
+            this.btnpill.Size = new System.Drawing.Size(239, 50);
             this.btnpill.TabIndex = 4;
             this.btnpill.Text = "Pill List";
             this.btnpill.TextOffset = new System.Drawing.Point(8, 0);
@@ -207,10 +207,10 @@
             this.btnpatient.Image = ((System.Drawing.Image)(resources.GetObject("btnpatient.Image")));
             this.btnpatient.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnpatient.ImageOffset = new System.Drawing.Point(8, 0);
-            this.btnpatient.Location = new System.Drawing.Point(0, 168);
-            this.btnpatient.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnpatient.Location = new System.Drawing.Point(0, 134);
+            this.btnpatient.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnpatient.Name = "btnpatient";
-            this.btnpatient.Size = new System.Drawing.Size(273, 62);
+            this.btnpatient.Size = new System.Drawing.Size(239, 50);
             this.btnpatient.TabIndex = 3;
             this.btnpatient.Text = "Patient List";
             this.btnpatient.TextOffset = new System.Drawing.Point(8, 0);
@@ -229,10 +229,10 @@
             this.btnhome.Image = ((System.Drawing.Image)(resources.GetObject("btnhome.Image")));
             this.btnhome.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnhome.ImageOffset = new System.Drawing.Point(8, 0);
-            this.btnhome.Location = new System.Drawing.Point(0, 98);
-            this.btnhome.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnhome.Location = new System.Drawing.Point(0, 78);
+            this.btnhome.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnhome.Name = "btnhome";
-            this.btnhome.Size = new System.Drawing.Size(273, 62);
+            this.btnhome.Size = new System.Drawing.Size(239, 50);
             this.btnhome.TabIndex = 1;
             this.btnhome.Text = "Home";
             this.btnhome.TextOffset = new System.Drawing.Point(8, 0);
@@ -243,10 +243,10 @@
             this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
             this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(5, 0);
-            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.guna2PictureBox1.Location = new System.Drawing.Point(4, 0);
+            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(86, 86);
+            this.guna2PictureBox1.Size = new System.Drawing.Size(75, 69);
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
@@ -261,26 +261,26 @@
             this.guna2Panel_top.CustomBorderColor = System.Drawing.Color.Silver;
             this.guna2Panel_top.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 0, 1);
             this.guna2Panel_top.Dock = System.Windows.Forms.DockStyle.Top;
-            this.guna2Panel_top.Location = new System.Drawing.Point(273, 0);
-            this.guna2Panel_top.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.guna2Panel_top.Location = new System.Drawing.Point(239, 0);
+            this.guna2Panel_top.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2Panel_top.Name = "guna2Panel_top";
-            this.guna2Panel_top.Size = new System.Drawing.Size(1337, 61);
+            this.guna2Panel_top.Size = new System.Drawing.Size(1170, 49);
             this.guna2Panel_top.TabIndex = 1;
             // 
             // label_val
             // 
             this.label_val.AutoSize = true;
             this.label_val.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F);
-            this.label_val.Location = new System.Drawing.Point(19, 16);
-            this.label_val.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label_val.Location = new System.Drawing.Point(17, 13);
+            this.label_val.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_val.Name = "label_val";
-            this.label_val.Size = new System.Drawing.Size(0, 25);
+            this.label_val.Size = new System.Drawing.Size(0, 21);
             this.label_val.TabIndex = 5;
             // 
             // guna2TextBox1
             // 
             this.guna2TextBox1.AutoRoundedCorners = true;
-            this.guna2TextBox1.BorderRadius = 19;
+            this.guna2TextBox1.BorderRadius = 15;
             this.guna2TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.guna2TextBox1.DefaultText = "";
             this.guna2TextBox1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -293,12 +293,12 @@
             this.guna2TextBox1.IconLeft = ((System.Drawing.Image)(resources.GetObject("guna2TextBox1.IconLeft")));
             this.guna2TextBox1.IconLeftOffset = new System.Drawing.Point(5, 0);
             this.guna2TextBox1.IconLeftSize = new System.Drawing.Size(15, 15);
-            this.guna2TextBox1.Location = new System.Drawing.Point(779, 10);
-            this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.guna2TextBox1.Location = new System.Drawing.Point(682, 8);
+            this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2TextBox1.Name = "guna2TextBox1";
             this.guna2TextBox1.PlaceholderText = "Search";
             this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.Size = new System.Drawing.Size(266, 40);
+            this.guna2TextBox1.Size = new System.Drawing.Size(233, 32);
             this.guna2TextBox1.TabIndex = 3;
             this.guna2TextBox1.TextOffset = new System.Drawing.Point(5, 0);
             // 
@@ -308,10 +308,10 @@
             this.guna2ControlBox3.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
             this.guna2ControlBox3.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox3.IconColor = System.Drawing.Color.Gray;
-            this.guna2ControlBox3.Location = new System.Drawing.Point(1142, 0);
-            this.guna2ControlBox3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.guna2ControlBox3.Location = new System.Drawing.Point(999, 0);
+            this.guna2ControlBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2ControlBox3.Name = "guna2ControlBox3";
-            this.guna2ControlBox3.Size = new System.Drawing.Size(59, 34);
+            this.guna2ControlBox3.Size = new System.Drawing.Size(52, 27);
             this.guna2ControlBox3.TabIndex = 2;
             // 
             // guna2ControlBox2
@@ -320,10 +320,10 @@
             this.guna2ControlBox2.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MaximizeBox;
             this.guna2ControlBox2.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox2.IconColor = System.Drawing.Color.Gray;
-            this.guna2ControlBox2.Location = new System.Drawing.Point(1209, 0);
-            this.guna2ControlBox2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.guna2ControlBox2.Location = new System.Drawing.Point(1058, 0);
+            this.guna2ControlBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2ControlBox2.Name = "guna2ControlBox2";
-            this.guna2ControlBox2.Size = new System.Drawing.Size(59, 34);
+            this.guna2ControlBox2.Size = new System.Drawing.Size(52, 27);
             this.guna2ControlBox2.TabIndex = 1;
             // 
             // guna2ControlBox1
@@ -331,10 +331,10 @@
             this.guna2ControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2ControlBox1.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox1.IconColor = System.Drawing.Color.Gray;
-            this.guna2ControlBox1.Location = new System.Drawing.Point(1278, 0);
-            this.guna2ControlBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.guna2ControlBox1.Location = new System.Drawing.Point(1118, 0);
+            this.guna2ControlBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2ControlBox1.Name = "guna2ControlBox1";
-            this.guna2ControlBox1.Size = new System.Drawing.Size(59, 34);
+            this.guna2ControlBox1.Size = new System.Drawing.Size(52, 27);
             this.guna2ControlBox1.TabIndex = 0;
             // 
             // guna2DragControl1
@@ -346,23 +346,23 @@
             // guna2Panel_container
             // 
             this.guna2Panel_container.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2Panel_container.Location = new System.Drawing.Point(273, 61);
-            this.guna2Panel_container.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.guna2Panel_container.Location = new System.Drawing.Point(239, 49);
+            this.guna2Panel_container.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2Panel_container.Name = "guna2Panel_container";
-            this.guna2Panel_container.Size = new System.Drawing.Size(1337, 809);
+            this.guna2Panel_container.Size = new System.Drawing.Size(1170, 647);
             this.guna2Panel_container.TabIndex = 2;
             // 
             // Principal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(1610, 870);
+            this.ClientSize = new System.Drawing.Size(1409, 696);
             this.Controls.Add(this.guna2Panel_container);
             this.Controls.Add(this.guna2Panel_top);
             this.Controls.Add(this.guna2Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Principal";
