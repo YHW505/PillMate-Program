@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using PillMate.ApiClients;
 using PillMate.DTOs;
+using PillMate.View.Widget;
 
 namespace PillMate.View
 {
@@ -29,12 +30,18 @@ namespace PillMate.View
             var success = await _authApi.RegisterAsync(user);
             if (success)
             {
-                MessageBox.Show("회원가입 성공");
+                Dialog_Widget dialog = new Dialog_Widget("회원가입", "회원가입 성공"); // LoadPatientsAsync 메소드를 전달
+                dialog.StartPosition = FormStartPosition.CenterScreen;
+                dialog.ShowDialog();
+                //MessageBox.Show("회원가입 성공");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("회원가입 실패: 중복 아이디 등");
+                Dialog_Widget dialog = new Dialog_Widget("회원가입", "회원가입 실패: 중복 아이디 등"); // LoadPatientsAsync 메소드를 전달
+                dialog.StartPosition = FormStartPosition.CenterScreen;
+                dialog.ShowDialog();
+                //MessageBox.Show("회원가입 실패: 중복 아이디 등");
             }
         }
     }

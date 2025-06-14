@@ -204,7 +204,7 @@ namespace PillMate.View
         private async Task LoadQRCodeAsync(int patientId)
         {
             //이 부분 자신에 맞게 수정
-            string url = $"https://localhost:14188/api/QRCode/{patientId}";
+            string url = $"https://localhost:8938/api/QRCode/{patientId}";
 
             try
             {

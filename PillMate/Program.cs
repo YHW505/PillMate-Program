@@ -26,7 +26,7 @@ namespace PillMate
             };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AuthView());
+            Application.Run(new LoginForm());
       }
     }
 }

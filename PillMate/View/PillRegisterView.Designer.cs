@@ -34,7 +34,7 @@
             this.YCNT_TextBox = new System.Windows.Forms.TextBox();
             this.YNUM_Label = new System.Windows.Forms.Label();
             this.YNum_TextBox = new System.Windows.Forms.TextBox();
-            this.Pill_Save_Button = new System.Windows.Forms.Button();
+            this.Pill_Save_Button = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // YName_Label
@@ -87,12 +87,19 @@
             // 
             // Pill_Save_Button
             // 
-            this.Pill_Save_Button.Location = new System.Drawing.Point(117, 315);
+            this.Pill_Save_Button.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Pill_Save_Button.BorderRadius = 5;
+            this.Pill_Save_Button.BorderThickness = 1;
+            this.Pill_Save_Button.FillColor = System.Drawing.Color.Transparent;
+            this.Pill_Save_Button.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.Pill_Save_Button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Pill_Save_Button.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Pill_Save_Button.HoverState.ForeColor = System.Drawing.Color.White;
+            this.Pill_Save_Button.Location = new System.Drawing.Point(117, 315); this.Pill_Save_Button.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Pill_Save_Button.Name = "Pill_Save_Button";
-            this.Pill_Save_Button.Size = new System.Drawing.Size(75, 23);
-            this.Pill_Save_Button.TabIndex = 6;
-            this.Pill_Save_Button.Text = "저장";
-            this.Pill_Save_Button.UseVisualStyleBackColor = true;
+            this.Pill_Save_Button.Size = new System.Drawing.Size(98, 28);
+            this.Pill_Save_Button.TabIndex = 9;
+            this.Pill_Save_Button.Text = "Add 저장";
             this.Pill_Save_Button.Click += new System.EventHandler(this.Pill_Save_Button_Click);
             // 
             // PillRegisterView
@@ -122,6 +129,6 @@
         private System.Windows.Forms.TextBox YCNT_TextBox;
         private System.Windows.Forms.Label YNUM_Label;
         private System.Windows.Forms.TextBox YNum_TextBox;
-        private System.Windows.Forms.Button Pill_Save_Button;
+        private Guna.UI2.WinForms.Guna2Button Pill_Save_Button;
     }
 }
