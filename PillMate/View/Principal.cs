@@ -6,8 +6,8 @@ namespace PillMate.View
 {
     public partial class Principal : Form
     {
-        private readonly string _username;
-        private readonly string _email;
+        private string _username;
+        private string _email;
         public Principal(string username, string email) : this()
         {
             _username = username;
@@ -79,7 +79,7 @@ namespace PillMate.View
         private void btnset_Click(object sender, EventArgs e)
         {
             label_val.Text = "Setting";
-            container(new SettingView());
+            container(new SettingView(_username, _email, this));
         }
 
         private void Helpbtn_Click(object sender, EventArgs e)
@@ -87,5 +87,8 @@ namespace PillMate.View
             label_val.Text = "Help";
             container(new HelpView());
         }
+
+        public string GetUsername() => _username;
+        public string GetEmail() => _email;
     }
 }

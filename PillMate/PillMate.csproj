@@ -145,6 +145,7 @@
     <Compile Include="ApiClients\PillApi.cs" />
     <Compile Include="ApiClients\TakenMedicinApi.cs" />
     <Compile Include="DTOs\BukyoungStatusDto.cs" />
+    <Compile Include="DTOs\ChangePasswordDto.cs" />
     <Compile Include="DTOs\DashboardDto.cs" />
     <Compile Include="DTOs\PatientDto.cs" />
     <Compile Include="DTOs\PillDto.cs" />
@@ -153,6 +154,12 @@
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Services\ApiService.cs" />
     <Compile Include="Services\ServerService.cs" />
+    <Compile Include="View\AccountEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AccountEditForm.Designer.cs">
+      <DependentUpon>AccountEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\BukyoungView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -176,6 +183,12 @@
     </Compile>
     <Compile Include="View\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PasswordConfirmForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PasswordConfirmForm.Designer.cs">
+      <DependentUpon>PasswordConfirmForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Patient.cs">
       <SubType>Form</SubType>
@@ -263,6 +276,9 @@
     <Compile Include="View\Widget\Dialog_Delete_Patient.Designer.cs">
       <DependentUpon>Dialog_Delete_Patient.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\AccountEditForm.resx">
+      <DependentUpon>AccountEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\BukyoungView.resx">
       <DependentUpon>BukyoungView.cs</DependentUpon>
     </EmbeddedResource>
@@ -285,6 +301,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\PasswordConfirmForm.resx">
+      <DependentUpon>PasswordConfirmForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Patient.resx">
       <DependentUpon>Patient.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -346,6 +365,9 @@
   <ItemGroup>
     <PackageReference Include="Guna.UI2.WinForms">
       <Version>2.0.4.7</Version>
+    </PackageReference>
+    <PackageReference Include="LiveCharts">
+      <Version>0.9.7</Version>
     </PackageReference>
     <PackageReference Include="LiveCharts.WinForms">
       <Version>0.9.7.1</Version>

@@ -35,29 +35,37 @@ namespace PillMate.View
             var summary = await _dashboardApi.GetSummaryAsync();
             if (summary == null) return;
 
-            // 🟦 카드 라벨 업데이트 (디자이너에서 cnt_card1~3 Label 또는 Guna2HtmlLabel일 수 있음)
+            int total = summary.Completed + summary.Pending;
+            double takenPercent = total == 0 ? 0 : (double)summary.Completed / total * 100;
+            double missedPercent = total == 0 ? 0 : (double)summary.Pending / total * 100;
+
+            // 카드 숫자
             cnt_card1.Text = summary.TotalPatients.ToString();
             cnt_card2.Text = summary.Completed.ToString();
             cnt_card3.Text = summary.Pending.ToString();
 
-            // ✅ 파이차트 시리즈 업데이트
-/*            pieChart1.Series = new SeriesCollection
-            {
-                new PieSeries
-                {
-                    Title = "복용 완료",
-                    Values = new ChartValues<int> { summary.Completed },
-                    DataLabels = true
-                },
-                new PieSeries
-                {
-                    Title = "미복용",
-                    Values = new ChartValues<int> { summary.Pending },
-                    DataLabels = true
-                }
-            };
+            // ✅ 퍼센트 텍스트 설정
+            takenlabel.Text = $"{takenPercent:0.#} %";
+            missedlabel.Text = $"{missedPercent:0.#} %";
 
-            pieChart1.LegendLocation = LegendLocation.Right;*/
+            // 파이차트
+            pieChart2.DisableAnimations = true;
+            pieChart2.InnerRadius = 50; // 내부 반지름 설정
+            pieChart2.Series.Clear();
+            pieChart2.Series.Add(new PieSeries
+            {
+                Title = "복용 완료",
+                Values = new ChartValues<int> { summary.Completed },
+                DataLabels = false
+            });
+            pieChart2.Series.Add(new PieSeries
+            {
+                Title = "미복용",
+                Values = new ChartValues<int> { summary.Pending },
+                DataLabels = false
+            });
+
+            pieChart2.LegendLocation = LegendLocation.Right;
         }
 
         private async Task LoadMedicationGridAsync()

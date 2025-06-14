@@ -50,10 +50,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
-            this.label16 = new System.Windows.Forms.Label();
+            this.pieChart2 = new LiveCharts.WinForms.PieChart();
+            this.totlabel = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.missedlabel = new System.Windows.Forms.Label();
+            this.takenlabel = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -241,7 +242,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label7.Location = new System.Drawing.Point(17, 47);
+            this.label7.Location = new System.Drawing.Point(18, 58);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(251, 42);
             this.label7.TabIndex = 4;
@@ -262,10 +263,11 @@
             // 
             this.guna2Panel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel4.BorderRadius = 20;
-            this.guna2Panel4.Controls.Add(this.label16);
+            this.guna2Panel4.Controls.Add(this.pieChart2);
+            this.guna2Panel4.Controls.Add(this.totlabel);
             this.guna2Panel4.Controls.Add(this.label17);
-            this.guna2Panel4.Controls.Add(this.label13);
-            this.guna2Panel4.Controls.Add(this.label12);
+            this.guna2Panel4.Controls.Add(this.missedlabel);
+            this.guna2Panel4.Controls.Add(this.takenlabel);
             this.guna2Panel4.Controls.Add(this.label11);
             this.guna2Panel4.Controls.Add(this.label10);
             this.guna2Panel4.Controls.Add(this.label9);
@@ -275,16 +277,24 @@
             this.guna2Panel4.Size = new System.Drawing.Size(371, 304);
             this.guna2Panel4.TabIndex = 5;
             // 
-            // label16
+            // pieChart2
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.Black;
-            this.label16.Location = new System.Drawing.Point(185, 272);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(32, 25);
-            this.label16.TabIndex = 13;
-            this.label16.Text = "10";
+            this.pieChart2.Location = new System.Drawing.Point(6, 70);
+            this.pieChart2.Name = "pieChart2";
+            this.pieChart2.Size = new System.Drawing.Size(237, 174);
+            this.pieChart2.TabIndex = 14;
+            this.pieChart2.Text = "pieChart2";
+            // 
+            // totlabel
+            // 
+            this.totlabel.AutoSize = true;
+            this.totlabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totlabel.ForeColor = System.Drawing.Color.Black;
+            this.totlabel.Location = new System.Drawing.Point(185, 272);
+            this.totlabel.Name = "totlabel";
+            this.totlabel.Size = new System.Drawing.Size(32, 25);
+            this.totlabel.TabIndex = 13;
+            this.totlabel.Text = "10";
             // 
             // label17
             // 
@@ -297,34 +307,34 @@
             this.label17.TabIndex = 12;
             this.label17.Text = "Total";
             // 
-            // label13
+            // missedlabel
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(114)))), ((int)(((byte)(125)))));
-            this.label13.Location = new System.Drawing.Point(226, 210);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(55, 25);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "38 %";
+            this.missedlabel.AutoSize = true;
+            this.missedlabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.missedlabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(114)))), ((int)(((byte)(125)))));
+            this.missedlabel.Location = new System.Drawing.Point(249, 201);
+            this.missedlabel.Name = "missedlabel";
+            this.missedlabel.Size = new System.Drawing.Size(55, 25);
+            this.missedlabel.TabIndex = 9;
+            this.missedlabel.Text = "38 %";
             // 
-            // label12
+            // takenlabel
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(113)))), ((int)(((byte)(242)))));
-            this.label12.Location = new System.Drawing.Point(226, 128);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(55, 25);
-            this.label12.TabIndex = 8;
-            this.label12.Text = "62 %";
+            this.takenlabel.AutoSize = true;
+            this.takenlabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.takenlabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(113)))), ((int)(((byte)(242)))));
+            this.takenlabel.Location = new System.Drawing.Point(249, 113);
+            this.takenlabel.Name = "takenlabel";
+            this.takenlabel.Size = new System.Drawing.Size(55, 25);
+            this.takenlabel.TabIndex = 8;
+            this.takenlabel.Text = "62 %";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(226, 185);
+            this.label11.Location = new System.Drawing.Point(249, 176);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(71, 25);
             this.label11.TabIndex = 7;
@@ -335,7 +345,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(226, 103);
+            this.label10.Location = new System.Drawing.Point(249, 88);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 25);
             this.label10.TabIndex = 6;
@@ -517,10 +527,10 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label missedlabel;
+        private System.Windows.Forms.Label takenlabel;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label totlabel;
         private System.Windows.Forms.Label label17;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel6;
         private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
@@ -528,5 +538,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pill;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private LiveCharts.WinForms.PieChart pieChart2;
     }
 }
