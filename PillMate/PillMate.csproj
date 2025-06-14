@@ -140,10 +140,12 @@
   <ItemGroup>
     <Compile Include="ApiClients\AuthApi.cs" />
     <Compile Include="ApiClients\BukyoungStatusApi.cs" />
+    <Compile Include="ApiClients\DashboardApi.cs" />
     <Compile Include="ApiClients\PatientApi.cs" />
     <Compile Include="ApiClients\PillApi.cs" />
     <Compile Include="ApiClients\TakenMedicinApi.cs" />
     <Compile Include="DTOs\BukyoungStatusDto.cs" />
+    <Compile Include="DTOs\DashboardDto.cs" />
     <Compile Include="DTOs\PatientDto.cs" />
     <Compile Include="DTOs\PillDto.cs" />
     <Compile Include="DTOs\TakenMedicineDto.cs" />

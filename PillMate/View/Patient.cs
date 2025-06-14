@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using LiveCharts;
+using LiveCharts.WinForms;
+using LiveCharts.Wpf;
+using PillMate.ApiClients;
+using PillMate.DTO;
 using System.Drawing.Printing;
 using System.IO;
 using System.Net.Http;
 using Guna.UI2.WinForms;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using PillMate.ApiClients;
 using PillMate.Client.ApiClients;
-using PillMate.DTO;
 using PillMate.View.Widget;
 
 namespace PillMate.View
@@ -18,6 +22,7 @@ namespace PillMate.View
     {
         private readonly PatientApi _api;
         private readonly TakenMedicineAPI _Tapi;
+        private bool _isLoadingMedicine = false;
 
         public Patient()
         {
@@ -26,12 +31,11 @@ namespace PillMate.View
             _Tapi = new TakenMedicineAPI();
             SetupListView();
 
-            // 우클릭 메뉴 설정 코드
+            // 우클릭 메뉴 설정
             var contextMenu = new ContextMenuStrip();
             var deleteMenu = new ToolStripMenuItem("삭제");
             deleteMenu.Click += DeleteMenu_Click;
             contextMenu.Items.Add(deleteMenu);
-
             listView1.ContextMenuStrip = contextMenu;
         }
 
@@ -45,60 +49,28 @@ namespace PillMate.View
             try
             {
                 var patients = await _api.GetAllAsync();
-                guna2DataGridView1.Columns.Clear(); // 이전 열 제거
+                guna2DataGridView1.Columns.Clear();
 
-                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "ColumnId",
-                    HeaderText = "No.",
-                    DataPropertyName = "Id",
-                    Width = 50
-                });
-                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "ColumnName",
-                    HeaderText = "이름",
-                    DataPropertyName = "Hwanja_Name",
-                    Width = 100
-                });
-                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "ColumnGender",
-                    HeaderText = "성별",
-                    DataPropertyName = "Hwanja_Gender",
-                    Width = 100
-                });
-                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "ColumnAge",
-                    HeaderText = "나이",
-                    DataPropertyName = "Hwanja_Age",
-                    Width = 100
-                });
-                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "ColumnPhone",
-                    HeaderText = "전화번호",
-                    DataPropertyName = "Hwanja_PhoneNumber",
-                    Width = 100
-                });
-                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "ColumnRoom",
-                    HeaderText = "병실",
-                    DataPropertyName = "Hwanja_Room",
-                    Width = 80
-                });
-                // this.guna2DataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.guna2DataGridView1_CellClick); // 셀 클릭 이벤트 핸들러 등록
-                // this.guna2DataGridView1.AutoGenerateColumns = false; // 자동 생성 비활성화
+                // 이벤트 잠깐 제거
+                guna2DataGridView1.CellClick -= guna2DataGridView1_CellClick;
+
+                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnId", HeaderText = "No.", DataPropertyName = "Id", Width = 50 });
+                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnName", HeaderText = "이름", DataPropertyName = "Hwanja_Name", Width = 100 });
+                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnGender", HeaderText = "성별", DataPropertyName = "Hwanja_Gender", Width = 100 });
+                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnAge", HeaderText = "나이", DataPropertyName = "Hwanja_Age", Width = 100 });
+                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnPhone", HeaderText = "전화번호", DataPropertyName = "Hwanja_PhoneNumber", Width = 100 });
+                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnRoom", HeaderText = "병실", DataPropertyName = "Hwanja_Room", Width = 80 });
 
                 guna2DataGridView1.DataSource = patients;
 
                 patientcnt.Text = patients.Count.ToString("D2");
-                patientcnt.Text = $"{patients.Count}";
 
-                if (guna2DataGridView1.Rows[0].DataBoundItem is PatientDto patient && patient.Id != null)
+                if (patients.Any())
                 {
+                    guna2DataGridView1.ClearSelection();
+                    guna2DataGridView1.Rows[0].Selected = true;
+
+                    var patient = patients[0];
                     Label_Bohoja_Name.Text = $"{patient.Bohoja_Name}";
                     Label_Bohoja_pNum.Text = $"{patient.Bohoja_PhoneNumber}";
                     Label_Hwanja_Room.Text = $"{patient.Hwanja_Room}";
@@ -106,23 +78,22 @@ namespace PillMate.View
                     await LoadTakenMedicine(patient.Id.Value);
                 }
 
-                
+                // 다시 이벤트 연결
+                guna2DataGridView1.CellClick += guna2DataGridView1_CellClick;
             }
             catch (Exception ex)
             {
-                //MessageBox.Show($"환자 목록 로드 실패: {ex.Message}");
-                Dialog_Widget dialog = new Dialog_Widget("오류", $"환자 목록 로드 실패: {ex.Message}"); // LoadPatientsAsync 메소드를 전달
+                Dialog_Widget dialog = new Dialog_Widget("오류", $"환자 목록 로드 실패: {ex.Message}");
                 dialog.StartPosition = FormStartPosition.CenterScreen;
                 dialog.ShowDialog();
-
             }
         }
 
         private async void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            listView1.Items.Clear();
             if (e.RowIndex < 0) return;
 
-            // 선택된 행에서 데이터 추출
             if (guna2DataGridView1.Rows[e.RowIndex].DataBoundItem is PatientDto patient && patient.Id != null)
             {
                 Label_Bohoja_Name.Text = $"{patient.Bohoja_Name}";
@@ -136,38 +107,45 @@ namespace PillMate.View
         private async Task LoadQRCodeAsync(int patientId)
         {
             string url = $"https://localhost:8938/api/QRCode/{patientId}";
-
             try
             {
                 using var handler = new HttpClientHandler { ServerCertificateCustomValidationCallback = (a, b, c, d) => true };
                 using var client = new HttpClient(handler);
-
                 var imageBytes = await client.GetByteArrayAsync(url);
                 using var ms = new MemoryStream(imageBytes);
-                QR_Image_Box.Image = Image.FromStream(ms);
+                using var img = Image.FromStream(ms);
+                QR_Image_Box.Image?.Dispose();
+                QR_Image_Box.Image = new Bitmap(img);
             }
             catch (Exception ex)
             {
                 QR_Image_Box.Image = null;
-                Dialog_Widget dialog = new Dialog_Widget("오류", $"QR 코드 로드 실패: {ex.Message}"); // LoadPatientsAsync 메소드를 전달
+                Dialog_Widget dialog = new Dialog_Widget("오류", $"QR 코드 로드 실패: {ex.Message}");
                 dialog.StartPosition = FormStartPosition.CenterScreen;
                 dialog.ShowDialog();
-                //MessageBox.Show("QR 코드 로드 실패: " + ex.Message);
+                listView1.Items.Clear();
             }
         }
 
         private async Task LoadTakenMedicine(int patientId)
         {
+            if (_isLoadingMedicine) return;
+            _isLoadingMedicine = true;
+
             listView1.Items.Clear();
             var takenList = await _Tapi.GetAllAsync(patientId);
+            var uniqueList = takenList.GroupBy(x => new { x.PillId, x.Dosage }).Select(g => g.First()).ToList();
 
-            foreach (var item in takenList)
+            foreach (var item in uniqueList)
             {
+                if (item?.Pill?.Yank_Name == null) continue;
                 var lvi = new ListViewItem(item.Pill.Yank_Name);
                 lvi.SubItems.Add($"{item.Dosage}정");
-                lvi.Tag = item; // ← 여기에서 Tag에 dto 넣기
+                lvi.Tag = item;
                 listView1.Items.Add(lvi);
             }
+
+            _isLoadingMedicine = false;
         }
 
         private void SetupListView()
@@ -186,30 +164,23 @@ namespace PillMate.View
         {
             if (QR_Image_Box.Image == null)
             {
-                Dialog_Widget dialog = new Dialog_Widget("오류", "인쇄할 QR 이미지가 없습니다."); // LoadPatientsAsync 메소드를 전달
+                Dialog_Widget dialog = new Dialog_Widget("오류", "인쇄할 QR 이미지가 없습니다.");
                 dialog.StartPosition = FormStartPosition.CenterScreen;
                 dialog.ShowDialog();
-                //MessageBox.Show("인쇄할 QR 이미지가 없습니다.");
                 return;
             }
 
             var pd = new PrintDocument();
-            pd.PrintPage += (s, e) =>
-            {
-                var img = QR_Image_Box.Image;
-                e.Graphics.DrawImage(img, new Rectangle(100, 100, 200, 200));
-            };
-
+            pd.PrintPage += (s, e) => e.Graphics.DrawImage(QR_Image_Box.Image, new Rectangle(100, 100, 200, 200));
             var dlg = new PrintDialog { Document = pd };
-            if (dlg.ShowDialog() == DialogResult.OK)
-                pd.Print();
+            if (dlg.ShowDialog() == DialogResult.OK) pd.Print();
         }
 
         private void Createbtn_Click(object sender, EventArgs e)
         {
-            PatientRegister patientRegister = new PatientRegister(LoadPatientsAsync); // LoadPatientsAsync 메소드를 전달
-            patientRegister.StartPosition = FormStartPosition.CenterScreen;
-            patientRegister.ShowDialog();
+            var register = new PatientRegister(LoadPatientsAsync);
+            register.StartPosition = FormStartPosition.CenterScreen;
+            register.ShowDialog();
         }
 
         private void guna2Button4_Click(object sender, EventArgs e)
@@ -217,66 +188,38 @@ namespace PillMate.View
             if (guna2DataGridView1.SelectedRows.Count > 0)
             {
                 var selectedPatient = guna2DataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
-
                 if (selectedPatient != null)
                 {
-                    PatientEdit patientEdit = new PatientEdit(selectedPatient, LoadPatientsAsync); // LoadPatientsAsync 메소드를 전달
-                    patientEdit.StartPosition = FormStartPosition.CenterScreen;
-                    patientEdit.ShowDialog();
+                    var edit = new PatientEdit(selectedPatient, LoadPatientsAsync);
+                    edit.StartPosition = FormStartPosition.CenterScreen;
+                    edit.ShowDialog();
                 }
             }
             else
             {
-                Dialog_Widget dialog = new Dialog_Widget("환자 수정", "수정할 환자를 선택해주세요."); // LoadPatientsAsync 메소드를 전달
+                Dialog_Widget dialog = new Dialog_Widget("환자 수정", "수정할 환자를 선택해주세요.");
                 dialog.StartPosition = FormStartPosition.CenterScreen;
                 dialog.ShowDialog();
-                //MessageBox.Show("수정할 환자를 선택해주세요.");
             }
         }
 
-        private async void guna2Button5_Click(object sender, EventArgs e)
+        private void guna2Button5_Click(object sender, EventArgs e)
         {
-            // 선택된 환자가 있는지 확인
             if (guna2DataGridView1.SelectedRows.Count > 0)
             {
                 var selectedPatient = guna2DataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
-
                 if (selectedPatient != null)
                 {
-                    Dialog_Delete_Patient dialogChoice = new Dialog_Delete_Patient(selectedPatient, LoadPatientsAsync); // LoadPatientsAsync 메소드를 전달
-                    dialogChoice.StartPosition = FormStartPosition.CenterScreen;
-                    dialogChoice.ShowDialog();
-                    //var result = MessageBox.Show("정말 이 환자를 삭제하시겠습니까?", "환자 삭제", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                    //if (result == DialogResult.Yes)
-                    //{
-                    //    // 환자 삭제 API 호출
-                    //    var success = await _api.DeleteAsync(new DeletePatientDto { Id = selectedPatient.Id ?? 0 });
-
-                    //    if (success)
-                    //    {
-                    //        //MessageBox.Show("환자가 삭제되었습니다.");
-                    //        Dialog_Widget dialog = new Dialog_Widget("삭제", "환자가 삭제되었습니다."); // LoadPatientsAsync 메소드를 전달
-                    //        dialog.StartPosition = FormStartPosition.CenterScreen;
-                    //        dialog.ShowDialog();
-                    //        await LoadPatientsAsync(); // 환자 리스트 새로고침
-                    //    }
-                    //    else
-                    //    {
-                    //        Dialog_Widget dialog = new Dialog_Widget("삭제", "환자 삭제에 실패했습니다."); // LoadPatientsAsync 메소드를 전달
-                    //        dialog.StartPosition = FormStartPosition.CenterScreen;
-                    //        dialog.ShowDialog();
-                    //        //MessageBox.Show("환자 삭제에 실패했습니다.");
-                    //    }
-                    //}
+                    var deleteDialog = new Dialog_Delete_Patient(selectedPatient, LoadPatientsAsync);
+                    deleteDialog.StartPosition = FormStartPosition.CenterScreen;
+                    deleteDialog.ShowDialog();
                 }
             }
             else
             {
-                Dialog_Widget dialog = new Dialog_Widget("삭제", "삭제할 환자를 선택해주세요."); // LoadPatientsAsync 메소드를 전달
+                Dialog_Widget dialog = new Dialog_Widget("삭제", "삭제할 환자를 선택해주세요.");
                 dialog.StartPosition = FormStartPosition.CenterScreen;
                 dialog.ShowDialog();
-                //MessageBox.Show("삭제할 환자를 선택해주세요.");
             }
         }
 
@@ -288,57 +231,46 @@ namespace PillMate.View
             var form = new TakenMedicineRegister(selectedPatient.Id.Value);
             form.OnPillsSelectedAsync += async (selectedList) =>
             {
-                await LoadTakenMedicine(selectedPatient.Id.Value); // 새로고침
+                await LoadTakenMedicine(selectedPatient.Id.Value);
                 await LoadQRCodeAsync(selectedPatient.Id.Value);
             };
             form.StartPosition = FormStartPosition.CenterScreen;
-            form.ShowDialog(); // 이거 꼭 필요!
+            form.ShowDialog();
         }
 
         private async void DeleteMenu_Click(object? sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count == 0)
             {
-                Dialog_Widget dialog = new Dialog_Widget("삭제", "삭제할 항목을 선택하세요."); // LoadPatientsAsync 메소드를 전달
+                Dialog_Widget dialog = new Dialog_Widget("삭제", "삭제할 항목을 선택하세요.");
                 dialog.StartPosition = FormStartPosition.CenterScreen;
                 dialog.ShowDialog();
-                //MessageBox.Show("삭제할 항목을 선택하세요.");
                 return;
             }
 
-
             var selectedItem = listView1.SelectedItems[0];
-
             if (selectedItem.Tag is TakenMedicineDto takenMedicine)
             {
                 var selectedPatient = guna2DataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
-
-                //Dialog_Delete_TakenPill dialog = new Dialog_Delete_TakenPill(takenMedicine, listView1, LoadQRCodeAsync(selectedPatient.Id.Value), selectedItem); // LoadPatientsAsync 메소드를 전달
-                //dialog.StartPosition = FormStartPosition.CenterScreen;
-                //dialog.ShowDialog();
-
                 var result = MessageBox.Show($"'{selectedItem.Text}' 약을 삭제하시겠습니까?", "삭제 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
                 if (result == DialogResult.Yes)
                 {
                     var api = new TakenMedicineAPI();
                     bool isSuccess = await api.DeleteTakenMedicineAsync(takenMedicine.Id);
-
                     if (isSuccess)
                     {
-
-                        listView1.Items.Remove(selectedItem); // ✅ 3번 코드: ListView에서 삭제
+                        listView1.Items.Remove(selectedItem);
                         await LoadQRCodeAsync(selectedPatient.Id.Value);
-                        Dialog_Widget dialog = new Dialog_Widget("삭제", "✅ 삭제 완료"); // LoadPatientsAsync 메소드를 전달
+                        Dialog_Widget dialog = new Dialog_Widget("삭제", "✅ 삭제 완료");
                         dialog.StartPosition = FormStartPosition.CenterScreen;
                         dialog.ShowDialog();
-                        //MessageBox.Show("✅ 삭제 완료");
                     }
                     else
                     {
-                        Dialog_Widget dialog = new Dialog_Widget("삭제", "✅ 삭제 실패"); // LoadPatientsAsync 메소드를 전달
+                        Dialog_Widget dialog = new Dialog_Widget("삭제", "✅ 삭제 실패");
                         dialog.StartPosition = FormStartPosition.CenterScreen;
                         dialog.ShowDialog();
-                        //MessageBox.Show("❌ 삭제 실패");
                     }
                 }
             }
