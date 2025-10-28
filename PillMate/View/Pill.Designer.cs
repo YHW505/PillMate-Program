@@ -153,6 +153,7 @@ namespace PillMate.View
             // 
             // Pill_DataGreed
             // 
+            this.Pill_DataGreed.AutoGenerateColumns = false;
             this.Pill_DataGreed.AllowUserToAddRows = false;
             this.Pill_DataGreed.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;

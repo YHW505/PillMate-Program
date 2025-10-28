@@ -49,17 +49,21 @@ namespace PillMate.View
             try
             {
                 var patients = await _api.GetAllAsync();
+                for (int i = 0; i < patients.Count; i++)
+                {
+                    patients[i].No = i + 1;
+                }
                 guna2DataGridView1.Columns.Clear();
 
                 // 이벤트 잠깐 제거
                 guna2DataGridView1.CellClick -= guna2DataGridView1_CellClick;
 
-                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnId", HeaderText = "No.", DataPropertyName = "Id", Width = 50 });
+                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnId", HeaderText = "No.", DataPropertyName = "No", Width = 50 });
                 guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnName", HeaderText = "이름", DataPropertyName = "Hwanja_Name", Width = 100 });
                 guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnGender", HeaderText = "성별", DataPropertyName = "Hwanja_Gender", Width = 100 });
                 guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnAge", HeaderText = "나이", DataPropertyName = "Hwanja_Age", Width = 100 });
                 guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnPhone", HeaderText = "전화번호", DataPropertyName = "Hwanja_PhoneNumber", Width = 100 });
-                guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnRoom", HeaderText = "병실", DataPropertyName = "Hwanja_Room", Width = 80 });
+                //guna2DataGridView1.Columns.Add(new DataGridViewTextBoxColumn { Name = "ColumnRoom", HeaderText = "병실", DataPropertyName = "Hwanja_Room", Width = 80 });
 
                 guna2DataGridView1.DataSource = patients;
 
@@ -74,7 +78,7 @@ namespace PillMate.View
                     Label_Bohoja_Name.Text = $"{patient.Bohoja_Name}";
                     Label_Bohoja_pNum.Text = $"{patient.Bohoja_PhoneNumber}";
                     Label_Hwanja_Room.Text = $"{patient.Hwanja_Room}";
-                    await LoadQRCodeAsync(patient.Id.Value);
+                    //await LoadQRCodeAsync(patient.Id.Value);
                     await LoadTakenMedicine(patient.Id.Value);
                 }
 
@@ -99,33 +103,33 @@ namespace PillMate.View
                 Label_Bohoja_Name.Text = $"{patient.Bohoja_Name}";
                 Label_Bohoja_pNum.Text = $"{patient.Bohoja_PhoneNumber}";
                 Label_Hwanja_Room.Text = $"{patient.Hwanja_Room}";
-                await LoadQRCodeAsync(patient.Id.Value);
+                //await LoadQRCodeAsync(patient.Id.Value);
                 await LoadTakenMedicine(patient.Id.Value);
             }
         }
 
-        private async Task LoadQRCodeAsync(int patientId)
-        {
-            string url = $"https://localhost:8938/api/QRCode/{patientId}";
-            try
-            {
-                using var handler = new HttpClientHandler { ServerCertificateCustomValidationCallback = (a, b, c, d) => true };
-                using var client = new HttpClient(handler);
-                var imageBytes = await client.GetByteArrayAsync(url);
-                using var ms = new MemoryStream(imageBytes);
-                using var img = Image.FromStream(ms);
-                QR_Image_Box.Image?.Dispose();
-                QR_Image_Box.Image = new Bitmap(img);
-            }
-            catch (Exception ex)
-            {
-                QR_Image_Box.Image = null;
-                Dialog_Widget dialog = new Dialog_Widget("오류", $"QR 코드 로드 실패: {ex.Message}");
-                dialog.StartPosition = FormStartPosition.CenterScreen;
-                dialog.ShowDialog();
-                listView1.Items.Clear();
-            }
-        }
+        //private async Task LoadQRCodeAsync(int patientId)
+        //{
+        //    string url = $"https://localhost:14188/api/QRCode/{patientId}";
+        //    try
+        //    {
+        //        using var handler = new HttpClientHandler { ServerCertificateCustomValidationCallback = (a, b, c, d) => true };
+        //        using var client = new HttpClient(handler);
+        //        var imageBytes = await client.GetByteArrayAsync(url);
+        //        using var ms = new MemoryStream(imageBytes);
+        //        using var img = Image.FromStream(ms);
+        //        QR_Image_Box.Image?.Dispose();
+        //        QR_Image_Box.Image = new Bitmap(img);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        QR_Image_Box.Image = null;
+        //        Dialog_Widget dialog = new Dialog_Widget("오류", $"QR 코드 로드 실패: {ex.Message}");
+        //        dialog.StartPosition = FormStartPosition.CenterScreen;
+        //        dialog.ShowDialog();
+        //        listView1.Items.Clear();
+        //    }
+        //}
 
         private async Task LoadTakenMedicine(int patientId)
         {
@@ -155,26 +159,26 @@ namespace PillMate.View
             listView1.Columns.Add("복용량", 70);
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-            PrintQRCode();
-        }
+        //private void guna2Button1_Click(object sender, EventArgs e)
+        //{
+        //    PrintQRCode();
+        //}
 
-        private void PrintQRCode()
-        {
-            if (QR_Image_Box.Image == null)
-            {
-                Dialog_Widget dialog = new Dialog_Widget("오류", "인쇄할 QR 이미지가 없습니다.");
-                dialog.StartPosition = FormStartPosition.CenterScreen;
-                dialog.ShowDialog();
-                return;
-            }
+        //private void PrintQRCode()
+        //{
+        //    if (QR_Image_Box.Image == null)
+        //    {
+        //        Dialog_Widget dialog = new Dialog_Widget("오류", "인쇄할 QR 이미지가 없습니다.");
+        //        dialog.StartPosition = FormStartPosition.CenterScreen;
+        //        dialog.ShowDialog();
+        //        return;
+        //    }
 
-            var pd = new PrintDocument();
-            pd.PrintPage += (s, e) => e.Graphics.DrawImage(QR_Image_Box.Image, new Rectangle(100, 100, 200, 200));
-            var dlg = new PrintDialog { Document = pd };
-            if (dlg.ShowDialog() == DialogResult.OK) pd.Print();
-        }
+        //    var pd = new PrintDocument();
+        //    pd.PrintPage += (s, e) => e.Graphics.DrawImage(QR_Image_Box.Image, new Rectangle(100, 100, 200, 200));
+        //    var dlg = new PrintDialog { Document = pd };
+        //    if (dlg.ShowDialog() == DialogResult.OK) pd.Print();
+        //}
 
         private void Createbtn_Click(object sender, EventArgs e)
         {
@@ -232,7 +236,7 @@ namespace PillMate.View
             form.OnPillsSelectedAsync += async (selectedList) =>
             {
                 await LoadTakenMedicine(selectedPatient.Id.Value);
-                await LoadQRCodeAsync(selectedPatient.Id.Value);
+                //await LoadQRCodeAsync(selectedPatient.Id.Value);
             };
             form.StartPosition = FormStartPosition.CenterScreen;
             form.ShowDialog();
@@ -261,7 +265,7 @@ namespace PillMate.View
                     if (isSuccess)
                     {
                         listView1.Items.Remove(selectedItem);
-                        await LoadQRCodeAsync(selectedPatient.Id.Value);
+                        //await LoadQRCodeAsync(selectedPatient.Id.Value);
                         Dialog_Widget dialog = new Dialog_Widget("삭제", "✅ 삭제 완료");
                         dialog.StartPosition = FormStartPosition.CenterScreen;
                         dialog.ShowDialog();

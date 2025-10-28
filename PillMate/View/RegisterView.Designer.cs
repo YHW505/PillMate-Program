@@ -108,6 +108,7 @@
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtUsername);
             this.Name = "RegisterView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RegisterView";
             this.ResumeLayout(false);
             this.PerformLayout();
