@@ -52,9 +52,8 @@
             this.guna2Panel1.Controls.Add(this.guna2PictureBox1);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
-            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(567, 586);
+            this.guna2Panel1.Size = new System.Drawing.Size(496, 469);
             this.guna2Panel1.TabIndex = 0;
             // 
             // guna2PictureBox1
@@ -64,9 +63,8 @@
             this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
             this.guna2PictureBox1.ImageRotate = 0F;
             this.guna2PictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(567, 586);
+            this.guna2PictureBox1.Size = new System.Drawing.Size(496, 469);
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
@@ -84,10 +82,9 @@
             this.guna2Panel2.Controls.Add(this.Emailtxt);
             this.guna2Panel2.Controls.Add(this.Nametxt);
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2Panel2.Location = new System.Drawing.Point(567, 0);
-            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.guna2Panel2.Location = new System.Drawing.Point(496, 0);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(407, 586);
+            this.guna2Panel2.Size = new System.Drawing.Size(356, 469);
             this.guna2Panel2.TabIndex = 1;
             // 
             // Registerbtn
@@ -103,10 +100,9 @@
             this.Registerbtn.ForeColor = System.Drawing.Color.DimGray;
             this.Registerbtn.Image = ((System.Drawing.Image)(resources.GetObject("Registerbtn.Image")));
             this.Registerbtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Registerbtn.Location = new System.Drawing.Point(81, 474);
-            this.Registerbtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Registerbtn.Location = new System.Drawing.Point(71, 379);
             this.Registerbtn.Name = "Registerbtn";
-            this.Registerbtn.Size = new System.Drawing.Size(249, 56);
+            this.Registerbtn.Size = new System.Drawing.Size(218, 45);
             this.Registerbtn.TabIndex = 8;
             this.Registerbtn.Text = "Create Account";
             this.Registerbtn.Click += new System.EventHandler(this.Registerbtn_Click);
@@ -117,9 +113,9 @@
             this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label3.Location = new System.Drawing.Point(150, 431);
+            this.label3.Location = new System.Drawing.Point(131, 345);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 19);
+            this.label3.Size = new System.Drawing.Size(99, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "Forget password?";
             // 
@@ -135,10 +131,9 @@
             this.Loginbtn.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.Loginbtn.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
             this.Loginbtn.ForeColor = System.Drawing.Color.White;
-            this.Loginbtn.Location = new System.Drawing.Point(81, 372);
-            this.Loginbtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Loginbtn.Location = new System.Drawing.Point(71, 298);
             this.Loginbtn.Name = "Loginbtn";
-            this.Loginbtn.Size = new System.Drawing.Size(249, 49);
+            this.Loginbtn.Size = new System.Drawing.Size(218, 39);
             this.Loginbtn.TabIndex = 6;
             this.Loginbtn.Text = "Login";
             this.Loginbtn.Click += new System.EventHandler(this.Loginbtn_Click);
@@ -147,9 +142,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(112, 66);
+            this.label2.Location = new System.Drawing.Point(98, 53);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(191, 46);
+            this.label2.Size = new System.Drawing.Size(154, 37);
             this.label2.TabIndex = 5;
             this.label2.Text = "User Login";
             // 
@@ -158,9 +153,9 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label1.Location = new System.Drawing.Point(127, 336);
+            this.label1.Location = new System.Drawing.Point(111, 269);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 23);
+            this.label1.Size = new System.Drawing.Size(97, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "Remember me";
             // 
@@ -170,10 +165,9 @@
             this.guna2ToggleSwitch1.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2ToggleSwitch1.CheckedState.InnerBorderColor = System.Drawing.Color.White;
             this.guna2ToggleSwitch1.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.guna2ToggleSwitch1.Location = new System.Drawing.Point(81, 334);
-            this.guna2ToggleSwitch1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.guna2ToggleSwitch1.Location = new System.Drawing.Point(71, 267);
             this.guna2ToggleSwitch1.Name = "guna2ToggleSwitch1";
-            this.guna2ToggleSwitch1.Size = new System.Drawing.Size(40, 25);
+            this.guna2ToggleSwitch1.Size = new System.Drawing.Size(35, 20);
             this.guna2ToggleSwitch1.TabIndex = 3;
             this.guna2ToggleSwitch1.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             this.guna2ToggleSwitch1.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -196,13 +190,13 @@
             this.Passwordtxt.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Passwordtxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.Passwordtxt.IconLeft = ((System.Drawing.Image)(resources.GetObject("Passwordtxt.IconLeft")));
-            this.Passwordtxt.Location = new System.Drawing.Point(81, 272);
-            this.Passwordtxt.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.Passwordtxt.Location = new System.Drawing.Point(71, 218);
+            this.Passwordtxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Passwordtxt.Name = "Passwordtxt";
             this.Passwordtxt.PlaceholderText = "Password";
             this.Passwordtxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Passwordtxt.SelectedText = "";
-            this.Passwordtxt.Size = new System.Drawing.Size(249, 50);
+            this.Passwordtxt.Size = new System.Drawing.Size(218, 40);
             this.Passwordtxt.TabIndex = 2;
             this.Passwordtxt.UseSystemPasswordChar = true;
             // 
@@ -222,13 +216,13 @@
             this.Emailtxt.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Emailtxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.Emailtxt.IconLeft = ((System.Drawing.Image)(resources.GetObject("Emailtxt.IconLeft")));
-            this.Emailtxt.Location = new System.Drawing.Point(81, 206);
-            this.Emailtxt.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.Emailtxt.Location = new System.Drawing.Point(71, 165);
+            this.Emailtxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Emailtxt.Name = "Emailtxt";
             this.Emailtxt.PlaceholderText = "Email";
             this.Emailtxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Emailtxt.SelectedText = "";
-            this.Emailtxt.Size = new System.Drawing.Size(249, 50);
+            this.Emailtxt.Size = new System.Drawing.Size(218, 40);
             this.Emailtxt.TabIndex = 1;
             // 
             // Nametxt
@@ -247,25 +241,25 @@
             this.Nametxt.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Nametxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.Nametxt.IconLeft = ((System.Drawing.Image)(resources.GetObject("Nametxt.IconLeft")));
-            this.Nametxt.Location = new System.Drawing.Point(81, 138);
-            this.Nametxt.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.Nametxt.Location = new System.Drawing.Point(71, 110);
+            this.Nametxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Nametxt.Name = "Nametxt";
             this.Nametxt.PlaceholderText = "Username";
             this.Nametxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Nametxt.SelectedText = "";
-            this.Nametxt.Size = new System.Drawing.Size(249, 50);
+            this.Nametxt.Size = new System.Drawing.Size(218, 40);
             this.Nametxt.TabIndex = 0;
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(974, 586);
+            this.ClientSize = new System.Drawing.Size(852, 469);
             this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.guna2Panel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();

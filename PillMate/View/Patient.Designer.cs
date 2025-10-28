@@ -50,8 +50,8 @@
             this.Label_Bohoja_pNum = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.Label_Hwanja_Room = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.QR_Image_Box = new System.Windows.Forms.PictureBox();
+            //this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            //this.QR_Image_Box = new System.Windows.Forms.PictureBox();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.AddPillbtn = new Guna.UI2.WinForms.Guna2Button();
             this.Createbtn = new Guna.UI2.WinForms.Guna2Button();
@@ -61,7 +61,7 @@
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.guna2ShadowPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.QR_Image_Box)).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)(this.QR_Image_Box)).BeginInit();
             this.guna2Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -141,8 +141,8 @@
             // 
             this.guna2Panel2.Controls.Add(this.guna2ShadowPanel1);
             this.guna2Panel2.Controls.Add(this.listView1);
-            this.guna2Panel2.Controls.Add(this.guna2Button1);
-            this.guna2Panel2.Controls.Add(this.QR_Image_Box);
+            //this.guna2Panel2.Controls.Add(this.guna2Button1);
+            //this.guna2Panel2.Controls.Add(this.QR_Image_Box);
             this.guna2Panel2.CustomBorderColor = System.Drawing.Color.Silver;
             this.guna2Panel2.CustomBorderThickness = new System.Windows.Forms.Padding(1);
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Right;
@@ -249,30 +249,30 @@
             // 
             // guna2Button1
             // 
-            this.guna2Button1.BorderColor = System.Drawing.Color.Gray;
-            this.guna2Button1.BorderThickness = 1;
-            this.guna2Button1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2Button1.Font = new System.Drawing.Font("Bahnschrift Condensed", 9F, System.Drawing.FontStyle.Bold);
-            this.guna2Button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.guna2Button1.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button1.Image")));
-            this.guna2Button1.ImageSize = new System.Drawing.Size(14, 14);
-            this.guna2Button1.Location = new System.Drawing.Point(154, 686);
-            this.guna2Button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(48, 32);
-            this.guna2Button1.TabIndex = 21;
-            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
+            //this.guna2Button1.BorderColor = System.Drawing.Color.Gray;
+            //this.guna2Button1.BorderThickness = 1;
+            //this.guna2Button1.FillColor = System.Drawing.Color.Transparent;
+            //this.guna2Button1.Font = new System.Drawing.Font("Bahnschrift Condensed", 9F, System.Drawing.FontStyle.Bold);
+            //this.guna2Button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            //this.guna2Button1.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button1.Image")));
+            //this.guna2Button1.ImageSize = new System.Drawing.Size(14, 14);
+            //this.guna2Button1.Location = new System.Drawing.Point(154, 686);
+            //this.guna2Button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            //this.guna2Button1.Name = "guna2Button1";
+            //this.guna2Button1.Size = new System.Drawing.Size(48, 32);
+            //this.guna2Button1.TabIndex = 21;
+            //this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // QR_Image_Box
             // 
-            this.QR_Image_Box.Image = ((System.Drawing.Image)(resources.GetObject("QR_Image_Box.Image")));
-            this.QR_Image_Box.Location = new System.Drawing.Point(10, 479);
-            this.QR_Image_Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.QR_Image_Box.Name = "QR_Image_Box";
-            this.QR_Image_Box.Size = new System.Drawing.Size(192, 200);
-            this.QR_Image_Box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.QR_Image_Box.TabIndex = 20;
-            this.QR_Image_Box.TabStop = false;
+            //this.QR_Image_Box.Image = ((System.Drawing.Image)(resources.GetObject("QR_Image_Box.Image")));
+            //this.QR_Image_Box.Location = new System.Drawing.Point(10, 479);
+            //this.QR_Image_Box.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            //this.QR_Image_Box.Name = "QR_Image_Box";
+            //this.QR_Image_Box.Size = new System.Drawing.Size(192, 200);
+            //this.QR_Image_Box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            //this.QR_Image_Box.TabIndex = 20;
+            //this.QR_Image_Box.TabStop = false;
             // 
             // guna2Panel3
             // 
@@ -448,7 +448,7 @@
             this.guna2Panel2.ResumeLayout(false);
             this.guna2ShadowPanel1.ResumeLayout(false);
             this.guna2ShadowPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.QR_Image_Box)).EndInit();
+            //((System.ComponentModel.ISupportInitialize)(this.QR_Image_Box)).EndInit();
             this.guna2Panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -465,8 +465,8 @@
         private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private System.Windows.Forms.ListView listView1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private System.Windows.Forms.PictureBox QR_Image_Box;
+        //private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        //private System.Windows.Forms.PictureBox QR_Image_Box;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
         private Guna.UI2.WinForms.Guna2Button Createbtn;
         private Guna.UI2.WinForms.Guna2Button guna2Button5;

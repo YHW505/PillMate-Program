@@ -82,7 +82,7 @@
             this.label_val.Name = "label_val";
             this.label_val.Size = new System.Drawing.Size(73, 20);
             this.label_val.TabIndex = 5;
-            this.label_val.Text = "환자 등록";
+            this.label_val.Text = "환자 수정";
             // 
             // guna2ControlBox3
             // 

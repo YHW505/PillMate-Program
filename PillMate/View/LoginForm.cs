@@ -55,7 +55,7 @@ namespace PillMate.View
 
         private void Registerbtn_Click(object sender, EventArgs e)
         {
-            var registerView = new RegisterView(_authApi);
+            var registerView = new Register_User(_authApi);
             registerView.ShowDialog();
         }
     }

@@ -22,11 +22,17 @@ namespace PillMate.View
             try
             {
                 var Pills = await _api.GetPillsAsync();
+                for (int i = 0; i < Pills.Count; i++)
+                {
+                    Pills[i].No = i + 1;
+
+                }
+
                 Pill_DataGreed.Columns.Clear(); // 이전 열 제거
 
                 Pill_DataGreed.Columns.Add(new DataGridViewTextBoxColumn
                 {
-                    DataPropertyName = "id",
+                    DataPropertyName = "No",
                     HeaderText = "No."
                 });
                 Pill_DataGreed.Columns.Add(new DataGridViewTextBoxColumn
@@ -42,7 +48,7 @@ namespace PillMate.View
                 Pill_DataGreed.Columns.Add(new DataGridViewTextBoxColumn
                 {
                     DataPropertyName = "yank_num",
-                    HeaderText = "위치" // 약품 번호로 되어있는데 바꾸는게 좋을듯
+                    HeaderText = "약품 번호" // 약품 번호로 되어있는데 바꾸는게 좋을듯
                 });
 
                 Pill_DataGreed.DataSource = Pills;
@@ -59,6 +65,10 @@ namespace PillMate.View
         private async Task LoadPillsToGrid()
         {
             var pillList = await _api.GetPillsAsync();
+            for (int i = 0; i < pillList.Count; i++)
+            {
+                pillList[i].No = i + 1;
+            }
             Pill_DataGreed.DataSource = pillList;
         }
         private async void PillForm_Load(object sender, EventArgs e)
