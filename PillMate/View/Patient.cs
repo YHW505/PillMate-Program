@@ -125,35 +125,77 @@ namespace PillMate.View
                 string jsonData = JsonSerializer.Serialize(data, new JsonSerializerOptions
                 {
                     WriteIndented = true,
-                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping // 한글 지원
+                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
                 });
 
-                // 5. 시리얼 포트로 전송
+                // 5. 시리얼 포트로 전송 + 응답 받기
                 tempPort = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
-                tempPort.ReadTimeout = 2000;
+                tempPort.ReadTimeout = 5000;  // 📈 응답 대기 시간 늘림
                 tempPort.WriteTimeout = 2000;
                 tempPort.Open();
 
                 Thread.Sleep(2000); // 아두이노 부팅 대기
 
-                // 전송
+                // 📤 데이터 전송
+                Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] 데이터 전송 시작...");
                 tempPort.WriteLine("=== MEDICINE DATA START ===");
                 tempPort.WriteLine(jsonData);
                 tempPort.WriteLine("=== MEDICINE DATA END ===");
 
-                Thread.Sleep(500);
+                // 📥 아두이노 응답 받기
+                Thread.Sleep(1000); // 아두이노 처리 시간 대기
 
-                MessageBox.Show($"✅ 복용 약물 데이터 전송 완료!\n\n" +
-                               $"👤 환자: {selectedPatient.Hwanja_Name}\n" +
-                               $"🏥 병실: {selectedPatient.Hwanja_Room}\n" +
-                               $"📊 전송된 약물 수: {medicineData.Count}개\n\n" +
-                               "🔍 아두이노 시리얼 모니터에서 확인하세요.");
+                string arduinoResponse = "";
+                DateTime startTime = DateTime.Now;
+
+                // 🕐 3초 동안 응답 수집
+                while ((DateTime.Now - startTime).TotalSeconds < 3)
+                {
+                    try
+                    {
+                        if (tempPort.BytesToRead > 0)
+                        {
+                            string chunk = tempPort.ReadExisting();
+                            arduinoResponse += chunk;
+                            Console.WriteLine($"[응답 수신] {chunk}");
+                        }
+                        Thread.Sleep(100);
+                    }
+                    catch (TimeoutException)
+                    {
+                        Console.WriteLine("응답 타임아웃");
+                        break;
+                    }
+                }
+
+                // 📋 결과 메시지 구성
+                string resultMessage = $"✅ 복용 약물 데이터 전송 완료!\n\n" +
+                                      $"👤 환자: {selectedPatient.Hwanja_Name}\n" +
+                                      $"🏥 병실: {selectedPatient.Hwanja_Room}\n" +
+                                      $"📊 전송된 약물 수: {medicineData.Count}개\n\n";
+
+                // 🎯 아두이노 응답 표시
+                if (!string.IsNullOrEmpty(arduinoResponse.Trim()))
+                {
+                    resultMessage += $"📨 아두이노 응답:\n{arduinoResponse.Trim()}\n\n";
+                    resultMessage += "🟢 아두이노와 통신 성공!";
+                }
+                else
+                {
+                    resultMessage += "📭 아두이노 응답 없음\n";
+                    resultMessage += "🟡 데이터는 전송되었지만 응답을 받지 못했습니다.";
+                }
+
+                MessageBox.Show(resultMessage);
 
                 // 디버깅용 출력
                 Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] 약물 데이터 전송 완료");
                 Console.WriteLine($"환자: {selectedPatient.Hwanja_Name} (ID: {patientId}), 약물 수: {medicineData.Count}");
                 Console.WriteLine("전송된 JSON:");
                 Console.WriteLine(jsonData);
+                Console.WriteLine("\n=== 아두이노 응답 ===");
+                Console.WriteLine(string.IsNullOrEmpty(arduinoResponse) ? "응답 없음" : arduinoResponse);
+                Console.WriteLine("==================\n");
             }
             catch (Exception ex)
             {
@@ -173,6 +215,112 @@ namespace PillMate.View
                 }
             }
         }
+
+
+        //private async void ejaculation_btn_serial(object sender, EventArgs e)
+        //{
+        //    SerialPort tempPort = null;
+
+        //    try
+        //    {
+        //        // 1. 선택된 환자 가져오기
+        //        if (guna2DataGridView1.SelectedRows.Count == 0)
+        //        {
+        //            MessageBox.Show("전송할 환자를 선택해주세요!");
+        //            return;
+        //        }
+
+        //        var selectedPatient = guna2DataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
+        //        if (selectedPatient?.Id == null)
+        //        {
+        //            MessageBox.Show("선택된 환자 정보가 올바르지 않습니다!");
+        //            return;
+        //        }
+
+        //        int patientId = selectedPatient.Id.Value;
+
+        //        // 2. 복용 약물 데이터 로드
+        //        var takenList = await _Tapi.GetAllAsync(patientId);
+        //        var uniqueList = takenList.GroupBy(x => new { x.PillId, x.Dosage })
+        //                                 .Select(g => g.First())
+        //                                 .ToList();
+
+        //        // 3. 아두이노 전송용 데이터 생성
+        //        var medicineData = uniqueList
+        //            .Where(item => item?.Pill?.Yank_Name != null)
+        //            .Select(item => new
+        //            {
+        //                pillId = item.PillId,
+        //                name = item.Pill.Yank_Name,
+        //                dosage = item.Dosage,
+        //                unit = "정"
+        //            })
+        //            .ToList();
+
+        //        // 4. JSON 데이터 구성
+        //        var data = new
+        //        {
+        //            type = "MEDICINE_DATA",
+        //            patientId = patientId,
+        //            patientName = selectedPatient.Hwanja_Name,
+        //            patientRoom = selectedPatient.Hwanja_Room,
+        //            timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+        //            totalCount = medicineData.Count,
+        //            medicines = medicineData
+        //        };
+
+        //        string jsonData = JsonSerializer.Serialize(data, new JsonSerializerOptions
+        //        {
+        //            WriteIndented = true,
+        //            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping // 한글 지원
+        //        });
+
+        //        // 5. 시리얼 포트로 전송
+        //        tempPort = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
+        //        tempPort.ReadTimeout = 2000;
+        //        tempPort.WriteTimeout = 2000;
+        //        tempPort.Open();
+
+        //        Thread.Sleep(2000); // 아두이노 부팅 대기
+
+        //        // 전송
+        //        tempPort.WriteLine("=== MEDICINE DATA START ===");
+        //        tempPort.WriteLine(jsonData);
+        //        tempPort.WriteLine("=== MEDICINE DATA END ===");
+
+        //        Thread.Sleep(500);
+
+        //        MessageBox.Show($"✅ 복용 약물 데이터 전송 완료!\n\n" +
+        //                       $"👤 환자: {selectedPatient.Hwanja_Name}\n" +
+        //                       $"🏥 병실: {selectedPatient.Hwanja_Room}\n" +
+        //                       $"📊 전송된 약물 수: {medicineData.Count}개\n\n" +
+        //                       "🔍 아두이노 시리얼 모니터에서 확인하세요.");
+
+        //        // 디버깅용 출력
+        //        Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] 약물 데이터 전송 완료");
+        //        Console.WriteLine($"환자: {selectedPatient.Hwanja_Name} (ID: {patientId}), 약물 수: {medicineData.Count}");
+        //        Console.WriteLine("전송된 JSON:");
+        //        Console.WriteLine(jsonData);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"❌ 전송 오류: {ex.Message}");
+        //        Console.WriteLine($"오류 상세: {ex}");
+        //    }
+        //    finally
+        //    {
+        //        try
+        //        {
+        //            tempPort?.Close();
+        //            tempPort?.Dispose();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Console.WriteLine($"포트 해제 오류: {ex.Message}");
+        //        }
+        //    }
+        //}
+
 
         private async void ejaculation_btn_wifi(object sender, EventArgs e)
         {
