@@ -150,6 +150,7 @@
     <Compile Include="DTOs\UserDto.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Services\ApiService.cs" />
+    <Compile Include="Services\ArduinoService.cs" />
     <Compile Include="Services\ServerService.cs" />
     <Compile Include="View\AccountEditForm.cs">
       <SubType>Form</SubType>
