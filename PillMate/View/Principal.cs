@@ -24,13 +24,13 @@ namespace PillMate.View
         {
             guna2ShadowForm1.SetShadowForm(this);
             label_val.Text = "Dashboard Overview";
-            container(new HomeView());
+            container(new DashboardView());
         }
 
         private void guna2Button1_Click(object sender, EventArgs e) //home
         {
             label_val.Text = "Dashboard Overview";
-            container(new HomeView());
+            container(new DashboardView());
         }
 
         private void container(object _control)
@@ -75,7 +75,11 @@ namespace PillMate.View
             label_val.Text = "Pill List";
             container(new Pill());
         }
-
+        private void guna2Button1_Click_1(object sender, EventArgs e)
+        {
+            label_val.Text = "Record";
+            container(new StockTransactionView());
+        }
         private void btnset_Click(object sender, EventArgs e)
         {
             label_val.Text = "Setting";
@@ -90,5 +94,7 @@ namespace PillMate.View
 
         public string GetUsername() => _username;
         public string GetEmail() => _email;
+
+
     }
 }

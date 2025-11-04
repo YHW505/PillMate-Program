@@ -39,7 +39,7 @@ namespace PillMate.View
         }
         private async Task TakenMedicineResisterView_Load()
         {
-            var api = new PillAPI();
+            var api = new PillApi();
             var pills = await api.GetAllAsync();
 
             tableLayout = new TableLayoutPanel

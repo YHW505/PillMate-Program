@@ -51,7 +51,7 @@
             this.guna2Panel_top.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel_top.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2Panel_top.Name = "guna2Panel_top";
-            this.guna2Panel_top.Size = new System.Drawing.Size(300, 30);
+            this.guna2Panel_top.Size = new System.Drawing.Size(360, 30);
             this.guna2Panel_top.TabIndex = 1;
             // 
             // Label_Dialog
@@ -70,7 +70,7 @@
             this.guna2ControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2ControlBox1.FillColor = System.Drawing.Color.Transparent;
             this.guna2ControlBox1.IconColor = System.Drawing.Color.Gray;
-            this.guna2ControlBox1.Location = new System.Drawing.Point(273, 0);
+            this.guna2ControlBox1.Location = new System.Drawing.Point(333, 0);
             this.guna2ControlBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2ControlBox1.Name = "guna2ControlBox1";
             this.guna2ControlBox1.Size = new System.Drawing.Size(27, 27);
@@ -90,7 +90,7 @@
             this.guna2Panel_container.Location = new System.Drawing.Point(0, 30);
             this.guna2Panel_container.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2Panel_container.Name = "guna2Panel_container";
-            this.guna2Panel_container.Size = new System.Drawing.Size(300, 170);
+            this.guna2Panel_container.Size = new System.Drawing.Size(360, 190);
             this.guna2Panel_container.TabIndex = 2;
             // 
             // Msg_Dialog
@@ -114,7 +114,7 @@
             this.btn_OK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btn_OK.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btn_OK.HoverState.ForeColor = System.Drawing.Color.White;
-            this.btn_OK.Location = new System.Drawing.Point(99, 115);
+            this.btn_OK.Location = new System.Drawing.Point(124, 132);
             this.btn_OK.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btn_OK.Name = "btn_OK";
             this.btn_OK.Size = new System.Drawing.Size(98, 28);
@@ -127,7 +127,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(300, 200);
+            this.ClientSize = new System.Drawing.Size(360, 220);
             this.Controls.Add(this.guna2Panel_container);
             this.Controls.Add(this.guna2Panel_top);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

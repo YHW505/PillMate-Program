@@ -1,4 +1,5 @@
-﻿using Guna.UI2.WinForms;
+﻿using System.Drawing;
+using Guna.UI2.WinForms;
 
 namespace PillMate.View
 {
@@ -30,6 +31,7 @@ namespace PillMate.View
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pill));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -40,12 +42,16 @@ namespace PillMate.View
             this.label2 = new System.Windows.Forms.Label();
             this.pillcnt = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.Releasebtn = new Guna.UI2.WinForms.Guna2Button();
+            this.cautionlbl = new System.Windows.Forms.Label();
+            this.cautionimg = new System.Windows.Forms.PictureBox();
             this.Createbtn = new Guna.UI2.WinForms.Guna2Button();
             this.Pill_DataGreed = new Guna.UI2.WinForms.Guna2DataGridView();
             this.Deletebtn = new Guna.UI2.WinForms.Guna2Button();
             this.Editbtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cautionimg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pill_DataGreed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,7 +107,7 @@ namespace PillMate.View
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Franklin Gothic Medium", 10F);
-            this.label2.Location = new System.Drawing.Point(71, 24);
+            this.label2.Location = new System.Drawing.Point(70, 24);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 18);
@@ -122,6 +128,9 @@ namespace PillMate.View
             // 
             // guna2Panel2
             // 
+            this.guna2Panel2.Controls.Add(this.Releasebtn);
+            this.guna2Panel2.Controls.Add(this.cautionlbl);
+            this.guna2Panel2.Controls.Add(this.cautionimg);
             this.guna2Panel2.Controls.Add(this.Createbtn);
             this.guna2Panel2.Controls.Add(this.Pill_DataGreed);
             this.guna2Panel2.Controls.Add(this.Deletebtn);
@@ -132,6 +141,48 @@ namespace PillMate.View
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(1170, 591);
             this.guna2Panel2.TabIndex = 11;
+            // 
+            // Releasebtn
+            // 
+            this.Releasebtn.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Releasebtn.BorderRadius = 5;
+            this.Releasebtn.BorderThickness = 1;
+            this.Releasebtn.FillColor = System.Drawing.Color.Transparent;
+            this.Releasebtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.Releasebtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Releasebtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Releasebtn.HoverState.ForeColor = System.Drawing.Color.White;
+            this.Releasebtn.Location = new System.Drawing.Point(670, 538);
+            this.Releasebtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Releasebtn.Name = "Releasebtn";
+            this.Releasebtn.Size = new System.Drawing.Size(98, 28);
+            this.Releasebtn.TabIndex = 17;
+            this.Releasebtn.Text = "출고";
+            this.Releasebtn.Click += new System.EventHandler(this.Releasebtn_Click);
+            // 
+            // cautionlbl
+            // 
+            this.cautionlbl.AutoSize = true;
+            this.cautionlbl.BackColor = System.Drawing.Color.White;
+            this.cautionlbl.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cautionlbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.cautionlbl.Location = new System.Drawing.Point(52, 550);
+            this.cautionlbl.Name = "cautionlbl";
+            this.cautionlbl.Size = new System.Drawing.Size(329, 21);
+            this.cautionlbl.TabIndex = 16;
+            this.cautionlbl.Text = "유통기한 임박 / 재고 부족 약품이 있습니다.";
+            this.cautionlbl.Visible = false;
+            // 
+            // cautionimg
+            // 
+            this.cautionimg.Image = ((System.Drawing.Image)(resources.GetObject("cautionimg.Image")));
+            this.cautionimg.Location = new System.Drawing.Point(18, 544);
+            this.cautionimg.Name = "cautionimg";
+            this.cautionimg.Size = new System.Drawing.Size(32, 32);
+            this.cautionimg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.cautionimg.TabIndex = 15;
+            this.cautionimg.TabStop = false;
+            this.cautionimg.Visible = false;
             // 
             // Createbtn
             // 
@@ -148,15 +199,14 @@ namespace PillMate.View
             this.Createbtn.Name = "Createbtn";
             this.Createbtn.Size = new System.Drawing.Size(98, 28);
             this.Createbtn.TabIndex = 13;
-            this.Createbtn.Text = "Create";
+            this.Createbtn.Text = "약품 추가";
             this.Createbtn.Click += new System.EventHandler(this.Createbtn_Click_1);
             // 
             // Pill_DataGreed
             // 
-            this.Pill_DataGreed.AutoGenerateColumns = false;
             this.Pill_DataGreed.AllowUserToAddRows = false;
             this.Pill_DataGreed.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.Pill_DataGreed.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.Pill_DataGreed.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -178,7 +228,7 @@ namespace PillMate.View
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.Pill_DataGreed.DefaultCellStyle = dataGridViewCellStyle3;
             this.Pill_DataGreed.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
-            this.Pill_DataGreed.Location = new System.Drawing.Point(10, 24);
+            this.Pill_DataGreed.Location = new System.Drawing.Point(10, 12);
             this.Pill_DataGreed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Pill_DataGreed.Name = "Pill_DataGreed";
             this.Pill_DataGreed.ReadOnly = true;
@@ -194,7 +244,7 @@ namespace PillMate.View
             this.Pill_DataGreed.RowHeadersWidth = 51;
             this.Pill_DataGreed.RowTemplate.DividerHeight = 5;
             this.Pill_DataGreed.RowTemplate.Height = 50;
-            this.Pill_DataGreed.Size = new System.Drawing.Size(1147, 498);
+            this.Pill_DataGreed.Size = new System.Drawing.Size(1147, 516);
             this.Pill_DataGreed.TabIndex = 12;
             this.Pill_DataGreed.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.Pill_DataGreed.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -228,12 +278,12 @@ namespace PillMate.View
             this.Deletebtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Deletebtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Deletebtn.HoverState.ForeColor = System.Drawing.Color.White;
-            this.Deletebtn.Location = new System.Drawing.Point(953, 538);
+            this.Deletebtn.Location = new System.Drawing.Point(1059, 538);
             this.Deletebtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Deletebtn.Name = "Deletebtn";
             this.Deletebtn.Size = new System.Drawing.Size(98, 28);
             this.Deletebtn.TabIndex = 11;
-            this.Deletebtn.Text = "Delete";
+            this.Deletebtn.Text = "약품 삭제";
             this.Deletebtn.Click += new System.EventHandler(this.Deletebtn_Click_1);
             // 
             // Editbtn
@@ -246,12 +296,12 @@ namespace PillMate.View
             this.Editbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Editbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Editbtn.HoverState.ForeColor = System.Drawing.Color.White;
-            this.Editbtn.Location = new System.Drawing.Point(1059, 538);
+            this.Editbtn.Location = new System.Drawing.Point(953, 538);
             this.Editbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Editbtn.Name = "Editbtn";
             this.Editbtn.Size = new System.Drawing.Size(98, 28);
             this.Editbtn.TabIndex = 10;
-            this.Editbtn.Text = "Edit";
+            this.Editbtn.Text = "약품 수정";
             this.Editbtn.Click += new System.EventHandler(this.Edit_Pill_Btn);
             // 
             // Pill
@@ -270,6 +320,8 @@ namespace PillMate.View
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cautionimg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pill_DataGreed)).EndInit();
             this.ResumeLayout(false);
 
@@ -286,5 +338,8 @@ namespace PillMate.View
         private Guna2DataGridView Pill_DataGreed;
         private Guna2Button Deletebtn;
         private Guna2Button Editbtn;
+        private System.Windows.Forms.Label cautionlbl;
+        private System.Windows.Forms.PictureBox cautionimg;
+        private Guna2Button Releasebtn;
     }
 }
