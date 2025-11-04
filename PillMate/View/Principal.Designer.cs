@@ -50,6 +50,7 @@
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.guna2Panel_container = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
@@ -60,6 +61,7 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.White;
+            this.guna2Panel1.Controls.Add(this.guna2Button1);
             this.guna2Panel1.Controls.Add(this.emaillabel);
             this.guna2Panel1.Controls.Add(this.namelabel);
             this.guna2Panel1.Controls.Add(this.guna2CirclePictureBox1);
@@ -138,7 +140,7 @@
             this.Helpbtn.HoverState.BorderColor = System.Drawing.Color.Navy;
             this.Helpbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(83)))), ((int)(((byte)(251)))));
             this.Helpbtn.HoverState.ForeColor = System.Drawing.Color.White;
-            this.Helpbtn.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image")));
+            this.Helpbtn.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image1")));
             this.Helpbtn.Image = ((System.Drawing.Image)(resources.GetObject("Helpbtn.Image")));
             this.Helpbtn.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.Helpbtn.ImageOffset = new System.Drawing.Point(8, 0);
@@ -159,11 +161,11 @@
             this.btnset.HoverState.BorderColor = System.Drawing.Color.Navy;
             this.btnset.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(83)))), ((int)(((byte)(251)))));
             this.btnset.HoverState.ForeColor = System.Drawing.Color.White;
-            this.btnset.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image1")));
+            this.btnset.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image2")));
             this.btnset.Image = ((System.Drawing.Image)(resources.GetObject("btnset.Image")));
             this.btnset.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnset.ImageOffset = new System.Drawing.Point(8, 0);
-            this.btnset.Location = new System.Drawing.Point(0, 246);
+            this.btnset.Location = new System.Drawing.Point(0, 302);
             this.btnset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnset.Name = "btnset";
             this.btnset.Size = new System.Drawing.Size(239, 50);
@@ -181,7 +183,7 @@
             this.btnpill.HoverState.BorderColor = System.Drawing.Color.Navy;
             this.btnpill.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(83)))), ((int)(((byte)(251)))));
             this.btnpill.HoverState.ForeColor = System.Drawing.Color.White;
-            this.btnpill.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image2")));
+            this.btnpill.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image3")));
             this.btnpill.Image = ((System.Drawing.Image)(resources.GetObject("btnpill.Image")));
             this.btnpill.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnpill.ImageOffset = new System.Drawing.Point(8, 0);
@@ -203,7 +205,7 @@
             this.btnpatient.HoverState.BorderColor = System.Drawing.Color.Navy;
             this.btnpatient.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(83)))), ((int)(((byte)(251)))));
             this.btnpatient.HoverState.ForeColor = System.Drawing.Color.White;
-            this.btnpatient.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image3")));
+            this.btnpatient.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image4")));
             this.btnpatient.Image = ((System.Drawing.Image)(resources.GetObject("btnpatient.Image")));
             this.btnpatient.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnpatient.ImageOffset = new System.Drawing.Point(8, 0);
@@ -225,7 +227,7 @@
             this.btnhome.HoverState.BorderColor = System.Drawing.Color.Navy;
             this.btnhome.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(83)))), ((int)(((byte)(251)))));
             this.btnhome.HoverState.ForeColor = System.Drawing.Color.White;
-            this.btnhome.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image4")));
+            this.btnhome.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image5")));
             this.btnhome.Image = ((System.Drawing.Image)(resources.GetObject("btnhome.Image")));
             this.btnhome.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnhome.ImageOffset = new System.Drawing.Point(8, 0);
@@ -352,6 +354,28 @@
             this.guna2Panel_container.Size = new System.Drawing.Size(1170, 647);
             this.guna2Panel_container.TabIndex = 2;
             // 
+            // guna2Button1
+            // 
+            this.guna2Button1.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.guna2Button1.FillColor = System.Drawing.Color.Transparent;
+            this.guna2Button1.Font = new System.Drawing.Font("Bahnschrift", 10F);
+            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button1.HoverState.BorderColor = System.Drawing.Color.Navy;
+            this.guna2Button1.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(83)))), ((int)(((byte)(251)))));
+            this.guna2Button1.HoverState.ForeColor = System.Drawing.Color.White;
+            this.guna2Button1.HoverState.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image")));
+            this.guna2Button1.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button1.Image")));
+            this.guna2Button1.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.guna2Button1.ImageOffset = new System.Drawing.Point(8, 0);
+            this.guna2Button1.Location = new System.Drawing.Point(0, 246);
+            this.guna2Button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(239, 50);
+            this.guna2Button1.TabIndex = 12;
+            this.guna2Button1.Text = "Record";
+            this.guna2Button1.TextOffset = new System.Drawing.Point(8, 0);
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click_1);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -400,5 +424,6 @@
         private System.Windows.Forms.Label label_val;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
         private Guna.UI2.WinForms.Guna2Button btnhome;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
     }
 }
