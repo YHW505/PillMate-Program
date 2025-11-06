@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,6 +42,7 @@
             this.patientcnt = new System.Windows.Forms.Label();
             this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.Ejaculation_button = new Guna.UI2.WinForms.Guna2Button();
             this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -135,6 +137,7 @@
             // 
             // guna2Panel2
             // 
+            this.guna2Panel2.Controls.Add(this.Ejaculation_button);
             this.guna2Panel2.Controls.Add(this.guna2ShadowPanel1);
             this.guna2Panel2.Controls.Add(this.listView1);
             this.guna2Panel2.CustomBorderColor = System.Drawing.Color.Silver;
@@ -144,6 +147,21 @@
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(192, 591);
             this.guna2Panel2.TabIndex = 7;
+            // 
+            // Ejaculation_button
+            // 
+            this.Ejaculation_button.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.Ejaculation_button.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.Ejaculation_button.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.Ejaculation_button.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.Ejaculation_button.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.Ejaculation_button.ForeColor = System.Drawing.Color.White;
+            this.Ejaculation_button.Location = new System.Drawing.Point(69, 543);
+            this.Ejaculation_button.Name = "Ejaculation_button";
+            this.Ejaculation_button.Size = new System.Drawing.Size(108, 32);
+            this.Ejaculation_button.TabIndex = 29;
+            this.Ejaculation_button.Text = "약 사출";
+            this.Ejaculation_button.Click += new System.EventHandler(this.ejaculation_btn_serial);
             // 
             // guna2ShadowPanel1
             // 
@@ -312,7 +330,9 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.guna2DataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
+
             this.guna2DataGridView1.Location = new System.Drawing.Point(24, 23);
+
             this.guna2DataGridView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2DataGridView1.Name = "guna2DataGridView1";
             this.guna2DataGridView1.ReadOnly = true;
@@ -439,5 +459,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
+        private Guna.UI2.WinForms.Guna2Button Ejaculation_button;
     }
 }
