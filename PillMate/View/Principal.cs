@@ -95,6 +95,9 @@ namespace PillMate.View
         public string GetUsername() => _username;
         public string GetEmail() => _email;
 
-
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            container(new PrescriptionView());
+        }
     }
 }
