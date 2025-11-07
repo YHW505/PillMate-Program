@@ -29,12 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,15 +40,6 @@
             this.patientcnt = new System.Windows.Forms.Label();
             this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.Ejaculation_button = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Label_Bohoja_Name = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.Label_Bohoja_pNum = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.Label_Hwanja_Room = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.AddPillbtn = new Guna.UI2.WinForms.Guna2Button();
             this.Createbtn = new Guna.UI2.WinForms.Guna2Button();
@@ -58,8 +47,6 @@
             this.guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
-            this.guna2Panel2.SuspendLayout();
-            this.guna2ShadowPanel1.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -137,9 +124,6 @@
             // 
             // guna2Panel2
             // 
-            this.guna2Panel2.Controls.Add(this.Ejaculation_button);
-            this.guna2Panel2.Controls.Add(this.guna2ShadowPanel1);
-            this.guna2Panel2.Controls.Add(this.listView1);
             this.guna2Panel2.CustomBorderColor = System.Drawing.Color.Silver;
             this.guna2Panel2.CustomBorderThickness = new System.Windows.Forms.Padding(1);
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Right;
@@ -147,112 +131,6 @@
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(192, 591);
             this.guna2Panel2.TabIndex = 7;
-            // 
-            // Ejaculation_button
-            // 
-            this.Ejaculation_button.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.Ejaculation_button.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.Ejaculation_button.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.Ejaculation_button.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.Ejaculation_button.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Ejaculation_button.ForeColor = System.Drawing.Color.White;
-            this.Ejaculation_button.Location = new System.Drawing.Point(69, 543);
-            this.Ejaculation_button.Name = "Ejaculation_button";
-            this.Ejaculation_button.Size = new System.Drawing.Size(108, 32);
-            this.Ejaculation_button.TabIndex = 29;
-            this.Ejaculation_button.Text = "약 사출";
-            this.Ejaculation_button.Click += new System.EventHandler(this.ejaculation_btn_serial);
-            // 
-            // guna2ShadowPanel1
-            // 
-            this.guna2ShadowPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ShadowPanel1.Controls.Add(this.label5);
-            this.guna2ShadowPanel1.Controls.Add(this.label4);
-            this.guna2ShadowPanel1.Controls.Add(this.label1);
-            this.guna2ShadowPanel1.Controls.Add(this.Label_Bohoja_Name);
-            this.guna2ShadowPanel1.Controls.Add(this.Label_Bohoja_pNum);
-            this.guna2ShadowPanel1.Controls.Add(this.Label_Hwanja_Room);
-            this.guna2ShadowPanel1.FillColor = System.Drawing.Color.White;
-            this.guna2ShadowPanel1.Location = new System.Drawing.Point(6, 12);
-            this.guna2ShadowPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.guna2ShadowPanel1.Name = "guna2ShadowPanel1";
-            this.guna2ShadowPanel1.Radius = 4;
-            this.guna2ShadowPanel1.ShadowColor = System.Drawing.Color.Navy;
-            this.guna2ShadowPanel1.ShadowShift = 3;
-            this.guna2ShadowPanel1.Size = new System.Drawing.Size(174, 166);
-            this.guna2ShadowPanel1.TabIndex = 28;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(7, 128);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 15);
-            this.label5.TabIndex = 32;
-            this.label5.Text = "병실: ";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(7, 76);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 15);
-            this.label4.TabIndex = 31;
-            this.label4.Text = "보호자 전화번호:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 15);
-            this.label1.TabIndex = 30;
-            this.label1.Text = "보호자 이름:";
-            // 
-            // Label_Bohoja_Name
-            // 
-            this.Label_Bohoja_Name.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Bohoja_Name.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Bohoja_Name.Location = new System.Drawing.Point(93, 37);
-            this.Label_Bohoja_Name.Name = "Label_Bohoja_Name";
-            this.Label_Bohoja_Name.Size = new System.Drawing.Size(39, 17);
-            this.Label_Bohoja_Name.TabIndex = 29;
-            this.Label_Bohoja_Name.Text = "보호자";
-            // 
-            // Label_Bohoja_pNum
-            // 
-            this.Label_Bohoja_pNum.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Bohoja_pNum.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Bohoja_pNum.Location = new System.Drawing.Point(10, 94);
-            this.Label_Bohoja_pNum.Name = "Label_Bohoja_pNum";
-            this.Label_Bohoja_pNum.Size = new System.Drawing.Size(79, 17);
-            this.Label_Bohoja_pNum.TabIndex = 28;
-            this.Label_Bohoja_pNum.Text = "010-0000-0000";
-            // 
-            // Label_Hwanja_Room
-            // 
-            this.Label_Hwanja_Room.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Hwanja_Room.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Hwanja_Room.Location = new System.Drawing.Point(57, 127);
-            this.Label_Hwanja_Room.Name = "Label_Hwanja_Room";
-            this.Label_Hwanja_Room.Size = new System.Drawing.Size(21, 17);
-            this.Label_Hwanja_Room.TabIndex = 27;
-            this.Label_Hwanja_Room.Text = "000";
-            // 
-            // listView1
-            // 
-            this.listView1.HideSelection = false;
-            listViewItem1.ToolTipText = "???";
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.listView1.Location = new System.Drawing.Point(9, 184);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(168, 193);
-            this.listView1.TabIndex = 22;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // guna2Panel3
             // 
@@ -330,9 +208,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.guna2DataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
-
             this.guna2DataGridView1.Location = new System.Drawing.Point(24, 23);
-
             this.guna2DataGridView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.guna2DataGridView1.Name = "guna2DataGridView1";
             this.guna2DataGridView1.ReadOnly = true;
@@ -425,9 +301,6 @@
             this.Load += new System.EventHandler(this.Patient_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
-            this.guna2Panel2.ResumeLayout(false);
-            this.guna2ShadowPanel1.ResumeLayout(false);
-            this.guna2ShadowPanel1.PerformLayout();
             this.guna2Panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -443,7 +316,6 @@
         private System.Windows.Forms.Label patientcnt;
         private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-        private System.Windows.Forms.ListView listView1;
         //private Guna.UI2.WinForms.Guna2Button guna2Button1;
         //private System.Windows.Forms.PictureBox QR_Image_Box;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
@@ -452,13 +324,5 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
         private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
         private Guna.UI2.WinForms.Guna2Button AddPillbtn;
-        private Guna.UI2.WinForms.Guna2ShadowPanel guna2ShadowPanel1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel Label_Bohoja_Name;
-        private Guna.UI2.WinForms.Guna2HtmlLabel Label_Bohoja_pNum;
-        private Guna.UI2.WinForms.Guna2HtmlLabel Label_Hwanja_Room;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2Button Ejaculation_button;
     }
 }
