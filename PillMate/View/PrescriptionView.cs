@@ -70,6 +70,7 @@ namespace PillMate.View
             if (selected == null) return;
 
             gridItems.DataSource = selected.Items;
+
             ConfigureItemsGrid();
         }
 
@@ -81,8 +82,9 @@ namespace PillMate.View
         //        new Dialog_Widget("출고", "재출고할 복약이력을 선택해주세요.").ShowDialog();
         //        return;
         //    }
-
         //    var record = gridHistory.SelectedRows[0].DataBoundItem as PrescriptionRecordDto;
+
+
         //    if (record == null) return;
 
         //    var confirm = MessageBox.Show("처방약을 출고하시겠습니까?", "처방 약 출고", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -128,7 +130,7 @@ namespace PillMate.View
                                 {
                                     name = pill.Yank_Name ?? item.PillName ?? "약물명 없음",
                                     quantity = item.Quantity,
-                                    storage = pill.StorageLocation ?? "1",
+                                    storage = pill.StorageLocation ?? "위치를 알 수 없음",
                                 });
                             }
                             else
@@ -137,7 +139,7 @@ namespace PillMate.View
                                 {
                                     name = item.PillName ?? "약물명 없음",
                                     quantity = item.Quantity,
-                                    storage = "1",
+                                    storage = "카트리지를 불러올 수 없습니다.",
                                 });
                             }
                         }
