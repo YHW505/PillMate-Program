@@ -1,32 +1,38 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using PillMate.ApiClients;
+using PillMate.Client.ApiClients;
+using PillMate.DTO;
+using PillMate.View.Widget;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Guna.UI2.WinForms;
-using PillMate.DTO;
-using PillMate.ApiClients;
-using PillMate.View.Widget;
 
 namespace PillMate.View
 {
     public partial class PrescriptionView : Form
     {
         private readonly PatientApi _patientApi;
+        private readonly PillApi _pillApi;
         private readonly PrescriptionApi _prescriptionApi;
 
         public PrescriptionView()
         {
             InitializeComponent();
             _patientApi = new PatientApi();
+            _pillApi = new PillApi();
             _prescriptionApi = new PrescriptionApi();
 
             Load += async (_, __) => await LoadPatientsAsync();
 
             gridPatients.SelectionChanged += gridPatients_SelectionChanged;
             gridHistory.SelectionChanged += gridHistory_SelectionChanged;
-            btnReorder.Click += btnReorder_Click;
+            //btnReorder.Click += btnReorder_Click;
         }
 
         // ✅ 환자 목록 로드
@@ -68,6 +74,30 @@ namespace PillMate.View
         }
 
         // ✅ 출고 버튼 클릭
+        //private async void btnReorder_Click(object sender, EventArgs e)
+        //{
+        //    if (gridHistory.SelectedRows.Count == 0)
+        //    {
+        //        new Dialog_Widget("출고", "재출고할 복약이력을 선택해주세요.").ShowDialog();
+        //        return;
+        //    }
+
+        //    var record = gridHistory.SelectedRows[0].DataBoundItem as PrescriptionRecordDto;
+        //    if (record == null) return;
+
+        //    var confirm = MessageBox.Show("처방약을 출고하시겠습니까?", "처방 약 출고", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        //    if (confirm == DialogResult.Yes)
+        //    {
+        //        var success = await _prescriptionApi.ReorderAsync(record.Id);
+        //        var dialog = success
+
+        //            ? new Dialog_Widget("출고 완료", "출고가 완료되었습니다.")
+        //            : new Dialog_Widget("출고 실패", "출고 중 오류가 발생했습니다.");
+
+        //        dialog.StartPosition = FormStartPosition.CenterScreen;
+        //        dialog.ShowDialog();
+        //    }
+        //}
         private async void btnReorder_Click(object sender, EventArgs e)
         {
             if (gridHistory.SelectedRows.Count == 0)
@@ -79,18 +109,156 @@ namespace PillMate.View
             var record = gridHistory.SelectedRows[0].DataBoundItem as PrescriptionRecordDto;
             if (record == null) return;
 
-            var confirm = MessageBox.Show("이 이력을 기준으로 다시 출고하시겠습니까?", "이전 이력 재출고", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var confirm = MessageBox.Show("처방약을 출고하시겠습니까?", "처방 약 출고", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm == DialogResult.Yes)
             {
-                var success = await _prescriptionApi.ReorderAsync(record.Id);
-                var dialog = success
-                    ? new Dialog_Widget("출고 완료", "이전 복약이력대로 출고가 완료되었습니다.")
-                    : new Dialog_Widget("출고 실패", "출고 중 오류가 발생했습니다.");
+                try
+                {
+                    var medicines = new List<object>();
 
-                dialog.StartPosition = FormStartPosition.CenterScreen;
-                dialog.ShowDialog();
+                    foreach (var item in record.Items)
+                    {
+                        try
+                        {
+                            var pill = await _pillApi.GetByIdAsync(item.PillId);
+
+                            if (pill != null)
+                            {
+                                medicines.Add(new
+                                {
+                                    name = pill.Yank_Name ?? item.PillName ?? "약물명 없음",
+                                    quantity = item.Quantity,
+                                    storage = pill.StorageLocation ?? "1",
+                                });
+                            }
+                            else
+                            {
+                                medicines.Add(new
+                                {
+                                    name = item.PillName ?? "약물명 없음",
+                                    quantity = item.Quantity,
+                                    storage = "1",
+                                });
+                            }
+                        }
+                        catch (Exception pillEx)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"❌ 약물 처리 중 오류: {pillEx.Message}");
+
+                            medicines.Add(new
+                            {
+                                name = item.PillName ?? "약물명 없음",
+                                quantity = item.Quantity,
+                                storage = "1"
+                            });
+                        }
+                    }
+
+                    // 🎯 1단계: 먼저 라즈베리파이 통신 시도
+                    bool socketSuccess = false;
+                    string raspberryResponse = "";
+
+                    System.Diagnostics.Debug.WriteLine("🔄 라즈베리파이 통신 시도 중...");
+
+                    try
+                    {
+                        var data = new { medicines = medicines };
+                        string jsonData = JsonSerializer.Serialize(data);
+                        System.Diagnostics.Debug.WriteLine($"📤 라즈베리파이 전송 데이터: {jsonData}");
+
+                        using (var client = new TcpClient())
+                        {
+                            var connectTask = client.ConnectAsync("172.20.10.8", 8080);
+                            if (await Task.WhenAny(connectTask, Task.Delay(10000)) != connectTask)
+                            {
+                                throw new TimeoutException("라즈베리파이 연결 시간 초과");
+                            }
+
+                            NetworkStream stream = client.GetStream();
+                            byte[] data_bytes = Encoding.UTF8.GetBytes(jsonData);
+                            await stream.WriteAsync(data_bytes, 0, data_bytes.Length);
+
+                            byte[] buffer = new byte[4096];
+                            int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+                            raspberryResponse = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+                            socketSuccess = true;
+                            System.Diagnostics.Debug.WriteLine($"✅ 라즈베리파이 통신 성공: {raspberryResponse}");
+                        }
+                    }
+                    catch (Exception socketEx)
+                    {
+                        raspberryResponse = $"라즈베리파이 통신 오류: {socketEx.Message}";
+                        socketSuccess = false;
+                        System.Diagnostics.Debug.WriteLine($"❌ 라즈베리파이 통신 실패: {socketEx.Message}");
+                    }
+
+                    // 🎯 2단계: 라즈베리파이 통신이 성공한 경우에만 DB 저장
+                    if (socketSuccess)
+                    {
+                        System.Diagnostics.Debug.WriteLine("✅ 라즈베리파이 통신 성공 - DB 업데이트 시작");
+
+                        var dbSuccess = await _prescriptionApi.ReorderAsync(record.Id);
+
+                        if (!dbSuccess)
+                        {
+                            System.Diagnostics.Debug.WriteLine("❌ DB 업데이트 실패");
+                            new Dialog_Widget("출고 실패",
+                                "⚠️ 라즈베리파이 통신은 성공했지만\n데이터베이스 저장 중 오류가 발생했습니다.").ShowDialog();
+                            return;
+                        }
+
+                        System.Diagnostics.Debug.WriteLine("✅ DB 업데이트 성공");
+
+                        // 🎯 3단계: 모든 것이 성공한 경우
+                        string resultMessage = $"✅ 출고가 완료되었습니다.\n약물: {medicines.Count}개";
+
+                        if (!string.IsNullOrEmpty(raspberryResponse))
+                        {
+                            try
+                            {
+                                var responseObj = JsonSerializer.Deserialize<JsonElement>(raspberryResponse);
+                                if (responseObj.TryGetProperty("message", out var msgElement))
+                                {
+                                    resultMessage += $"\n\n🍓 라즈베리파이: {msgElement.GetString()}";
+                                }
+                            }
+                            catch
+                            {
+                                resultMessage += $"\n\n🍓 라즈베리파이: {raspberryResponse}";
+                            }
+                        }
+
+                        var dialog = new Dialog_Widget("출고 완료", resultMessage);
+                        dialog.StartPosition = FormStartPosition.CenterScreen;
+                        dialog.ShowDialog();
+                    }
+                    else
+                    {
+                        // 🎯 라즈베리파이 통신 실패 시 DB 저장하지 않음
+                        System.Diagnostics.Debug.WriteLine("❌ 라즈베리파이 통신 실패 - DB 저장 중단");
+
+                        var errorDialog = new Dialog_Widget("출고 실패",
+                            $"❌ 라즈베리파이 통신에 실패하여 출고를 중단했습니다.\n\n" +
+                            $"오류: {raspberryResponse}\n\n" +
+                            $"※ 데이터베이스에는 변경사항이 반영되지 않았습니다.");
+                        errorDialog.StartPosition = FormStartPosition.CenterScreen;
+                        errorDialog.ShowDialog();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"❌ 시스템 오류: {ex.Message}");
+                    var errorDialog = new Dialog_Widget("시스템 오류", $"❌ 시스템 오류가 발생했습니다:\n{ex.Message}");
+                    errorDialog.StartPosition = FormStartPosition.CenterScreen;
+                    errorDialog.ShowDialog();
+                }
             }
         }
+
+
+
+
 
         // ✅ 환자 이름만 표시 (헤더 없음)
         private void ConfigurePatientGrid()

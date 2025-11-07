@@ -1,9 +1,10 @@
-﻿using System;
+﻿using PillMate.DTO;
+using PillMate.Services;
+using System;
 using System.Collections.Generic;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
-using PillMate.DTO;
-using PillMate.Services;
 
 namespace PillMate.Client.ApiClients
 {
@@ -71,5 +72,34 @@ namespace PillMate.Client.ApiClients
                 return new List<PillDto>();
             }
         }
+
+        // PillApi.cs 파일에 추가
+        public async Task<PillDto> GetByIdAsync(int id)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"api/pills/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonContent = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<PillDto>(jsonContent, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+                }
+                else
+                {
+                    return null; // 약물을 찾을 수 없는 경우
+                }
+            }
+            catch (Exception ex)
+            {
+                // 로그 기록 (필요시)
+                Console.WriteLine($"PillApi.GetByIdAsync 오류: {ex.Message}");
+                return null;
+            }
+        }
+
     }
 }

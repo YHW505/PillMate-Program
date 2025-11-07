@@ -72,8 +72,6 @@ namespace PillMate.View
 
         private async void ejaculation_btn_serial(object sender, EventArgs e)
         {
-            SerialPort tempPort = null;
-
             try
             {
                 // 1. 선택된 환자 가져오기
@@ -98,123 +96,75 @@ namespace PillMate.View
                                          .Select(g => g.First())
                                          .ToList();
 
-                // 3. 아두이노 전송용 데이터 생성
+                // 3. 약물 데이터 생성
                 var medicineData = uniqueList
                     .Where(item => item?.Pill?.Yank_Name != null)
                     .Select(item => new
                     {
-                        pillId = item.PillId,
                         name = item.Pill.Yank_Name,
-                        dosage = item.Dosage,
-                        unit = "정"
+                        dosage = item.Dosage
                     })
                     .ToList();
 
                 // 4. JSON 데이터 구성
                 var data = new
                 {
-                    type = "MEDICINE_DATA",
-                    patientId = patientId,
                     patientName = selectedPatient.Hwanja_Name,
                     patientRoom = selectedPatient.Hwanja_Room,
-                    timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    totalCount = medicineData.Count,
                     medicines = medicineData
                 };
 
-                string jsonData = JsonSerializer.Serialize(data, new JsonSerializerOptions
+                string jsonData = JsonSerializer.Serialize(data);
+
+                // 5. TCP 소켓으로 전송
+                using (var client = new TcpClient())
                 {
-                    WriteIndented = true,
-                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-                });
-
-                // 5. 시리얼 포트로 전송 + 응답 받기
-                tempPort = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
-                tempPort.ReadTimeout = 5000;  // 📈 응답 대기 시간 늘림
-                tempPort.WriteTimeout = 2000;
-                tempPort.Open();
-
-                Thread.Sleep(2000); // 아두이노 부팅 대기
-
-                // 📤 데이터 전송
-                Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] 데이터 전송 시작...");
-                tempPort.WriteLine("=== MEDICINE DATA START ===");
-                tempPort.WriteLine(jsonData);
-                tempPort.WriteLine("=== MEDICINE DATA END ===");
-
-                // 📥 아두이노 응답 받기
-                Thread.Sleep(1000); // 아두이노 처리 시간 대기
-
-                string arduinoResponse = "";
-                DateTime startTime = DateTime.Now;
-
-                // 🕐 3초 동안 응답 수집
-                while ((DateTime.Now - startTime).TotalSeconds < 3)
-                {
-                    try
+                    // 연결 시도 (10초 타임아웃)
+                    var connectTask = client.ConnectAsync("172.20.10.13", 8080);
+                    if (await Task.WhenAny(connectTask, Task.Delay(10000)) != connectTask)
                     {
-                        if (tempPort.BytesToRead > 0)
+                        throw new TimeoutException("연결 시간 초과");
+                    }
+
+                    // 데이터 전송
+                    NetworkStream stream = client.GetStream();
+                    byte[] data_bytes = Encoding.UTF8.GetBytes(jsonData);
+                    await stream.WriteAsync(data_bytes, 0, data_bytes.Length);
+
+                    // 응답 수신
+                    byte[] buffer = new byte[4096];
+                    int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+                    string response = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+                    // 응답 파싱
+                    string resultMessage = $"✅ 전송 완료!\n환자: {selectedPatient.Hwanja_Name}\n약물: {medicineData.Count}개";
+
+                    if (!string.IsNullOrEmpty(response))
+                    {
+                        try
                         {
-                            string chunk = tempPort.ReadExisting();
-                            arduinoResponse += chunk;
-                            Console.WriteLine($"[응답 수신] {chunk}");
+                            var responseObj = JsonSerializer.Deserialize<JsonElement>(response);
+                            if (responseObj.TryGetProperty("message", out var msgElement))
+                            {
+                                resultMessage += $"\n\n📨 응답: {msgElement.GetString()}";
+                            }
                         }
-                        Thread.Sleep(100);
+                        catch
+                        {
+                            resultMessage += $"\n\n📨 응답: {response}";
+                        }
                     }
-                    catch (TimeoutException)
-                    {
-                        Console.WriteLine("응답 타임아웃");
-                        break;
-                    }
+
+                    MessageBox.Show(resultMessage);
                 }
-
-                // 📋 결과 메시지 구성
-                string resultMessage = $"✅ 복용 약물 데이터 전송 완료!\n\n" +
-                                      $"👤 환자: {selectedPatient.Hwanja_Name}\n" +
-                                      $"🏥 병실: {selectedPatient.Hwanja_Room}\n" +
-                                      $"📊 전송된 약물 수: {medicineData.Count}개\n\n";
-
-                // 🎯 아두이노 응답 표시
-                if (!string.IsNullOrEmpty(arduinoResponse.Trim()))
-                {
-                    resultMessage += $"📨 아두이노 응답:\n{arduinoResponse.Trim()}\n\n";
-                    resultMessage += "🟢 아두이노와 통신 성공!";
-                }
-                else
-                {
-                    resultMessage += "📭 아두이노 응답 없음\n";
-                    resultMessage += "🟡 데이터는 전송되었지만 응답을 받지 못했습니다.";
-                }
-
-                MessageBox.Show(resultMessage);
-
-                // 디버깅용 출력
-                Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] 약물 데이터 전송 완료");
-                Console.WriteLine($"환자: {selectedPatient.Hwanja_Name} (ID: {patientId}), 약물 수: {medicineData.Count}");
-                Console.WriteLine("전송된 JSON:");
-                Console.WriteLine(jsonData);
-                Console.WriteLine("\n=== 아두이노 응답 ===");
-                Console.WriteLine(string.IsNullOrEmpty(arduinoResponse) ? "응답 없음" : arduinoResponse);
-                Console.WriteLine("==================\n");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"❌ 전송 오류: {ex.Message}");
-                Console.WriteLine($"오류 상세: {ex}");
-            }
-            finally
-            {
-                try
-                {
-                    tempPort?.Close();
-                    tempPort?.Dispose();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"포트 해제 오류: {ex.Message}");
-                }
+                MessageBox.Show($"❌ 오류: {ex.Message}");
             }
         }
+
+
 
 
         //private async void ejaculation_btn_serial(object sender, EventArgs e)
