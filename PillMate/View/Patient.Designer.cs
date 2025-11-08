@@ -42,10 +42,10 @@
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.AddPillbtn = new Guna.UI2.WinForms.Guna2Button();
-            this.Createbtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
             this.guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
+            //this.Createbtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).BeginInit();
@@ -135,7 +135,7 @@
             // guna2Panel3
             // 
             this.guna2Panel3.Controls.Add(this.AddPillbtn);
-            this.guna2Panel3.Controls.Add(this.Createbtn);
+            //this.guna2Panel3.Controls.Add(this.Createbtn);
             this.guna2Panel3.Controls.Add(this.guna2DataGridView1);
             this.guna2Panel3.Controls.Add(this.guna2Button5);
             this.guna2Panel3.Controls.Add(this.guna2Button4);
@@ -163,24 +163,6 @@
             this.AddPillbtn.TabIndex = 9;
             this.AddPillbtn.Text = "Add Pill";
             this.AddPillbtn.Click += new System.EventHandler(this.AddPillbtn_Click);
-            // 
-            // Createbtn
-            // 
-            this.Createbtn.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Createbtn.BorderRadius = 5;
-            this.Createbtn.BorderThickness = 1;
-            this.Createbtn.FillColor = System.Drawing.Color.Transparent;
-            this.Createbtn.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Createbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Createbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Createbtn.HoverState.ForeColor = System.Drawing.Color.White;
-            this.Createbtn.Location = new System.Drawing.Point(502, 547);
-            this.Createbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Createbtn.Name = "Createbtn";
-            this.Createbtn.Size = new System.Drawing.Size(98, 28);
-            this.Createbtn.TabIndex = 12;
-            this.Createbtn.Text = "Create";
-            this.Createbtn.Click += new System.EventHandler(this.Createbtn_Click);
             // 
             // guna2DataGridView1
             // 
@@ -285,6 +267,24 @@
             this.guna2Button4.Text = "Edit";
             this.guna2Button4.Click += new System.EventHandler(this.guna2Button4_Click);
             // 
+            // Createbtn
+            // 
+            //this.Createbtn.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            //this.Createbtn.BorderRadius = 5;
+            //this.Createbtn.BorderThickness = 1;
+            //this.Createbtn.FillColor = System.Drawing.Color.Transparent;
+            //this.Createbtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            //this.Createbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            //this.Createbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            //this.Createbtn.HoverState.ForeColor = System.Drawing.Color.White;
+            //this.Createbtn.Location = new System.Drawing.Point(502, 547);
+            //this.Createbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            //this.Createbtn.Name = "Createbtn";
+            //this.Createbtn.Size = new System.Drawing.Size(98, 28);
+            //this.Createbtn.TabIndex = 12;
+            //this.Createbtn.Text = "Create";
+            //this.Createbtn.Click += new System.EventHandler(this.Createbtn_Click);
+            // 
             // Patient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -319,10 +319,10 @@
         //private Guna.UI2.WinForms.Guna2Button guna2Button1;
         //private System.Windows.Forms.PictureBox QR_Image_Box;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
-        private Guna.UI2.WinForms.Guna2Button Createbtn;
         private Guna.UI2.WinForms.Guna2Button guna2Button5;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
         private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
         private Guna.UI2.WinForms.Guna2Button AddPillbtn;
+        //private Guna.UI2.WinForms.Guna2Button Createbtn;
     }
 }

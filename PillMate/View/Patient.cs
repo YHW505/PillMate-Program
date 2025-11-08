@@ -40,14 +40,15 @@ namespace PillMate.View
             _api = new PatientApi();
             _Tapi = new TakenMedicineAPI();
             SetupListView();
+            guna2DataGridView1.AutoGenerateColumns = false;
 
 
             // 우클릭 메뉴 설정
             var contextMenu = new ContextMenuStrip();
             var deleteMenu = new ToolStripMenuItem("삭제");
-            deleteMenu.Click += DeleteMenu_Click;
+            //deleteMenu.Click += DeleteMenu_Click;
             contextMenu.Items.Add(deleteMenu);
-            listView1.ContextMenuStrip = contextMenu;
+            //listView1.ContextMenuStrip = contextMenu;
         }
 
         private void InitializeSerialPort()
@@ -271,237 +272,6 @@ namespace PillMate.View
         //    }
         //}
 
-
-        private async void ejaculation_btn_wifi(object sender, EventArgs e)
-        {
-            try
-            {
-                // 1. 선택된 환자 가져오기
-                if (guna2DataGridView1.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("전송할 환자를 선택해주세요!");
-                    return;
-                }
-
-                var selectedPatient = guna2DataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
-                if (selectedPatient?.Id == null)
-                {
-                    MessageBox.Show("선택된 환자 정보가 올바르지 않습니다!");
-                    return;
-                }
-
-                int patientId = selectedPatient.Id.Value;
-
-                // 2. 복용 약물 데이터 로드
-                var takenList = await _Tapi.GetAllAsync(patientId);
-                var uniqueList = takenList.GroupBy(x => new { x.PillId, x.Dosage })
-                                         .Select(g => g.First())
-                                         .ToList();
-
-                // 3. 아두이노 전송용 데이터 생성
-                var medicineData = uniqueList
-                    .Where(item => item?.Pill?.Yank_Name != null)
-                    .Select(item => new
-                    {
-                        pillId = item.PillId,
-                        name = item.Pill.Yank_Name,
-                        dosage = item.Dosage,
-                        unit = "정"
-                    })
-                    .ToList();
-
-                // 4. JSON 데이터 구성
-                var data = new
-                {
-                    type = "MEDICINE_DATA",
-                    patientId = patientId,
-                    patientName = selectedPatient.Hwanja_Name,
-                    patientRoom = selectedPatient.Hwanja_Room,
-                    timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    totalCount = medicineData.Count,
-                    medicines = medicineData
-                };
-
-                string jsonData = JsonSerializer.Serialize(data, new JsonSerializerOptions
-                {
-                    WriteIndented = true,
-                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-                });
-
-                // 5. WiFi로 HTTP POST 전송
-                string arduinoIP = "192.168.1.100"; // 아두이노 IP 주소 (시리얼 모니터에서 확인)
-                string url = $"http://{arduinoIP}/medicine";
-
-                using (var client = new HttpClient())
-                {
-                    client.Timeout = TimeSpan.FromSeconds(10);
-
-                    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-                    // 전송 시작 알림
-                    var loadingForm = new Form
-                    {
-                        Text = "전송 중...",
-                        Size = new Size(300, 100),
-                        StartPosition = FormStartPosition.CenterParent,
-                        FormBorderStyle = FormBorderStyle.FixedDialog,
-                        MaximizeBox = false,
-                        MinimizeBox = false
-                    };
-
-                    var loadingLabel = new Label
-                    {
-                        Text = "아두이노로 데이터 전송 중...",
-                        Dock = DockStyle.Fill,
-                        TextAlign = ContentAlignment.MiddleCenter
-                    };
-
-                    loadingForm.Controls.Add(loadingLabel);
-                    loadingForm.Show();
-
-                    try
-                    {
-                        var response = await client.PostAsync(url, content);
-                        loadingForm.Close();
-
-                        if (response.IsSuccessStatusCode)
-                        {
-                            string responseContent = await response.Content.ReadAsStringAsync();
-
-                            MessageBox.Show($"✅ WiFi 전송 성공!\n\n" +
-                                           $"👤 환자: {selectedPatient.Hwanja_Name}\n" +
-                                           $"🏥 병실: {selectedPatient.Hwanja_Room}\n" +
-                                           $"📊 전송된 약물 수: {medicineData.Count}개\n" +
-                                           $"🌐 아두이노 IP: {arduinoIP}\n" +
-                                           $"📡 응답: {responseContent}",
-                                           "전송 완료",
-                                           MessageBoxButtons.OK,
-                                           MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show($"❌ 전송 실패!\n" +
-                                           $"상태 코드: {response.StatusCode}\n" +
-                                           $"오류: {response.ReasonPhrase}",
-                                           "전송 오류",
-                                           MessageBoxButtons.OK,
-                                           MessageBoxIcon.Error);
-                        }
-                    }
-                    catch (HttpRequestException ex)
-                    {
-                        loadingForm.Close();
-                        MessageBox.Show($"❌ 네트워크 오류!\n\n" +
-                                       $"아두이노 IP({arduinoIP})에 연결할 수 없습니다.\n" +
-                                       $"오류: {ex.Message}\n\n" +
-                                       $"확인사항:\n" +
-                                       $"1. 아두이노가 같은 WiFi에 연결되어 있는지\n" +
-                                       $"2. IP 주소가 올바른지\n" +
-                                       $"3. 방화벽 설정",
-                                       "연결 오류",
-                                       MessageBoxButtons.OK,
-                                       MessageBoxIcon.Warning);
-                    }
-                    catch (TaskCanceledException)
-                    {
-                        loadingForm.Close();
-                        MessageBox.Show("⏰ 전송 시간 초과!\n아두이노 응답이 없습니다.",
-                                       "시간 초과",
-                                       MessageBoxButtons.OK,
-                                       MessageBoxIcon.Warning);
-                    }
-                }
-
-                // 디버깅용 출력
-                Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] WiFi 약물 데이터 전송 시도");
-                Console.WriteLine($"환자: {selectedPatient.Hwanja_Name} (ID: {patientId})");
-                Console.WriteLine($"아두이노 IP: {arduinoIP}");
-                Console.WriteLine("전송된 JSON:");
-                Console.WriteLine(jsonData);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"❌ 전송 오류: {ex.Message}\n\n상세: {ex}");
-                Console.WriteLine($"오류 상세: {ex}");
-            }
-        }
-
-        private async Task<string> FindArduinoIP()
-        {
-            var localIP = GetLocalIPAddress();
-            var subnet = localIP.Substring(0, localIP.LastIndexOf('.'));
-
-            var tasks = new List<Task<string>>();
-
-            for (int i = 1; i <= 254; i++)
-            {
-                string ip = $"{subnet}.{i}";
-                tasks.Add(CheckArduinoAtIP(ip));
-            }
-
-            var results = await Task.WhenAll(tasks);
-            return results.FirstOrDefault(ip => !string.IsNullOrEmpty(ip));
-        }
-
-        // 실시간 상태 확인
-        private async void btnCheckStatus_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string arduinoIP = "192.168.1.100";
-                using (var client = new HttpClient())
-                {
-                    var response = await client.GetAsync($"http://{arduinoIP}/status");
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string status = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show($"🟢 아두이노 온라인!\n\n{status}");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"🔴 아두이노 오프라인\n{ex.Message}");
-            }
-        }
-
-
-        private async Task<string> CheckArduinoAtIP(string ip)
-        {
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    client.Timeout = TimeSpan.FromSeconds(2);
-                    var response = await client.GetAsync($"http://{ip}/status");
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var content = await response.Content.ReadAsStringAsync();
-                        if (content.Contains("Arduino") || content.Contains("status"))
-                        {
-                            return ip;
-                        }
-                    }
-                }
-            }
-            catch { }
-
-            return null;
-        }
-
-        private string GetLocalIPAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            return host.AddressList
-                .FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork)
-                ?.ToString() ?? "127.0.0.1";
-        }
-
-
-
-
-
         // 폼 종료시 시리얼 포트 닫기
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -548,9 +318,9 @@ namespace PillMate.View
                     guna2DataGridView1.Rows[0].Selected = true;
 
                     var patient = patients[0];
-                    Label_Bohoja_Name.Text = $"{patient.Bohoja_Name}";
-                    Label_Bohoja_pNum.Text = $"{patient.Bohoja_PhoneNumber}";
-                    Label_Hwanja_Room.Text = $"{patient.Hwanja_Room}";
+                    //Label_Bohoja_Name.Text = $"{patient.Bohoja_Name}";
+                    //Label_Bohoja_pNum.Text = $"{patient.Bohoja_PhoneNumber}";
+                    //Label_Hwanja_Room.Text = $"{patient.Hwanja_Room}";
                     //await LoadQRCodeAsync(patient.Id.Value);
                     await LoadTakenMedicine(patient.Id.Value);
                 }
@@ -568,14 +338,14 @@ namespace PillMate.View
 
         private async void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            listView1.Items.Clear();
+            //listView1.Items.Clear();
             if (e.RowIndex < 0) return;
 
             if (guna2DataGridView1.Rows[e.RowIndex].DataBoundItem is PatientDto patient && patient.Id != null)
             {
-                Label_Bohoja_Name.Text = $"{patient.Bohoja_Name}";
-                Label_Bohoja_pNum.Text = $"{patient.Bohoja_PhoneNumber}";
-                Label_Hwanja_Room.Text = $"{patient.Hwanja_Room}";
+                //Label_Bohoja_Name.Text = $"{patient.Bohoja_Name}";
+                //Label_Bohoja_pNum.Text = $"{patient.Bohoja_PhoneNumber}";
+                //Label_Hwanja_Room.Text = $"{patient.Hwanja_Room}";
                 //await LoadQRCodeAsync(patient.Id.Value);
                 await LoadTakenMedicine(patient.Id.Value);
             }
@@ -609,7 +379,7 @@ namespace PillMate.View
             if (_isLoadingMedicine) return;
             _isLoadingMedicine = true;
 
-            listView1.Items.Clear();
+            //listView1.Items.Clear();
             var takenList = await _Tapi.GetAllAsync(patientId);
             var uniqueList = takenList.GroupBy(x => new { x.PillId, x.Dosage }).Select(g => g.First()).ToList();
 
@@ -619,7 +389,7 @@ namespace PillMate.View
                 var lvi = new ListViewItem(item.Pill.Yank_Name);
                 lvi.SubItems.Add($"{item.Dosage}정");
                 lvi.Tag = item;
-                listView1.Items.Add(lvi);
+                //listView1.Items.Add(lvi);
             }
 
             _isLoadingMedicine = false;
@@ -627,9 +397,9 @@ namespace PillMate.View
 
         private void SetupListView()
         {
-            listView1.View = System.Windows.Forms.View.Details;
-            listView1.Columns.Add("약품명", 80);
-            listView1.Columns.Add("복용량", 70);
+            //listView1.View = System.Windows.Forms.View.Details;
+            //listView1.Columns.Add("약품명", 80);
+            //listView1.Columns.Add("복용량", 70);
         }
 
         //private void guna2Button1_Click(object sender, EventArgs e)
@@ -715,42 +485,42 @@ namespace PillMate.View
             form.ShowDialog();
         }
 
-        private async void DeleteMenu_Click(object? sender, EventArgs e)
-        {
-            if (listView1.SelectedItems.Count == 0)
-            {
-                Dialog_Widget dialog = new Dialog_Widget("삭제", "삭제할 항목을 선택하세요.");
-                dialog.StartPosition = FormStartPosition.CenterScreen;
-                dialog.ShowDialog();
-                return;
-            }
+        //private async void DeleteMenu_Click(object? sender, EventArgs e)
+        //{
+        //    if (listView1.SelectedItems.Count == 0)
+        //    {
+        //        Dialog_Widget dialog = new Dialog_Widget("삭제", "삭제할 항목을 선택하세요.");
+        //        dialog.StartPosition = FormStartPosition.CenterScreen;
+        //        dialog.ShowDialog();
+        //        return;
+        //    }
 
-            var selectedItem = listView1.SelectedItems[0];
-            if (selectedItem.Tag is TakenMedicineDto takenMedicine)
-            {
-                var selectedPatient = guna2DataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
-                var result = MessageBox.Show($"'{selectedItem.Text}' 약을 삭제하시겠습니까?", "삭제 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        //    var selectedItem = listView1.SelectedItems[0];
+        //    if (selectedItem.Tag is TakenMedicineDto takenMedicine)
+        //    {
+        //        var selectedPatient = guna2DataGridView1.SelectedRows[0].DataBoundItem as PatientDto;
+        //        var result = MessageBox.Show($"'{selectedItem.Text}' 약을 삭제하시겠습니까?", "삭제 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (result == DialogResult.Yes)
-                {
-                    var api = new TakenMedicineAPI();
-                    bool isSuccess = await api.DeleteTakenMedicineAsync(takenMedicine.Id);
-                    if (isSuccess)
-                    {
-                        listView1.Items.Remove(selectedItem);
-                        //await LoadQRCodeAsync(selectedPatient.Id.Value);
-                        Dialog_Widget dialog = new Dialog_Widget("삭제", "✅ 삭제 완료");
-                        dialog.StartPosition = FormStartPosition.CenterScreen;
-                        dialog.ShowDialog();
-                    }
-                    else
-                    {
-                        Dialog_Widget dialog = new Dialog_Widget("삭제", "✅ 삭제 실패");
-                        dialog.StartPosition = FormStartPosition.CenterScreen;
-                        dialog.ShowDialog();
-                    }
-                }
-            }
-        }
+        //        if (result == DialogResult.Yes)
+        //        {
+        //            var api = new TakenMedicineAPI();
+        //            bool isSuccess = await api.DeleteTakenMedicineAsync(takenMedicine.Id);
+        //            if (isSuccess)
+        //            {
+        //                listView1.Items.Remove(selectedItem);
+        //                //await LoadQRCodeAsync(selectedPatient.Id.Value);
+        //                Dialog_Widget dialog = new Dialog_Widget("삭제", "✅ 삭제 완료");
+        //                dialog.StartPosition = FormStartPosition.CenterScreen;
+        //                dialog.ShowDialog();
+        //            }
+        //            else
+        //            {
+        //                Dialog_Widget dialog = new Dialog_Widget("삭제", "✅ 삭제 실패");
+        //                dialog.StartPosition = FormStartPosition.CenterScreen;
+        //                dialog.ShowDialog();
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
