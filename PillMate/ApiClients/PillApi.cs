@@ -7,14 +7,12 @@ using PillMate.Services;
 
 namespace PillMate.Client.ApiClients
 {
-    public class PillAPI : ApiService
+    public class PillApi : ApiService
     {
-        public PillAPI() : base("Pills") { }
+        public PillApi() : base("Pills") { }
 
-
-
-        // 알약 등록
-        public async Task<bool> CreatePillAsync(PillDto pill)
+        // ✅ 알약 등록
+        public async Task<bool> CreateAsync(PillDto pill)
         {
             try
             {
@@ -23,27 +21,13 @@ namespace PillMate.Client.ApiClients
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[CreatePillAsync] 오류: {ex.Message}");
+                Console.WriteLine($"[CreateAsync] 오류: {ex.Message}");
                 return false;
             }
         }
 
-        public async Task<bool> AddAsync(CreatePatientDto dto)
-        {
-            try
-            {
-                var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}", dto);
-                return response.IsSuccessStatusCode;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[AddAsync] 오류: {ex.Message}");
-                return false;
-            }
-        }
-
-        // 알약 수정
-        public async Task<bool> UpdatePillAsync(int id, PillDto pill)
+        // ✅ 알약 수정
+        public async Task<bool> UpdateAsync(int id, PillDto pill)
         {
             try
             {
@@ -52,13 +36,14 @@ namespace PillMate.Client.ApiClients
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[UpdatePillAsync] 오류: {ex.Message}");
+                Console.WriteLine($"[UpdateAsync] 오류: {ex.Message}");
                 return false;
             }
         }
 
-        // 알약 삭제
-        public async Task<bool> DeletePillAsync(int id)
+
+        // ✅ 알약 삭제
+        public async Task<bool> DeleteAsync(int id)
         {
             try
             {
@@ -67,13 +52,13 @@ namespace PillMate.Client.ApiClients
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[DeletePillAsync] 오류: {ex.Message}");
+                Console.WriteLine($"[DeleteAsync] 오류: {ex.Message}");
                 return false;
             }
         }
 
-        // 알약 목록 불러오기
-        public async Task<List<PillDto>> GetPillsAsync()
+        // ✅ 알약 목록 불러오기
+        public async Task<List<PillDto>> GetAllAsync()
         {
             try
             {
@@ -82,12 +67,9 @@ namespace PillMate.Client.ApiClients
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[GetPillsAsync] 오류: {ex.Message}");
+                Console.WriteLine($"[GetAllAsync] 오류: {ex.Message}");
                 return new List<PillDto>();
             }
         }
-
-        // alias 역할 (기존과 동일한 기능)
-        public async Task<List<PillDto>> GetAllAsync() => await GetPillsAsync();
     }
 }

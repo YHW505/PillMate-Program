@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PillMate.Services;
@@ -16,17 +17,18 @@ namespace PillMate
         [STAThread]
         static void Main()
         {
-            var serverService = new PillMate.Services.ServerService();
+            //var serverService = new PillMate.Services.ServerService();
 
-            serverService.StartServer();
+            //serverService.StartServer();
 
             Application.ApplicationExit += (s, e) =>
             {
-                serverService.StopServer();
+                //serverService.StopServer();
             };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AuthView());
+            Application.Run(new Principal());
+            
       }
     }
 }

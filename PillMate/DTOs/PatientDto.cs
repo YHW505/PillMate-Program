@@ -2,7 +2,8 @@
 {
     public class PatientDto
     {
-        public int? Id { get; set; }  // 수정할 때만 필요 (nullable로 설정)
+        public int? Id { get; set; } 
+        public int No { get; set; }  // UI 전용 순번
         public string Hwanja_Name { get; set; }
         public string Hwanja_Gender { get; set; }
         public string Hwanja_No { get; set; }

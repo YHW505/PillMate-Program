@@ -19,7 +19,7 @@ using System.Drawing.Printing;
 
 namespace PillMate.View
 {
-    public partial class PillView : UserControl
+    public partial class PillView : Form
     {
 
         private readonly PillAPI _api;
@@ -87,10 +87,10 @@ namespace PillMate.View
 
         private void Pill_Register_Button_Click(object sender, EventArgs e)
         {
-            /// 실험중 
-            PillRegisterView PillRegisterView = new PillRegisterView(LoadPillsAsync); // LoadPatientsAsync 메소드를 전달
-            PillRegisterView.StartPosition = FormStartPosition.CenterScreen;
-            PillRegisterView.ShowDialog();
+            ///// 실험중 
+            //PillRegisterView PillRegisterView = new PillRegisterView(LoadPillsAsync); // LoadPatientsAsync 메소드를 전달
+            //PillRegisterView.StartPosition = FormStartPosition.CenterScreen;
+            //PillRegisterView.ShowDialog();
             ///
             ///
             /*
